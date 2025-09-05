@@ -1,6 +1,10 @@
-Here are the essential fucntions we need for scDock:
+Here are the essential fucntions we need for scDock. Please follow the instructions:
+1. Please go to your work directory for scDock analysis. For example: /home/to/your/path/
+Next, you should create a directory named "functions".
+
+
 1. Functions:
-The functions below are expected to put in the sample directory
+The functions below are expected to put in the sample directory named "functions"
 ===== R scripts =====
 1. load_and_qc.R
 2. normalize_and_scale.R
