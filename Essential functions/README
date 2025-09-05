@@ -1,18 +1,19 @@
 To utilize scDock, we need to create the correct environment. Please follow the instructions:
-1. Please create and go to your work directory for scDock analysis. For example: /home/to/your/path/scDock/
-2. Please create a directory named "functions" at /home/to/your/path/scDock/. You should get a directory /home/to/your/path/scDock/functions/
-3. Drag all the below functions into /home/to/your/path/scDock/functions/. These functions are provided in this Github project.
+1. Please create and move to your work directory for scDock analysis. For example: /home/to/your/path/scDock/
+2. Please drag main.sh file and config.yaml into /home/to/your/path/scDock/. These files are provided in this Github project.
+3. Please create a directory named "functions" at /home/to/your/path/scDock/. You should get a directory /home/to/your/path/scDock/functions/
+4. Please drag all the below functions into /home/to/your/path/scDock/functions/. These functions are provided in this Github project.
 ===== R scripts =====
-1. load_and_qc.R
-2. normalize_and_scale.R
-3. DR_and_cluster.R
-4. find_markers_and_annotate.R
-5. plot_dim_reduction.R
-6. run_cellchat.R
-7. vina_docking
+(1) load_and_qc.R
+(2) normalize_and_scale.R
+(3) DR_and_cluster.R
+(4) find_markers_and_annotate.R
+(5) plot_dim_reduction.R
+(6) run_cellchat.R
+(7) vina_docking
 
 ===== Python scripts =====
-1. download_alphafold.py
-2. download_swissmodel.py
-3. download_cas_pubchem.py
-4. prepare_receptor.py
+(1) download_alphafold.py
+(2) download_swissmodel.py
+(3) download_cas_pubchem.py
+(4) prepare_receptor.py
