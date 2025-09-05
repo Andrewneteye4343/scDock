@@ -6,6 +6,6 @@ How to use:
 bash main.sh config.yaml
 
 Preparation:
-1. First, please follow the README in our Essential environment/.
-2. Then, please follow the README in our Essential functions/.
-3. If you want to use FDA compounds as drug library, we can follow the README in our 
+1. [Mandatory] First, please follow the README in our Essential environment/.
+2. [Mandatory] Then, please follow the README in our Essential files/.
+3. [Optional] If you want to use FDA compounds as drug library, we can follow the README in our FDA parent compounds_202509/.
