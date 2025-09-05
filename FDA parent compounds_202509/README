@@ -7,3 +7,5 @@ Due to the limitation of molecular docking, we can only use the major component 
 If you want to use the FDA compound list as drug library, you need to:
 1. Make sure to set "use_fda" argument as true and provide "fda_txt_path" argument in config.yaml$vina_docking.
 2. Place the fda.txt we provide in this page at the correct directory (same as "fda_txt_path" that you provide).
+
+By following the instuctions, scDock will automatically download and pre-process the corresponding FDA parent compounds for the further molecular docking.
