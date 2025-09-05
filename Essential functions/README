@@ -1,10 +1,7 @@
-Here are the essential fucntions we need for scDock. Please follow the instructions:
-1. Please go to your work directory for scDock analysis. For example: /home/to/your/path/
-Next, you should create a directory named "functions".
-
-
-1. Functions:
-The functions below are expected to put in the sample directory named "functions"
+To utilize scDock, we need to create the correct environment. Please follow the instructions:
+1. Please create and go to your work directory for scDock analysis. For example: /home/to/your/path/scDock/
+2. Please create a directory named "functions" at /home/to/your/path/scDock/. You should get a directory /home/to/your/path/scDock/functions/
+3. Drag all the below functions into /home/to/your/path/scDock/functions/. These functions are provided in this Github project.
 ===== R scripts =====
 1. load_and_qc.R
 2. normalize_and_scale.R
