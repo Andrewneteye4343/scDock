@@ -2,7 +2,7 @@ To utilize scDock, we need to create the correct environment. Please follow the 
 1. Please create and move to your work directory for scDock analysis. For example: /home/to/your/path/scDock/
 2. Please place main.sh and config.yaml at /home/to/your/path/scDock/. These files are provided in this Github project.
 3. Please create a directory named "functions" at /home/to/your/path/scDock/. You should get a directory /home/to/your/path/scDock/functions/
-4. Please place all the below functions at /home/to/your/path/scDock/functions/. These functions are provided in this Github project.
+4. Please place all the below scripts at /home/to/your/path/scDock/functions/. These functions are provided in this Github project.
 ===== R scripts =====
 (1) load_and_qc.R
 (2) normalize_and_scale.R
