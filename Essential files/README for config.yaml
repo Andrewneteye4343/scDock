@@ -1,5 +1,5 @@
 For users, you just need to adjust the arguments in config.yaml for scDock based on your requirement.
-If you are not sure about what are meaning of these arguments, we suggest you use the default setting.
+If you are not sure about what are the meaning of these arguments, we suggest you use the default setting.
 We have noted the corresponding usage and their original function of each argument in config.yaml. You can also refer the guidance in their original websites.
 If you want to change the argument, please confirm the format of your input. For example, you should input a value with integer format in min_features in load_and_qc(), not float format.
 
