@@ -1,1 +1,17 @@
+Here are the essential fucntions we need for scDock:
+1. Functions:
+The functions below are expected to put in the sample directory
+===== R scripts =====
+1. load_and_qc.R
+2. normalize_and_scale.R
+3. DR_and_cluster.R
+4. find_markers_and_annotate.R
+5. plot_dim_reduction.R
+6. run_cellchat.R
+7. vina_docking
 
+===== Python scripts =====
+1. download_alphafold.py
+2. download_swissmodel.py
+3. download_cas_pubchem.py
+4. prepare_receptor.py
