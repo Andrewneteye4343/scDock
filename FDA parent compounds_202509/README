@@ -3,3 +3,7 @@ The .xslx were acquired by the "Get CAS from compound name.py". By giving the co
 
 In the .xslx, there are six columns, including Input Name, Input CID, Input CAS, Parent Name, Parent CID, and Parent CAS.
 Due to the limitation of molecular docking, we can only use the major component of a drug, which is the parent compound. The parent compound CAS number are recorded in fda.txt.
+
+If you want to use the FDA compound list as drug library, you nedd to:
+1. Make sure to set "use_fda" argument as true and provide "fda_txt_path" argument in config.yaml$vina_docking.
+2. Place the fda.txt we provide in this page in the correct directory (same as "fda_txt_path" that you provide).
