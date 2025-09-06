@@ -1,2 +1,4 @@
 If you want to group the samples during input, please provide a metadata.txt with similar format as we demonstrate.
-There should be two columns (seperate with tab), including file_name and group.
+There should be two columns (seperate with tab) in the metadata.txt, including file_name and group.
+For our example metadata.txt, it is applied on data with two samples as input in .txt format (sample1.txt and sample2.txt).
+Among them, sample1 belongs to "Control" group, and sample2 belongs to "Treatment" group.
