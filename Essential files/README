@@ -4,13 +4,13 @@ To utilize scDock, we need the . Please follow the instructions:
 3. Please create a directory named "functions" at /home/to/your/path/scDock/. You should get a directory /home/to/your/path/scDock/functions/
 4. Please place all the below scripts at /home/to/your/path/scDock/functions/. These functions are provided in this Github project.
 ===== R scripts =====
-(1) load_and_qc.R
-(2) normalize_and_scale.R
-(3) DR_and_cluster.R
-(4) find_markers_and_annotate.R
-(5) plot_dim_reduction.R
-(6) run_cellchat.R
-(7) vina_docking
+(1) Load_QC.R
+(2) Normalization_Scale.R
+(3) DR_Cluster.R
+(4) Markers_Annotation.R
+(5) DR_Plot.R
+(6) Run_CellChat.R
+(7) Vina_Docking.R
 
 ===== Python scripts =====
 (1) download_alphafold.py
