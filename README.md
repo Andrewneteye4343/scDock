@@ -4,6 +4,8 @@ Here, we establish a series analysis pipeline, including scRNA/snRNA sequencing 
 How to use:
 
 bash main.sh config.yaml
+or
+bash main.sh config.yaml 2>&1 | tee log.txt
 
 Preparation:
 1. [Mandatory] First, please follow the README in our Essential environment/.
