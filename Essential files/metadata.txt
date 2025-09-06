@@ -1,3 +1,0 @@
-file_name	group
-sample1.txt	Control
-sample2.txt	Treatment
