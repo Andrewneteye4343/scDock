@@ -1,0 +1,2 @@
+If you want to group the samples during input, please provide a metadata.txt with similar format as we demonstrate.
+There should be two columns (seperate with tab), including file_name and group.
