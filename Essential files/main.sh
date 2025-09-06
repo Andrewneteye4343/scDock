@@ -10,7 +10,6 @@ fi
 
 Rscript --vanilla - "$CONFIG_FILE" <<'EOF'
 
-
 args <- commandArgs(trailingOnly = TRUE)
 config_file <- args[1]
 
@@ -31,130 +30,101 @@ suppressPackageStartupMessages({
   library(igraph)
 })
 
-# Read YAML
+# 讀取 YAML
 config <- yaml::read_yaml(config_file)
 
-# Establish temp folder in user workspace
-base_input <- config$input_paths[[1]]
-tmp_dir <- file.path(dirname(base_input), "tmp_counts")
-if (!dir.exists(tmp_dir)) {
-  dir.create(tmp_dir, recursive = TRUE)
-}
-
-# Input files
-rds_files <- c()
-index <- 1
-for (input_path in config$input_paths) {
-  message("Check input: ", input_path)
-  out_file <- file.path(tmp_dir, paste0("counts_", index, ".rds"))
-
-  if (dir.exists(input_path)) {
-    if (file.exists(file.path(input_path, "barcodes.tsv.gz")) &&
-        file.exists(file.path(input_path, "features.tsv.gz")) &&
-        file.exists(file.path(input_path, "matrix.mtx.gz"))) {
-      message("Detected 10X folder → Read10X()")
-      saveRDS(Read10X(data.dir = input_path), out_file)
-    } else {
-      stop("Invalid folder format: expected 10X files.")
-    }
-
-  } else if (file.exists(input_path)) {
-    ext <- tools::file_ext(input_path)
-    if (ext %in% c("h5", "hdf5")) {
-      message("Detected HDF5 → Read10X_h5()")
-      saveRDS(Read10X_h5(filename = input_path), out_file)
-    } else if (ext == "csv") {
-      message("Detected CSV → read.table()")
-      raw_mat <- read.table(input_path, sep = ",", header = TRUE, row.names = 1, check.names = FALSE)
-      saveRDS(as(as.matrix(raw_mat), "dgCMatrix"), out_file)
-    } else if (ext %in% c("txt", "tsv")) {
-      message("Detected TXT/TSV → read.table()")
-      raw_mat <- read.table(input_path, sep = "\t", header = TRUE, row.names = 1, check.names = FALSE)
-      saveRDS(as(as.matrix(raw_mat), "dgCMatrix"), out_file)
-    } else {
-      stop("Unsupported file format: ", ext)
-    }
-  } else {
-    stop("Path does not exist: ", input_path)
-  }
-
-  rds_files <- c(rds_files, out_file)
-  index <- index + 1
+# -------------------------
+# Step 0: Input files
+# -------------------------
+input_files <- config$input_paths
+if (length(input_files) == 0) {
+  stop("Error: No input paths specified in config.yaml")
 }
 
 # 匯入分析函數
-source("functions/load_and_qc.R")
-source("functions/normalize_and_scale.R")
-source("functions/DR_and_cluster.R")
-source("functions/find_markers_and_annotate.R")
-source("functions/plot_dim_reduction.R")
-source("functions/run_cellchat.R")
-source("functions/vina_docking.R")
+source("functions/Load_QC.R")
+source("functions/Normalization_Scale.R")
+source("functions/DR_Cluster.R")
+source("functions/Markers_Annotation.R")
+source("functions/DR_Plot.R")
+source("functions/Run_CellChat.R")
+source("functions/Vina_Docking.R")
 
 # -------------------------
 # Step 1: Load and QC
 # -------------------------
-seurat_obj <- load_and_qc(
-  rds_files     = rds_files,
-  min_features  = config$load_and_qc$min_features,
-  min_cells     = config$load_and_qc$min_cells,
-  names_delim   = config$load_and_qc$names_delim,
-  max_mito      = config$load_and_qc$max_mito,
-  load_and_qc_verbose = config$load_and_qc$load_and_qc_verbose
+message("========== Starting loading data and QC ... ==========")
+seurat_obj <- Load_QC(
+  Load_QC_input_files   = config$Load_QC$Load_QC_input_files,
+  Load_QC_input_type    = config$Load_QC$Load_QC_input_type,
+  Load_QC_min_features  = config$Load_QC$Load_QC_min_features,
+  Load_QC_min_cells     = config$Load_QC$Load_QC_min_cells,
+  Load_QC_names_delim   = config$Load_QC$Load_QC_names_delim,
+  Load_QC_max_mito      = config$Load_QC$Load_QC_max_mito,
+  Load_QC_metadata_file = config$Load_QC$Load_QC_metadata_file,
+  Load_QC_verbose       = config$Load_QC$Load_QC_verbose
 )
 
+base_input <- dirname(input_files[[1]])
 message("Saving the QC-completed file to seurat_qc.rds")
 saveRDS(seurat_obj, file = file.path(base_input, "seurat_qc.rds"))
+message("========== QC process complete. ==========")
+message("")
+
 
 # -------------------------
-# Step 2: Check for normalize_and_scale
+# Step 2: Check for Normalization_Scale
 # -------------------------
 if (!inherits(seurat_obj, "Seurat")) {
-  stop("Error: Input is not a Seurat object. Please run load_and_qc() first.")
+  stop("Error: Input is not a Seurat object. Please run Load_QC() first.")
 }
 
 valid_hvg_methods <- c("vst", "mean.var.plot", "dispersion")
-if (!(config$normalize_and_scale$hvg_method %in% valid_hvg_methods)) {
-  stop(paste0("Error: Invalid hvg.method (", config$normalize_and_scale$hvg_method,
+if (!(config$Normalization_Scale$Normalization_Scale_hvg_method %in% valid_hvg_methods)) {
+  stop(paste0("Error: Invalid hvg.method (", config$Normalization_Scale$Normalization_Scale_hvg_method,
               "). Choose one of: ", paste(valid_hvg_methods, collapse = ", ")))
 }
 
-if (config$normalize_and_scale$nVariableFeatures < 100 || config$normalize_and_scale$nVariableFeatures > 10000) {
-  warning("⚠️ nVariableFeatures = ", config$nVariableFeatures,
+if (config$Normalization_Scale$Normalization_Scale_nVariableFeatures < 100 || config$Normalization_Scale$Normalization_Scale_nVariableFeatures > 10000) {
+  warning("⚠️ nVariableFeatures = ", config$Normalization_Scale_nVariableFeatures,
           " is unusually small or large. Please double-check.")
 }
 
-if (!(config$normalize_and_scale$scale_features %in% c("variable", "all")) && !is.vector(config$normalize_and_scale$scale_features)) {
+if (!(config$Normalization_Scale$Normalization_Scale_scale_features %in% c("variable", "all")) && !is.vector(config$Normalization_Scale$Normalization_Scale_scale_features)) {
   stop("Error: Invalid value for scale_features. Must be 'variable', 'all', or a list of gene names.")
 }
 
 # -------------------------
 # Step 3: Normalize, HVG, and Scale
 # -------------------------
-config$normalize_and_scale$scale_factor <- as.numeric(config$normalize_and_scale$scale_factor)
-config$normalize_and_scale$nVariableFeatures <- as.integer(config$normalize_and_scale$nVariableFeatures)
+message("========== Starting normalization and scaling... ==========")
+config$Normalization_Scale$Normalization_Scale_scale_factor <- as.numeric(config$Normalization_Scale$Normalization_Scale_scale_factor)
+config$Normalization_Scale$Normalization_Scale_nVariableFeatures <- as.integer(config$Normalization_Scale$Normalization_Scale_nVariableFeatures)
 
-seurat_obj <- normalize_and_scale(
-  seurat_obj             = seurat_obj,
-  use_assay              = config$normalize_and_scale$use_assay,
-  normalization_method   = config$normalize_and_scale$normalization_method,
-  scale_factor           = config$normalize_and_scale$scale_factor,
-  CLR_margin             = config$normalize_and_scale$CLR_margin,
-  hvg_method             = config$normalize_and_scale$hvg_method,
-  nVariableFeatures      = config$normalize_and_scale$nVariableFeatures,
-  split_by               = config$normalize_and_scale$split_by,
-  model_use              = config$normalize_and_scale$model_use,
-  scale_max              = config$normalize_and_scale$scale_max,
-  scale_features         = config$normalize_and_scale$scale_features,
-  normalize_and_scale_verbose = config$normalize_and_scale$normalize_and_scale_verbose
+seurat_obj <- Normalization_Scale(
+  seurat_obj                                 = seurat_obj,
+  Normalization_Scale_use_assay              = config$Normalization_Scale$Normalization_Scale_use_assay,
+  Normalization_Scale_normalization_method   = config$Normalization_Scale$Normalization_Scale_normalization_method,
+  Normalization_Scale_scale_factor           = config$Normalization_Scale$Normalization_Scale_scale_factor,
+  Normalization_Scale_CLR_margin             = config$Normalization_Scale$Normalization_Scale_CLR_margin,
+  Normalization_Scale_hvg_method             = config$Normalization_Scale$Normalization_Scale_hvg_method,
+  Normalization_Scale_nVariableFeatures      = config$Normalization_Scale$Normalization_Scale_nVariableFeatures,
+  Normalization_Scale_split_by               = config$Normalization_Scale$Normalization_Scale_split_by,
+  Normalization_Scale_model_use              = config$Normalization_Scale$Normalization_Scale_model_use,
+  Normalization_Scale_scale_max              = config$Normalization_Scale$Normalization_Scale_scale_max,
+  Normalization_Scale_scale_features         = config$Normalization_Scale$Normalization_Scale_scale_features,
+  Normalization_Scale_verbose                = config$Normalization_Scale$Normalization_Scale_verbose
 )
 
 message("Saving the normalized and scaled file to seurat_norm_scale.rds")
 saveRDS(seurat_obj, file = file.path(base_input, "seurat_norm_scale.rds"))
+message("========== Normalization and scaling complete ==========")
+message("")
 
 # -------------------------
-# Step 4: Check for DR_and_cluster
+# Step 4: Check for DR_Cluster
 # -------------------------
+message("========== Starting dimensional reduction and clustering... ==========")
 if (!inherits(seurat_obj, "Seurat")) {
   stop("Error: Input is not a Seurat object. Please run previous steps first.")
 }
@@ -168,175 +138,188 @@ if ("scale.data" %in% slotNames(seurat_obj@assays$RNA)) {
   scaled_ok <- length(LayerData(seurat_obj[["RNA"]], "scale.data")) > 0
 }
 if (!scaled_ok) {
-  stop("Error: Data has not been scaled. Please run normalize_and_scale() first.")
+  stop("Error: Data has not been scaled. Please run Normalization_Scale() first.")
 }
 
-if (!(config$DR_and_cluster$pca_features %in% c("variable", "all")) &&
-    !is.vector(config$DR_and_cluster$pca_features)) {
-  stop("Error: Invalid pca_features. Must be 'variable', 'all', or a vector of genes.")
+if (!(config$DR_Cluster$DR_Cluster_pca_features %in% c("variable", "all")) &&
+    !is.vector(config$DR_Cluster$DR_Cluster_pca_features)) {
+  stop("Error: Invalid DR_Cluster_pca_features. Must be 'variable', 'all', or a vector of genes.")
 }
 
-if (!(tolower(config$DR_and_cluster$reduction_method) %in% c("umap", "tsne"))) {
-  stop("Error: Invalid reduction_method. Must be 'umap' or 'tsne'.")
+if (!(tolower(config$DR_Cluster$DR_Cluster_reduction_method) %in% c("umap", "tsne"))) {
+  stop("Error: Invalid DR_Cluster_reduction_method. Must be 'umap' or 'tsne'.")
 }
 
-if (!(config$DR_and_cluster$clustering_algorithm %in% 1:4)) {
-  stop("Error: clustering_algorithm must be 1, 2, 3, or 4.")
+if (!(config$DR_Cluster$DR_Cluster_clustering_algorithm %in% 1:4)) {
+  stop("Error: DR_Cluster_clustering_algorithm must be 1, 2, 3, or 4.")
 }
 
-if (!(is.numeric(config$DR_and_cluster$resolution) && config$DR_and_cluster$resolution > 0)) {
+if (!(is.numeric(config$DR_Cluster$DR_Cluster_resolution) && config$DR_Cluster$DR_Cluster_resolution > 0)) {
   stop("Error: resolution must be a positive number.")
 }
 
 # -------------------------
-# Step 5: Run DR_and_cluster
+# Step 5: Run DR_Cluster
 # -------------------------
-config$DR_and_cluster$dims <- seq_len(as.integer(config$DR_and_cluster$dims))
+config$DR_Cluster$DR_Cluster_dims <- seq_len(as.integer(config$DR_Cluster$DR_Cluster_dims))
 
-seurat_obj <- DR_and_cluster(
-  seurat_obj             = seurat_obj,
-  pca_features           = config$DR_and_cluster$pca_features,
-  seed                   = config$DR_and_cluster$seed,
-  dims                   = config$DR_and_cluster$dims,
-  k_param                = config$DR_and_cluster$k_param,
-  n_trees                = config$DR_and_cluster$n_trees,
-  resolution             = config$DR_and_cluster$resolution,
-  reduction_method       = config$DR_and_cluster$reduction_method,
-  clustering_algorithm   = config$DR_and_cluster$clustering_algorithm,
-  DR_and_cluster_verbose = config$DR_and_cluster$DR_and_cluster_verbose
+seurat_obj <- DR_Cluster(
+  seurat_obj                        = seurat_obj,
+  DR_Cluster_pca_features           = config$DR_Cluster$DR_Cluster_pca_features,
+  DR_Cluster_seed                   = config$DR_Cluster$DR_Cluster_seed,
+  DR_Cluster_dims                   = config$DR_Cluster$DR_Cluster_dims,
+  DR_Cluster_k_param                = config$DR_Cluster$DR_Cluster_k_param,
+  DR_Cluster_n_trees                = config$DR_Cluster$DR_Cluster_n_trees,
+  DR_Cluster_resolution             = config$DR_Cluster$DR_Cluster_resolution,
+  DR_Cluster_reduction_method       = config$DR_Cluster$DR_Cluster_reduction_method,
+  DR_Cluster_reduction_assay        = config$DR_Cluster$DR_Cluster_reduction_assay,
+  DR_Cluster_clustering_algorithm   = config$DR_Cluster$DR_Cluster_clustering_algorithm,
+  DR_Cluster_verbose                = config$DR_Cluster$DR_Cluster_verbose
 )
 
 message("Saving the clustered file to seurat_dr_cluster.rds")
 saveRDS(seurat_obj, file = file.path(base_input, "seurat_dr_cluster.rds"))
+message("========== Dimensional reduction and clustering complete. ==========")
+message("")
 
 # -------------------------
 # Step 6: Find markers and annotate
 # -------------------------
+message("========== Starting cluster markers calculating... ==========")
 
 # ---- Check ----
 if (!"seurat_clusters" %in% colnames(seurat_obj@meta.data)) {
-  stop("Error: 'seurat_clusters' not found. Please run DR_and_cluster() first.")
+  stop("Error: 'seurat_clusters' not found. Please run DR_Cluster() first.")
 }
 
-if (!is.numeric(config$find_markers_and_annotate$top_n) ||
-    config$find_markers_and_annotate$top_n < 0) {
-  stop("Error: top_n must be a non-negative number.")
+if (!is.numeric(config$Markers_Annotation$Markers_Annotation_top_n) ||
+    config$Markers_Annotation$Markers_Annotation_top_n < 0) {
+  stop("Error: Markers_Annotation_top_n must be a non-negative number.")
 }
 
 # Check the output directory
-for (out_file in c(config$find_markers_and_annotate$output_marker_csv,
-                   config$find_markers_and_annotate$output_annotation_csv)) {
+for (out_file in c(config$Markers_Annotation$Markers_Annotation_output_marker_csv,
+                   config$Markers_Annotation$Markers_Annotation_output_annotation_csv)) {
   if (!is.null(out_file)) {
     out_dir <- dirname(out_file)
     if (!dir.exists(out_dir)) dir.create(out_dir, recursive = TRUE)
   }
 }
 
-seurat_obj <- find_markers_and_annotate(
-  seurat_obj            = seurat_obj,
-  use_assay             = config$find_markers_and_annotate$use_assay,
-  group_by              = config$find_markers_and_annotate$group_by,
-  logfc_threshold       = config$find_markers_and_annotate$logfc_threshold,
-  test_use              = config$find_markers_and_annotate$test_use,
-  min_pct               = config$find_markers_and_annotate$min_pct,
-  only_pos              = config$find_markers_and_annotate$only_pos,
-  find_markers_and_annotate_verbose = config$find_markers_and_annotate$find_markers_and_annotate_verbose,
-  top_n                 = config$find_markers_and_annotate$top_n,
-  output_marker_csv     = config$find_markers_and_annotate$output_marker_csv,
-  output_annotation_csv = config$find_markers_and_annotate$output_annotation_csv,
-  tissue_type           = config$find_markers_and_annotate$tissue_type,
-  label_column          = ifelse(
-    is.null(config$find_markers_and_annotate$label_column),
+seurat_obj <- Markers_Annotation(
+  seurat_obj                               = seurat_obj,
+  Markers_Annotation_use_assay             = config$Markers_Annotation$Markers_Annotation_use_assay,
+  Markers_Annotation_group_by              = config$Markers_Annotation$Markers_Annotation_group_by,
+  Markers_Annotation_logfc_threshold       = config$Markers_Annotation$Markers_Annotation_logfc_threshold,
+  Markers_Annotation_test_use              = config$Markers_Annotation$Markers_Annotation_test_use,
+  Markers_Annotation_min_pct               = config$Markers_Annotation$Markers_Annotation_min_pct,
+  Markers_Annotation_only_pos              = config$Markers_Annotation$Markers_Annotation_only_pos,
+  Markers_Annotation_verbose               = config$Markers_Annotation$Markers_Annotation_verbose,
+  Markers_Annotation_top_n                 = config$Markers_Annotation$Markers_Annotation_top_n,
+  Markers_Annotation_output_marker_csv     = config$Markers_Annotation$Markers_Annotation_output_marker_csv,
+  Markers_Annotation_output_annotation_csv = config$Markers_Annotation$Markers_Annotation_output_annotation_csv,
+  Markers_Annotation_tissue_type           = config$Markers_Annotation$Markers_Annotation_tissue_type,
+  Markers_Annotation_label_column          = ifelse(
+    is.null(config$Markers_Annotation$Markers_Annotation_label_column),
     "celltype",
-    config$find_markers_and_annotate$label_column
+    config$Markers_Annotation$Markers_Annotation_label_column
   )
 )
 
 message("Saving the annotated file to seurat_markers_annotated.rds")
 saveRDS(seurat_obj, file = file.path(base_input, "seurat_markers_annotated.rds"))
+message("========== Find marker and annotation complete. ==========")
+message("")
 
 # -------------------------
 # Step 7: Check + Dimensional Reduction Plot
 # -------------------------
-if (!is.null(config$plot_dim_reduction)) {
+message("========== Starting visualization with Dimplot... ==========")
+
+if (!is.null(config$DR_Plot)) {
   # Check reduction method
   available_reductions <- Reductions(seurat_obj)
-  reduction_method <- config$plot_dim_reduction$reduction_method
+  reduction_method <- config$DR_Plot$DR_Plot_reduction_method
   if (!(reduction_method %in% available_reductions)) {
     warning(paste0("⚠️ Reduction '", reduction_method, "' not found in Seurat object. Skipping plot."))
     reduction_method <- NULL
   }
 
   # Check group_by
-  group_by <- config$plot_dim_reduction$group_by
+  group_by <- config$DR_Plot$DR_Plot_group_by
   if (!is.null(reduction_method) && !(group_by %in% colnames(seurat_obj@meta.data))) {
     warning(paste0("⚠️ Metadata column '", group_by, "' not found. Skipping plot."))
     reduction_method <- NULL
   }
 
   if (!is.null(reduction_method)) {
-    plot_dim_reduction(
-      seurat_obj = seurat_obj,
-      output_path = config$plot_dim_reduction$output_path,
-      reduction_method = reduction_method,
-      group_by = group_by,
-      pt_size = config$plot_dim_reduction$pt_size,
-      label = config$plot_dim_reduction$label,
-      label_size = config$plot_dim_reduction$label_size,
-      label_color = config$plot_dim_reduction$label_color,
-      label_box = config$plot_dim_reduction$label_box,
-      alpha = config$plot_dim_reduction$alpha,
-      shuffle = config$plot_dim_reduction$shuffle,
-      raster = config$plot_dim_reduction$raster,
-      width = config$plot_dim_reduction$width,
-      height = config$plot_dim_reduction$height
+    DR_Plot(
+      seurat_obj               = seurat_obj,
+      DR_Plot_output_path      = config$DR_Plot$DR_Plot_output_path,
+      DR_Plot_reduction_method = reduction_method,
+      DR_Plot_group_by         = group_by,
+      DR_Plot_pt_size          = config$DR_Plot$DR_Plot_pt_size,
+      DR_Plot_label            = config$DR_Plot$DR_Plot_label,
+      DR_Plot_label_size       = config$DR_Plot$DR_Plot_label_size,
+      DR_Plot_label_color      = config$DR_Plot$DR_Plot_label_color,
+      DR_Plot_label_box        = config$DR_Plot$DR_Plot_label_box,
+      DR_Plot_alpha            = config$DR_Plot$DR_Plot_alpha,
+      DR_Plot_shuffle          = config$DR_Plot$DR_Plot_shuffle,
+      DR_Plot_raster           = config$DR_Plot$DR_Plot_raster,
+      DR_Plot_width            = config$DR_Plot$DR_Plot_width,
+      DR_Plot_height           = config$DR_Plot$DR_Plot_height
     )
   }
 }
+message("========== Visualization complete. ==========")
+message("")
 
 # -------------------------
 # Step 8: CellChat analysis
 # -------------------------
-if (!is.null(config$run_cellchat)) {
+message("========== Running CellChat on Seurat object ... ==========")
+
+if (!is.null(config$Run_CellChat)) {
   seurat_obj <- readRDS(file.path(base_input, "seurat_markers_annotated.rds"))
 
-  run_cellchat(
-    seurat_obj      = seurat_obj,
-    output_dir      = config$run_cellchat$output_dir,
-    species         = config$run_cellchat$species,
-    group_by        = config$run_cellchat$group_by,
-    source_celltype = config$run_cellchat$source_celltype,
-    target_celltype = config$run_cellchat$target_celltype,
-    plot_heatmap    = ifelse(is.null(config$run_cellchat$plot_heatmap), TRUE, config$run_cellchat$plot_heatmap),
-    ntop_pathway    = config$run_cellchat$ntop_pathway,
-    ntop_signaling  = config$run_cellchat$ntop_signaling,
-    pdf_width       = ifelse(is.null(config$run_cellchat$pdf_width), 8, config$run_cellchat$pdf_width),
-    pdf_height      = ifelse(is.null(config$run_cellchat$pdf_height), 6, config$run_cellchat$pdf_height)
+  Run_CellChat(
+    seurat_obj                   = seurat_obj,
+    Run_CellChat_output_dir      = config$Run_CellChat$Run_CellChat_output_dir,
+    Run_CellChat_species         = config$Run_CellChat$Run_CellChat_species,
+    Run_CellChat_group_by        = config$Run_CellChat$Run_CellChat_group_by,
+    Run_CellChat_source_celltype = config$Run_CellChat$Run_CellChat_source_celltype,
+    Run_CellChat_target_celltype = config$Run_CellChat$Run_CellChat_target_celltype,
+    Run_CellChat_plot_heatmap    = ifelse(is.null(config$Run_CellChat$Run_CellChat_plot_heatmap), TRUE, config$Run_CellChat$Run_CellChat_plot_heatmap),
+    Run_CellChat_ntop_pathway    = config$Run_CellChat$Run_CellChat_ntop_pathway,
+    Run_CellChat_ntop_signaling  = config$Run_CellChat$Run_CellChat_ntop_signaling,
+    Run_CellChat_pdf_width       = ifelse(is.null(config$Run_CellChat$Run_CellChat_pdf_width), 8, config$Run_CellChat$Run_CellChat_pdf_width),
+    Run_CellChat_pdf_height      = ifelse(is.null(config$Run_CellChat$Run_CellChat_pdf_height), 6, config$Run_CellChat$Run_CellChat_pdf_height)
   )
 }
+message("========== CellChat complete. ==========")
+message("")
 
 # -------------------------
 # Step 9: AutoDock Vina docking
 # -------------------------
-if (!is.null(config$vina_docking)) {
-  result <- vina_docking(
-    input_dir         = config$vina_docking$input_dir,
-    ligand_ref_file   = config$vina_docking$ligand_ref_file,
-    receptor_ref_file = config$vina_docking$receptor_ref_file,
-    output_dir        = config$vina_docking$output_dir,
-    python_bin        = config$vina_docking$python_bin,
-    cas_txt_file      = config$vina_docking$cas_txt_file,
-    docking_ligand_dir     = config$vina_docking$docking_ligand_dir,
-    use_fda                = config$vina_docking$use_fda,
-    fda_txt_path           = config$vina_docking$fda_txt_path,
-    docking_receptor_dir   = config$vina_docking$docking_receptor_dir,
-    vina_exhaustiveness     = ifelse(is.null(config$vina_docking$vina_exhaustiveness), 8, config$vina_docking$vina_exhaustiveness),
-    vina_num_modes          = ifelse(is.null(config$vina_docking$vina_num_modes), 9, config$vina_docking$vina_num_modes),
-    vina_seed               = ifelse(is.null(config$vina_docking$vina_seed), 42, config$vina_docking$vina_seed),
-    vina_cpu                = ifelse(is.null(config$vina_docking$vina_cpu), 1, config$vina_docking$vina_cpu)
+message("========== Starting docking... ==========")
+
+if (!is.null(config$Vina_Docking)) {
+  result <- Vina_Docking(
+    Vina_Docking_input_dir              = config$Vina_Docking$Vina_Docking_input_dir,
+    Vina_Docking_ligand_ref_file        = config$Vina_Docking$Vina_Docking_ligand_ref_file,
+    Vina_Docking_receptor_ref_file      = config$Vina_Docking$Vina_Docking_receptor_ref_file,
+    Vina_Docking_output_dir             = config$Vina_Docking$Vina_Docking_output_dir,
+    Vina_Docking_cas_txt_file           = config$Vina_Docking$Vina_Docking_cas_txt_file,
+    Vina_Docking_docking_ligand_dir     = config$Vina_Docking$Vina_Docking_docking_ligand_dir,
+    Vina_Docking_use_fda                = config$Vina_Docking$Vina_Docking_use_fda,
+    Vina_Docking_fda_txt_path           = config$Vina_Docking$Vina_Docking_fda_txt_path,
+    Vina_Docking_docking_receptor_dir   = config$Vina_Docking$Vina_Docking_docking_receptor_dir,
+    Vina_Docking_vina_exhaustiveness    = ifelse(is.null(config$Vina_Docking$Vina_Docking_vina_exhaustiveness), 8, config$Vina_Docking$Vina_Docking_vina_exhaustiveness),
+    Vina_Docking_vina_num_modes         = ifelse(is.null(config$Vina_Docking$Vina_Docking_vina_num_modes), 9, config$Vina_Docking$Vina_Docking_vina_num_modes),
+    Vina_Docking_vina_seed              = ifelse(is.null(config$Vina_Docking$Vina_Docking_vina_seed), 42, config$Vina_Docking$Vina_Docking_vina_seed),
+    Vina_Docking_vina_cpu               = ifelse(is.null(config$Vina_Docking$Vina_Docking_vina_cpu), 1, config$Vina_Docking$Vina_Docking_vina_cpu)
   )
 }
-
-# 清理暫存
-unlink(tmp_dir, recursive = TRUE)
+message("========== Docking complete. ==========")
 EOF
