@@ -5,6 +5,7 @@ How to use:
 
 bash main.sh config.yaml
 or
+
 bash main.sh config.yaml 2>&1 | tee log.txt
 
 Preparation:
