@@ -1,4 +1,5 @@
-If you want to group the samples during input, please provide a metadata.txt with similar format as we demonstrate.
+If you want to group the samples during input, please provide a metadata.txt with similar format as we demonstrate. 
+By giving the metadata.txt, your Seurat object will generate a metadata named "sample_group" according to metadata.txt. 
 There should be two columns (seperate with tab) in the metadata.txt, including file_name and group.
 For our example metadata.txt, it is applied on data with two samples as input in .txt format (sample1.txt and sample2.txt).
 Among them, sample1 belongs to "Control" group, and sample2 belongs to "Treatment" group.
