@@ -1,4 +1,4 @@
-Here, we provide a list of compounds from FDA Drug website (https://www.fda.gov/drugs/drug-approvals-and-databases/drugsfda-data-files) [version September 2nd, 2025] (accessed September 4th, 2025).
+Here, we provide a list of compounds (FDA_202509_compounds.xlsx) from FDA Drug website (https://www.fda.gov/drugs/drug-approvals-and-databases/drugsfda-data-files) [version September 2nd, 2025] (accessed September 4th, 2025).
 The .xslx were acquired by the "Get CAS from compound name.py". By giving the compound names from the above list, "Get CAS from compound name.py" output the PubChem CID and CAS number of the given compound name as well as their parent compound's name, PubChem CID, and CAS number.
 
 In the .xslx, there are six columns, including Input Name, Input CID, Input CAS, Parent Name, Parent CID, and Parent CAS.
