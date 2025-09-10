@@ -59,4 +59,47 @@ Lymphoid-primed multipotent progenitor cell,Macrophage,Mast cell,Mature T cell,M
 Mucosal-associated invariant T cell,Myeloid cell,Myeloid dendritic cell,Myeloid progenitor cell,Natural killer cell,Neutrophil,Osteoclast precursor cell,Plasma cell,Plasmacytoid dendritic cell,
 Platelet,Precursor plasmacytoid dendritic cell,T cell
 
+### brain ###
+Adrenergic neurons,Anterior pituitary gland cell,Astrocyte,B cell,Basket cell,Bergmann glial cell,Cajal-Retzius cell,CCK basket cell,Chandelier cell,Cholinergic neuron,Choroid plexus cell,
+Dopaminergic neuron,Endothelial cell,Ependymal cell,GABAergic neuron,Ganglion cell,Glutamatergic neuron,Hypothalamic ependymal cell,Immature neuron,Interneuron,Interneuron-selective cell,
+Lepotomeningeal cell,Macrophage,Martinotti cell,Meningeal cell,Microglia cell,Motor neuron,Mural cell,Neural progenitor cell,Neural stem cell,Neuroblast,Neuroendocrine cell,Neuron,Noradrenergic neuron,
+Olfactory ensheathing glia,Olfactory sensory neuron,Oligodendrocyte,Oligodendrocyte precursor cell,Pan-gabaergic,Pericyte,Pinealocyte,Purkinje neuron,Pyramidal cell,Radial glia cell,Rhombic lip cell,
+Satellite glial cell,Schwann cell,Serotonergic neuron,Smooth muscle cell,T cell,Tanycyte,Trigeminal neuron,Type IA spiral ganglion neuron,Type IB spiral ganglion neuron,Type IC spiral ganglion neuron,
+Type II spiral ganglion neuron
+
+### breast ###
+B cell,Basal epithelial cell,Dendritic cell,Endothelial cell,Eosinophil,Epithelial cell,Fibroblast,Hematopoietic stem cell,Luminal epithelial cell,Luminal progenitor cell,Macrophage,Mast cell,
+Mesenchymal stem cell,Myoepithelial cell,Natural killer cell,Neutrophil,Pericyte,T cell
+
+### embryo ###
+Arterial cell,Blastomere,Cardiomyocyte,Dorsal otocyst,Ectoderm cell,Embryonic stem cell,Endocardial cell,Endocrine cell,Endoderm cell,Endothelial cell,Epiblast cell,Germ cell,Hemangioblast,
+Hematopoietic stem cell,Macrophage,Mesenchymal stem cell,Mesoderm cell,Myeloblast,Neural crest cell,Neural stem cell,Neural tube cell,Neuron,Neutrophil,Oocyte,Primitive endoderm cell,
+Skeletal muscle cell,Trophectoderm cell,Trophoblast cell,Unrestricted somatic stem cell,Venous cell,Ventral otocyst
+
+### eye ###
+Bipolar cell,Endothelial cell,Epithelial cell,Epithelial stem cell,Erythroid cell,Ganglion cell,Hematopoietic stem cell,Lymphocyte,Macrophage,Mesenchymal cell,Mesenchymal stem cell,Muller cell,
+Myoepithelial cell,Photoreceptor cell,Progenitor cell
+
+### gastrointestinal tract ###
+Ciliated epithelial cell,Colonic stem cell,Crypt cell,Dendritic cell,Enteric glia cell,Enteric neuron,Enterochromaffin cell,Enterocyte,Enterocyte progenitor cell,Enteroendocrine cell,
+Enteroendocrine precursor cell,Foveolar cell,Gastric chief cell,Goblet cell,Goblet progenitor cell,Intestinal stem cell,Macrophage,Mast cell,Microfold cell,Paneth cell,Parietal cell,
+S cell,Secretory progenitor cell,T cell,Tuft cell,Tuft progenitor cell
+
+### heart ###
+Aorta valve interstitial cell,Cardiocyte,Cardiomyocyte,Cardiovascular progenitor cell,Endocardial cell,Endothelial cell,Erythroid cell,Fibroblast,Macrophage,Myofibroblast,Pericyte,
+Progenitor cell,Smooth muscle cell
+
+### kidney ###
+B cell,Basophil,Connecting tubule epithelial cell,Cortical cell,Dendritic cell,Descending vasa recta endothelial cell,Distal convoluted tubule cell,Endothelial cell,Epithelial cell,
+Erythroblast,Erythroid precursor cell,Fibroblast,Glomerular capillary endothelial cell,Granular cell,Infiltrated mononuclear cell,Inner medulla collecting duct epithelial cell,
+Intercalated cell,Juxtaglomerular cell,Kidney progenitor cell,Loop of Henle cell,Loop of Henle cortical thick ascending limb epithelial cell,
+Loop of Henle medullary thick ascending limb epithelial cell,Loop of Henle thin descending limb epithelial cell,Lymphatic endothelial cell,M2 Macrophage,Macrophage,Macula densa,
+Mast cell,Medullary fibroblast,Mesangial cell,Monocyte,Mononuclear phagocyte,Natural killer cell,Nephron epithelial cell,Neutrophil,Papillary tip epithelial cell,
+Parietal epithelial cell,Pericyte,Peritubular capilary endothelial cell,Plasma cell,Podocyte,Principal cell,Proximal tubule brush border cell,Proximal tubule cell,
+Proximal tubule epithelial cell,Renal alpha-intercalated cell,Schwann cell,T cell
+
+### liver ###
+B cell,Cholangiocyte,Dendritic cell,Endothelial cell,Epithelial cell,Hematopoietic cell,Hepatoblast,Hepatocyte,Kupffer cell,Liver bud hepatic cell,Mesenchymal cell,
+Mesenchymal stem cell,Monocyte,Myofibroblast,Natural killer cell,Neutrophil,Progenitor cell,Stellate cell,Stem cell,T cell
+
 ###  ###
