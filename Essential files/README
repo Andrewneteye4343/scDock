@@ -48,4 +48,15 @@ Gamma delta T cell,Granulocyte,Hematopoietic stem cell,Immature myeloid cell,Inn
 Monocyte,Mucosal-associated invariant T cell,Myeloid cell,Myeloid dendritic cell,Myeloid-derived suppressor cell,Naive B cell,Natural killer cell,Neutrophil,Plasma cell,Plasmablast,Plasmacytoid dendritic cell,
 Platelet,Regulatory T cell,Reticulocyte,T cell,Thymic emigrant cell
 
-###
+### bone ###
+Chondrocyte,Dendritic cell,Eosinophil,Erythroid cell,Granulocyte,Hematopoietic stem cell,Meniscus-derived progenitor cell,Mesenchymal progenitor cell,Mesenchymal stem cell,Monocyte,Myeloid progenitor cell,
+Neutrophil,Osteoblast,Osteoclast,Osteoclast precursor cell,Osteocyte,Periosteum-derived progenitor cell
+
+### bone marrow ###
+B cell,Basophil,Blastema cell,Common lymphoid progenitor cell,Common myeloid progenitor,Dendritic cell,Dendritic progenitor cell,Endothelial cell,Endothelial progenitor cell,Eosinophil,Erythroid cell,
+Erythroid megakaryocyte progenitor cell,Erythroid precursor cell,Granulocyte monocyte progenitor cell,Hematopoietic stem cell,Immature dendritic cell,Innate lymphoid cell,Langerhans cell,
+Lymphoid-primed multipotent progenitor cell,Macrophage,Mast cell,Mature T cell,Megakaryocyte,Megakaryocyte progenitor cell,Mesenchymal stem cell,Monocyte,Monocyte derived dendritic cell,
+Mucosal-associated invariant T cell,Myeloid cell,Myeloid dendritic cell,Myeloid progenitor cell,Natural killer cell,Neutrophil,Osteoclast precursor cell,Plasma cell,Plasmacytoid dendritic cell,
+Platelet,Precursor plasmacytoid dendritic cell,T cell
+
+###  ###
