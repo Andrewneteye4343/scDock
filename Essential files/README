@@ -1,9 +1,10 @@
+=======================================================
 To utilize scDock, we need the . Please follow the instructions:
-1. Please create and move to your work directory (can be any name) for scDock analysis. For example: /home/path/to/scDock
-2. Please place main.sh and config.yaml at /home/to/your/path/scDock/. These files are provided in this Github project.
-3. Please create a directory named "functions" at /home/to/your/path/scDock/. You should get a directory /home/to/your/path/scDock/functions/
+1. Please create and move to your work directory for scDock analysis. For example: /home/path/to/scDock
+2. Please place main.sh and config.yaml at /home/path/to/scDock. These files are provided in this Github project.
+3. Please create a directory named "functions" at /home/path/to/scDock. You should get a directory /home/path/to/scDock/functions/
 4. Please place all the below scripts at /home/to/your/path/scDock/functions/. These functions are provided in this Github project.
-===== R scripts =====
+### R scripts ###
 (1) Load_QC.R
 (2) Normalization_Scale.R
 (3) DR_Cluster.R
@@ -12,12 +13,11 @@ To utilize scDock, we need the . Please follow the instructions:
 (6) Run_CellChat.R
 (7) Vina_Docking.R
 
-===== Python scripts =====
+### Python scripts ###
 (1) download_alphafold.py
 (2) download_swissmodel.py
 (3) download_cas_pubchem.py
 (4) prepare_receptor.py
-
 
 =======================================================
 For setting config.yaml:
