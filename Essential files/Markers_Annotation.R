@@ -8,8 +8,7 @@ Markers_Annotation <- function(seurat_obj,
                                Markers_Annotation_only_pos = TRUE,
                                Markers_Annotation_verbose = TRUE,
                                Markers_Annotation_top_n = 10,
-                               Markers_Annotation_output_marker_csv = NULL,
-                               Markers_Annotation_output_annotation_csv = NULL,
+                               Markers_Annotation_output_path = NULL,
                                Markers_Annotation_tissue_type = NULL,
                                Markers_Annotation_label_column = "CellType") {
   library(Seurat)
@@ -67,9 +66,10 @@ Markers_Annotation <- function(seurat_obj,
   
   if (Markers_Annotation_verbose) message("Marker finding complete. Total markers: ", nrow(markers))
   
-  if (!is.null(Markers_Annotation_output_marker_csv)) {
-    write.csv(markers, Markers_Annotation_output_marker_csv, row.names = FALSE)
-    message("Markers saved to: ", Markers_Annotation_output_marker_csv)
+  if (!is.null(Markers_Annotation_output_path)) {
+    Marker_output <- file.path(Markers_Annotation_output_path, "Markers.csv")
+    write.csv(markers, Marker_output, row.names = FALSE)
+    message("Markers.csv saved to: ", Markers_Annotation_output_path)
   }
   
   # ----------- Step 2: Select top markers per cluster -----------
@@ -88,9 +88,10 @@ Markers_Annotation <- function(seurat_obj,
   annotation <- scMayoMap::scMayoMap(data = top_markers, tissue = Markers_Annotation_tissue_type)
   
   # ----------- Step 3: Save annotation result -----------
-  if (!is.null(Markers_Annotation_output_annotation_csv) && "res" %in% names(annotation)) {
-    write.csv(annotation$res, Markers_Annotation_output_annotation_csv, row.names = FALSE)
-    message("Annotation saved to: ", Markers_Annotation_output_annotation_csv)
+  if (!is.null(Markers_Annotation_output_path) && "res" %in% names(annotation)) {
+    Annotation_output <- file.path(Markers_Annotation_output_path, "Annotations.csv")
+    write.csv(annotation$res, Annotation_output, row.names = FALSE)
+    message("Annotation.csv saved to: ", Markers_Annotation_output_path)
   }
   
   # ----------- Step 4: Add annotation to Seurat object -----------

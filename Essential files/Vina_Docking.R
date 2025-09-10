@@ -1,12 +1,12 @@
 # functions/Vina_Docking.R
-Vina_Docking <- function(Vina_Docking_input_dir,
+Vina_Docking <- function(Vina_Docking_input_path,
+                         Vina_Docking_output_path,
                          Vina_Docking_ligand_ref_file = "/path/to/ligand_reference.csv",
                          Vina_Docking_receptor_ref_file = "path/to/receptor_reference.csv",
-                         Vina_Docking_output_dir,
                          Vina_Docking_cas_txt_file = NULL,
-                         Vina_Docking_docking_ligand_dir = NULL,
                          Vina_Docking_use_fda = FALSE,
-                         Vina_Docking_fda_txt_path = NULL,
+                         Vina_Docking_fda_txt = NULL,
+                         Vina_Docking_docking_ligand_dir = NULL,
                          Vina_Docking_docking_receptor_dir = NULL,
                          Vina_Docking_vina_exhaustiveness = 8,
                          Vina_Docking_vina_num_modes = 9,
@@ -69,15 +69,38 @@ Vina_Docking <- function(Vina_Docking_input_dir,
   )
 
   # ---- Read LR CSV ----
-  csv_files <- list.files(Vina_Docking_input_dir, pattern = "^top\\d+_LR_.*\\.csv$", full.names = TRUE)
-  if (length(csv_files) == 0) stop("No LR CSV files found in: ", Vina_Docking_input_dir)
+  csv_files <- list.files(Vina_Docking_input_path, pattern = "^top\\d+_LR_.*\\.csv$", full.names = TRUE)
+
+  if (length(csv_files) == 0) {
+  # fallback: try multi-group file
+    multi_csv <- file.path(Vina_Docking_input_path, "multiGroup_significant_LR_by_prob_diff.csv")
+  if (file.exists(multi_csv)) {
+    message("[INFO] No top*_LR_*.csv found. Using multiGroup_significant_LR_by_prob_diff.csv instead.")
+    csv_files <- c(multi_csv)   # <-- 確保是 vector
+  } else {
+    stop("No LR CSV files found (neither top*_LR_*.csv nor multiGroup_significant_LR_by_prob_diff.csv) in: ",
+         Vina_Docking_input_path)
+    } 
+  }
 
   ligands <- receptors <- c()
   for (csv in csv_files) {
     df <- tryCatch(read.csv(csv, stringsAsFactors = FALSE), error = function(e) NULL)
-    if (!is.null(df) && all(c("ligand","receptor") %in% colnames(df))) {
+    if (is.null(df)) next
+
+    # Ensure ligand/receptor columns exist
+    
+    if (!all(c("ligand","receptor") %in% colnames(df)) && "interaction" %in% colnames(df)) {
+      parts <- strsplit(df$interaction, "_")
+      df$ligand <- sapply(parts, `[`, 1)
+      df$receptor <- sapply(parts, `[`, 2)
+    }
+
+    if (all(c("ligand","receptor") %in% colnames(df))) {
       ligands <- c(ligands, df$ligand)
       receptors <- c(receptors, df$receptor)
+    } else {
+      warning("[Vina] CSV ", basename(csv), " does not contain ligand/receptor information.")
     }
   }
   ligands <- unique(ligands)
@@ -89,13 +112,13 @@ Vina_Docking <- function(Vina_Docking_input_dir,
   ligand_match <- ligand_ref %>% filter(protein_name %in% ligands)
   receptor_match <- receptor_ref %>% filter(protein_name %in% receptors)
 
-  if (!dir.exists(Vina_Docking_output_dir)) dir.create(Vina_Docking_output_dir, recursive = TRUE)
-  write.csv(ligand_match, file.path(Vina_Docking_output_dir, "ligands_with_PDB.csv"), row.names = FALSE)
-  write.csv(receptor_match, file.path(Vina_Docking_output_dir, "receptors_with_PDB.csv"), row.names = FALSE)
+  if (!dir.exists(Vina_Docking_output_path)) dir.create(Vina_Docking_output_path, recursive = TRUE)
+  write.csv(ligand_match, file.path(Vina_Docking_output_path, "ligands_with_PDB.csv"), row.names = FALSE)
+  write.csv(receptor_match, file.path(Vina_Docking_output_path, "receptors_with_PDB.csv"), row.names = FALSE)
 
   # ---- Create PDB directory ----
-  ligand_dir <- file.path(Vina_Docking_output_dir, "ligand_from_PDB_LR_pairs")
-  receptor_dir <- file.path(Vina_Docking_output_dir, "receptor_from_PDB_LR_pairs")
+  ligand_dir <- file.path(Vina_Docking_output_path, "ligand_from_PDB_LR_pairs")
+  receptor_dir <- file.path(Vina_Docking_output_path, "receptor_from_PDB_LR_pairs")
   if (!dir.exists(ligand_dir)) dir.create(ligand_dir, recursive = TRUE)
   if (!dir.exists(receptor_dir)) dir.create(receptor_dir, recursive = TRUE)
 
@@ -144,19 +167,19 @@ Vina_Docking <- function(Vina_Docking_input_dir,
 
   if (Vina_Docking_use_fda) {
     # ---- FDA compounds support ----
-    if (is.null(Vina_Docking_fda_txt_path) || !file.exists(Vina_Docking_fda_txt_path)) {
-      stop("[FDA] Vina_Docking_use_fda = TRUE but Vina_Docking_fda_txt_path is missing or does not exist!")
+    if (is.null(Vina_Docking_fda_txt) || !file.exists(Vina_Docking_fda_txt)) {
+      stop("[FDA] Vina_Docking_use_fda = TRUE but Vina_Docking_fda_txt is missing or does not exist!")
     }
 
-    fda_dir <- file.path(Vina_Docking_output_dir, "fda_results")
+    fda_dir <- file.path(Vina_Docking_output_path, "fda_results")
     if (!dir.exists(fda_dir)) dir.create(fda_dir, recursive = TRUE)
 
-    fda_cas <- trimws(readLines(Vina_Docking_fda_txt_path))
+    fda_cas <- trimws(readLines(Vina_Docking_fda_txt))
     if (length(fda_cas) > 0) {
       message("[FDA] Downloading structures for ", length(fda_cas), " FDA compounds...")
       system2("python3", args = c(
         normalizePath("functions/download_cas_pubchem.py"),
-        Vina_Docking_fda_txt_path, fda_dir
+        Vina_Docking_fda_txt, fda_dir
       ))
       Vina_Docking_docking_ligand_dir <- fda_dir
     } else {
@@ -166,7 +189,7 @@ Vina_Docking <- function(Vina_Docking_input_dir,
   } else {
     # ---- CAS compounds support ----
     if (!is.null(Vina_Docking_cas_txt_file) && file.exists(Vina_Docking_cas_txt_file)) {
-      cas_dir <- file.path(Vina_Docking_output_dir, "ligand_structure_for_AutoDockVina")
+      cas_dir <- file.path(Vina_Docking_output_path, "ligand_structures_from_CAStxt_for_AutoDockVina")
       if (!dir.exists(cas_dir)) dir.create(cas_dir)
       cas_numbers <- trimws(readLines(Vina_Docking_cas_txt_file))
       message("[CAS] Downloading structures for ", length(cas_numbers), " compounds...")

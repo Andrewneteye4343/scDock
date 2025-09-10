@@ -1,5 +1,5 @@
 Load_QC <- function(Load_QC_input_files,
-                    Load_QC_input_type = c("10x", "multi10x", "rds", "h5", "txt"),
+                    Load_QC_input_type = c("10x", "multi10x", "h5", "txt"),
                     Load_QC_min_features = 200,
                     Load_QC_min_cells = 3,
                     Load_QC_names_delim = "_",
@@ -53,32 +53,6 @@ Load_QC <- function(Load_QC_input_files,
         # Add group if metadata exists
         if (!is.null(meta_info)) {
           seurat_obj$sample_group <- meta_info$group[match(basename(subdir), meta_info$file_name)]
-        }
-        seurat_list[[length(seurat_list) + 1]] <- seurat_obj
-      }
-      next
-    } else if (Load_QC_input_type == "rds") {
-      rds_files <- if (dir.exists(input_path)) list.files(input_path, pattern = "\\.rds$", full.names = TRUE) else input_path
-      for (rds_file in rds_files) {
-        message("Input type = RDS → readRDS(): ", basename(rds_file))
-        obj <- readRDS(rds_file)
-        if (inherits(obj, "Seurat")) {
-          message("  ✅ Detected Seurat object → using directly")
-          seurat_obj <- obj
-        } else if (is.matrix(obj) || inherits(obj, "dgCMatrix")) {
-          message("  📦 Detected Matrix object → wrapping into Seurat")
-          seurat_obj <- CreateSeuratObject(
-            counts = obj,
-            min.features = Load_QC_min_features,
-            min.cells = Load_QC_min_cells,
-            names.delim = Load_QC_names_delim,
-            project = tools::file_path_sans_ext(basename(rds_file))
-          )
-        } else {
-          stop("❌ Unsupported object type in RDS file: ", paste(class(obj), collapse = ", "))
-        }
-        if (!is.null(meta_info)) {
-          seurat_obj$sample_group <- meta_info$group[match(basename(rds_file), meta_info$file_name)]
         }
         seurat_list[[length(seurat_list) + 1]] <- seurat_obj
       }

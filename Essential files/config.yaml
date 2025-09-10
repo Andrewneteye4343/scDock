@@ -1,31 +1,35 @@
 # --------
 # Input data
 # --------
-input_paths:
-  - "/home/andrew/docking_work/Tasks/scDock/scData/" # [string] This path defines the workplace of scDock pipeline.
+work_path: "/home/andrew/docking_work/Tasks/scDock/scData"   # [string] This argument defines the workplace of scDock pipeline. Should be a path to directory.
+
+# --------
+# Output directory for Seurat objects
+# --------
+Seurat_output_dir: "seurat_output"    # [string] This argument defines the name of output directory for seurat_obj.rds. Should be a directory name.
 
 # --------
 # Step 1: Load_QC()
 # --------
 Load_QC:
-  Load_QC_input_files: "/home/andrew/docking_work/Tasks/scDock/scData/dataset/"   # [string] This path defines where to find your scRNA file(s). Options can be a single file or a directory which contains several files.
-  # For each pair of Cell Ranger file (barcodes.tsv.gz, features.tsv.gz, matrix.mtx.gz), they should be placed in distinct directories under Load_QC_input_files. For other format (.h5, .txt and .rds), they can be placed under Load_QC_input_files without creating any directory.
-  Load_QC_input_type: txt      # [string] This argument defines the type of scRNA that you place in Load_QC_input_files. Options are 10x, multi10x (use only when you have more than 1 pair of Cell Ranger file), rds, h5 and txt.
+  Load_QC_input_files: "/home/andrew/docking_work/Tasks/scDock/scData/dataset"   # [string] This path defines where to find your scRNA file(s). Options can be a single file or a directory which contains several files.
+  # For each pair of Cell Ranger file (barcodes.tsv.gz, features.tsv.gz, matrix.mtx.gz), they should be placed in distinct directories under Load_QC_input_files. For other format (.h5 and .txt), they can be placed under Load_QC_input_files without creating any directory.
+  Load_QC_input_type: txt           # [string] This argument defines the type of scRNA that you place in Load_QC_input_files. Options are 10x, multi10x (use only when you have more than 1 pair of Cell Ranger file), rds, h5 and txt.
   Load_QC_min_features: 200         # [integer] This argument defines the min.features in Seurat::CreateSeuratObject()
   Load_QC_min_cells: 3              # [integer] This argument defines the min.min.cells in Seurat::CreateSeuratObject()
   Load_QC_names_delim: "_"          # [string] This argument defines the names.delim in Seurat::CreateSeuratObject(). Default is "_". 
   Load_QC_max_mito: 0.3             # [float] This argument defines the persent of mitochondrial counts cut off in subset(). The valid range locates from 0 to 1. Default is 0.3.
-  Load_QC_metadata_file: "/home/andrew/docking_work/Tasks/scDock/scData/metadata.txt"
+  Load_QC_metadata_file: "/home/andrew/docking_work/Tasks/scDock/scData/metadata.txt"   # [string] This pah defines where to find metadata for grouping your samples. Should not be the same path with Load_QC_input_files when you input txt as Load_QC_input_type.
   Load_QC_verbose: true             # [boolean] Whether to display the progress detail. Default is true.
 
 # --------
 # Step 2: Normalization_Scale()
 # --------
 Normalization_Scale:
-  Normalization_Scale_use_assay: null                    # [string] This argument defines the min.features in Seurat::CreateSeuratObject()
+  Normalization_Scale_use_assay: null                    
   Normalization_Scale_normalization_method: LogNormalize # [string] This argument defines the method in Seurat::NormalizeData(). The valid value are LogNormalize, CLR, and RC. Default is LogNormalize.
+  Normalization_Scale_CLR_margin: 1                      # [integer] CLR Normalization margin. Choose 1 (features) or 2 (cells), only you use normalization_method as CLR.
   Normalization_Scale_scale_factor: 10000                # [integer] This argument defines the scale.factor in Seurat::NormalizeData(). Default is 10000.
-  Normalization_Scale_CLR_margin: null                   # [integer] CLR Normalization margin. Choose 1 (features) or 2 (cells), only you use normalization_method as CLR. Default is null.
   Normalization_Scale_hvg_method: vst                    # [string] This argument defines the selection.method in Seurat::FindVariableFeatures(). The valid value are vst, mean.var.plot, and dispersion. Default is vst.
   Normalization_Scale_nVariableFeatures: 2000            # [integer] This argument defines the nfeatures in Seurat::FindVariableFeatures(). Default is 2000.
   Normalization_Scale_split_by: null                     # [string] This argument defines the split.by in Seurat::ScaleData(). Default is null.
@@ -53,17 +57,16 @@ DR_Cluster:
 # Step 4: Markers_Annotation()
 # --------
 Markers_Annotation:
-  Markers_Annotation_use_assay: null              # [string] Assay to use in differential expression testing. Default is null.
+  Markers_Annotation_output_path: "/home/andrew/docking_work/Tasks/scDock/scData"
+  Markers_Annotation_use_assay: null              # [string] The argument defines the assay in Seurat::FindAllMarkers(). Default is null.
   Markers_Annotation_group_by: seurat_clusters    # [string] The argument defines the group.by in Seurat::FindAllMarkers(). Default is seurat_clusters.
   Markers_Annotation_logfc_threshold: 0.1         # [float] The argument defines the min.pct in Seurat::FindAllMarkers(). Default is 0.1.
-  Markers_Annotation_test_use: wilcox             # [string] The argument defines the test.use in Seurat::FindAllMarkers(). Default is wilcox.
   Markers_Annotation_min_pct: 0.01                # [float] The argument defines the min.pct in Seurat::FindAllMarkers(). Default is 0.01.
+  Markers_Annotation_test_use: wilcox             # [string] The argument defines the test.use in Seurat::FindAllMarkers(). Default is wilcox.
   Markers_Annotation_only_pos: true               # [boolean] Whether to only calculate the positive differential expression genes in each cluster. Default is false.
   Markers_Annotation_verbose: true                # [boolean] Whether to display the progress detail. Default is true.
-  Markers_Annotation_top_n: 100                   # [integer] The number of top positive differential expresseion genes (ranked by avf_log2) in each cluster that will be utilized in the annotation. Default is 100.
-  Markers_Annotation_output_marker_csv: "/home/andrew/docking_work/Tasks/scDock/scData/markers.csv"   # [string] This path defines the output path for the results of FindAllMarkers(). Please change the path based on your requirement.
-  Markers_Annotation_output_annotation_csv: "/home/andrew/docking_work/Tasks/scDock/scData/annotations.csv"   # [string] Please change the path based on your requirement.
-  Markers_Annotation_tissue_type: lung            # [string] Please choose the one of the following tissue type of your sample: adipose tissue; bladder; blood; bone; bone marrow; brain; breast; embryo; eye; 
+  Markers_Annotation_top_n: 100                   # [integer] The number of top positive differential expresseion genes (ranked by avf_log2) in each cluster that will be utilized in the annotation. Default is 100. 
+  Markers_Annotation_tissue_type: blood           # [string] Please choose the one of the following tissue type of your sample: adipose tissue; bladder; blood; bone; bone marrow; brain; breast; embryo; eye; 
                                                   # gastrointestinal tract; heart; kidney; liver; lung ; mammary gland; muscle; other; ovary; pancreas; placenta; prostate; skin; spleen; stomach; testis; thymus; tooth; uterus. Default is lung.
   Markers_Annotation_label_column: Celltype       # [string] This argument defines the metadata name in seurat_obj that records the annotation results. Default is Celltype.
 
@@ -71,7 +74,7 @@ Markers_Annotation:
 # Step 5: DR_Plot()
 # --------
 DR_Plot:
-  DR_Plot_output_path: "/home/andrew/docking_work/Tasks/scDock/scData/dim_reduction_plot.png"   # [string] This path defines the output path for the DimPlot visualization. Please change the path based on your requirement.
+  DR_Plot_output_path: "/home/andrew/docking_work/Tasks/scDock/scData"     # [string] This path defines the output path for the DimPlot visualization. Please change the path based on your requirement.
   DR_Plot_reduction_method: umap                  # [string] Please choose "umap" or "tsne" for visualization. Default is umap.
   DR_Plot_group_by: Celltype                      # [string] Please choose a group condition (in seurat_obj metadata) for visualization. Default is Celltype.
   DR_Plot_pt_size: 0.5                            # [float] The argument defines the pt.size in Seurat::DimPlot(). Default is 0.5.
@@ -89,31 +92,30 @@ DR_Plot:
 # Step 6: Run_CellChat()
 # --------
 Run_CellChat:
-  Run_CellChat_output_dir: "/home/andrew/docking_work/Tasks/scDock/scData/cellchat"   # [string] This path defines the output path for the DimPlot visualization. Please change the path based on your requirement.
-  Run_CellChat_species: human                                                         # [string] Choose the species of your data. Options are human and mouse. Default is human.
-  Run_CellChat_group_by: Celltype                                                     # [string] This argument defines the group.by in CellChat::createCellChat(). Default is Celltype.
-  Run_CellChat_source_celltype: T cell                                                # [string] Choose your interested celltype as a signaling sender. Defualt is null.
-  Run_CellChat_target_celltype: Macrophage                                            # [string] Choose your interested celltype as a signaling receiver. Defualt is null.
-  Run_CellChat_plot_heatmap: true                                                     # [boolean] Whether to draw a overall signal outgoing and incoming plot. Default is true.
-  Run_CellChat_ntop_pathway: 2                                                        # [integer] Choose how many top pathways you want to explore. The order is ranked by rankNet. More pathways will increase the time cost for further docking. Defualt is 5. 
-  Run_CellChat_ntop_signaling: 1                                                      # [integer] Choose how many top signalings (detailed L-R pairs in each pathway) you want to explore. More signalings will increase the time cost for further docking. Defualt is 2.
-  Run_CellChat_pdf_width: 8                                                           # [float] Choose the width of the bubble plots from CellChat::netVisual_bubble().
-  Run_CellChat_pdf_height: 6                                                          # [float] Choose the height of the bubble plots from CellChat::netVisual_bubble().
-
+  Run_CellChat_output_path: "/home/andrew/docking_work/Tasks/scDock/scData/cellchat"   # [string] This path defines the output path for the DimPlot visualization. Please change the path based on your requirement.
+  Run_CellChat_species: human                                # [string] Choose the species of your data. Options are human and mouse. Default is human.
+  Run_CellChat_group_by: sample_group                        # [string] This argument defines the group.by in CellChat::createCellChat(). Default is Celltype.
+  Run_CellChat_source_celltype: null                         # [string] Choose your interested celltype as a signaling sender. Defualt is null.
+  Run_CellChat_target_celltype: null                         # [string] Choose your interested celltype as a signaling receiver. Defualt is null.
+  Run_CellChat_plot_heatmap: true                            # [boolean] Whether to draw a overall signal outgoing and incoming plot. Default is true.
+  Run_CellChat_ntop_signaling: 1                             # [integer] Choose how many top signalings (detailed L-R pairs in each pathway) you want to explore. More signalings will increase the time cost for further docking. Defualt is 2.
+  Run_CellChat_pdf_width: 8                                  # [float] Choose the width of the bubble plots from CellChat::netVisual_bubble().
+  Run_CellChat_pdf_height: 6                                 # [float] Choose the height of the bubble plots from CellChat::netVisual_bubble().
+  Run_CellChat_MaxGroup: Treatment                           # [string] This argument defines the your interested group. Other group will be the baseline of Run_CellChat_MaxGroup.
 # --------
 # Step 7: Vina_Docking()
 # --------
 Vina_Docking:
-  Vina_Docking_input_dir: "/home/andrew/docking_work/Tasks/scDock/scData/cellchat"    # [string] This path will read the topX_LR_XX.csv from run_cellchat(). Should be the same as output_dir in run_cellchat().
-  Vina_Docking_ligand_ref_file: "/home/andrew/docking_work/Tasks/scDock/scData/cellchat/ligand_reference.csv" # [string] This path will read the ligand_reference.csv that we provide from the Github. The file helps you match the PDB model for ligand strucutre (found from CellChat L-R pairs).
-  Vina_Docking_receptor_ref_file: "/home/andrew/docking_work/Tasks/scDock/scData/cellchat/receptor_reference.csv" # [string] This path will read the receptor_reference.csv that we provide from the Github. The file helps you match the PDB model for receptor strucutre (found from CellChat L-R pairs).
-  Vina_Docking_output_dir: "/home/andrew/docking_work/Tasks/scDock/scData/docking"    # [string] This path defines the output path for the docking process.
-  Vina_Docking_cas_txt_file: "/home/andrew/docking_work/Tasks/scDock/scData/cas_txt_file.txt" # [string] You can provide a .txt file with CAS number for each compound that you are interested. Seperate them with row. If you provide this, the program won't consider use_fda and fda_txt_path.
-  Vina_Docking_docking_ligand_dir: null                                               # [string] If you do not provide "cas_txt_file" or both "use_fda" and "fda_txt_path", then you must provide a directory path which contains your own ligand.pdbqt files.
-  Vina_Docking_use_fda: false                                                          # [boolean] Whether to use a FDA compound list (2025.09). Default is false.
-  Vina_Docking_fda_txt_path: null  # [string] This path will read the fda.txt. You can download the fda.txt from pur Github website.
-  Vina_Docking_docking_receptor_dir: null                                             # [string] If you want to use your own receptor.pdbqt for docking, input your directory path. The .pdbqt file(s) must be named in the following pattern. ex: YourName_prepare.pdbqt. Default is null.
-  Vina_Docking_vina_exhaustiveness: 8                                                 # [integer] This argument defines the exhaustiveness in AudoDock Vina. Default is 8.
-  Vina_Docking_vina_num_modes: 9                                                      # [integer] This argument defines the num_modes in AutoDock Vina. Default is 9.
-  Vina_Docking_vina_seed: 42                                                          # [integer] This argument defines the seed in AutoDock Vina. Default is 42.
-  Vina_Docking_vina_cpu: 1                                                            # [integer] This argument defines the cpu in AutoDock Vina. Default is 1.
+  Vina_Docking_input_path: "/home/andrew/docking_work/Tasks/scDock/scData/cellchat"             # [string] This path will read the topX_LR_XX.csv from run_cellchat(). Should be the same as output_dir in run_cellchat().
+  Vina_Docking_output_path: "/home/andrew/docking_work/Tasks/scDock/scData/docking"             # [string] This path defines the output path for the docking process.
+  Vina_Docking_ligand_ref_file: "/home/andrew/docking_work/Tasks/scDock/scData/ligand_reference.csv"       # [string] This path will read the ligand_reference.csv that we provide from the Github. The file helps you match the PDB model for ligand strucutre (found from CellChat L-R pairs).
+  Vina_Docking_receptor_ref_file: "/home/andrew/docking_work/Tasks/scDock/scData/receptor_reference.csv"   # [string] This path will read the receptor_reference.csv that we provide from the Github. The file helps you match the PDB model for receptor strucutre (found from CellChat L-R pairs).
+  Vina_Docking_cas_txt_file: "/home/andrew/docking_work/Tasks/scDock/scData/cas_txt_file.txt"             # [string] You can provide a .txt file with CAS number for each compound that you are interested. Seperate them with row. If you provide this, the program won't consider use_fda and fda_txt_path.
+  Vina_Docking_use_fda: false                                          # [boolean] Whether to use a FDA compound list (2025.09). Default is false.
+  Vina_Docking_fda_txt: null                                         # [string] This path will read the fda.txt. You can download the fda.txt from pur Github website.
+  Vina_Docking_docking_ligand_dir: null                               # [string] If you do not provide "cas_txt_file" nor both "use_fda" and "fda_txt_path", then you must provide a directory path which contains your own ligand.pdbqt files.
+  Vina_Docking_docking_receptor_dir: null                             # [string] If you want to use your own receptor.pdbqt for docking, input your directory path. The .pdbqt file(s) must be named in the following pattern. ex: YourName_prepare.pdbqt. Default is null.
+  Vina_Docking_vina_exhaustiveness: 8                                 # [integer] This argument defines the exhaustiveness in AudoDock Vina. Default is 8.
+  Vina_Docking_vina_num_modes: 9                                      # [integer] This argument defines the num_modes in AutoDock Vina. Default is 9.
+  Vina_Docking_vina_seed: 42                                          # [integer] This argument defines the seed in AutoDock Vina. Default is 42.
+  Vina_Docking_vina_cpu: 4                                            # [integer] This argument defines the cpu in AutoDock Vina. Default is 1.
