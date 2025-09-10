@@ -1,7 +1,7 @@
 # --------
 # Input data
 # --------
-work_path: "/home/andrew/docking_work/Tasks/scDock/scData"   # [string] This argument defines the workplace of scDock pipeline. Should be a path to directory.
+work_path: "/path/to/YourDirectory"   # [string] This argument defines the workplace of scDock pipeline. Should be a path to directory.
 
 # --------
 # Output directory for Seurat objects
@@ -12,14 +12,14 @@ Seurat_output_dir: "seurat_output"    # [string] This argument defines the name 
 # Step 1: Load_QC()
 # --------
 Load_QC:
-  Load_QC_input_files: "/home/andrew/docking_work/Tasks/scDock/scData/dataset"   # [string] This path defines where to find your scRNA file(s). Options can be a single file or a directory which contains several files.
+  Load_QC_input_files: "/path/to/YourDataset"   # [string] This path defines where to find your scRNA file(s). Options can be a single file or a directory which contains several files.
   # For each pair of Cell Ranger file (barcodes.tsv.gz, features.tsv.gz, matrix.mtx.gz), they should be placed in distinct directories under Load_QC_input_files. For other format (.h5 and .txt), they can be placed under Load_QC_input_files without creating any directory.
   Load_QC_input_type: txt           # [string] This argument defines the type of scRNA that you place in Load_QC_input_files. Options are 10x, multi10x (use only when you have more than 1 pair of Cell Ranger file), rds, h5 and txt.
   Load_QC_min_features: 200         # [integer] This argument defines the min.features in Seurat::CreateSeuratObject()
   Load_QC_min_cells: 3              # [integer] This argument defines the min.min.cells in Seurat::CreateSeuratObject()
   Load_QC_names_delim: "_"          # [string] This argument defines the names.delim in Seurat::CreateSeuratObject(). Default is "_". 
   Load_QC_max_mito: 0.3             # [float] This argument defines the persent of mitochondrial counts cut off in subset(). The valid range locates from 0 to 1. Default is 0.3.
-  Load_QC_metadata_file: "/home/andrew/docking_work/Tasks/scDock/scData/metadata.txt"   # [string] This pah defines where to find metadata for grouping your samples. Should not be the same path with Load_QC_input_files when you input txt as Load_QC_input_type.
+  Load_QC_metadata_file: "/path/to/YourMetadata.txt"   # [string] This pah defines where to find metadata for grouping your samples. Should not be the same path with Load_QC_input_files when you input txt as Load_QC_input_type.
   Load_QC_verbose: true             # [boolean] Whether to display the progress detail. Default is true.
 
 # --------
@@ -57,7 +57,7 @@ DR_Cluster:
 # Step 4: Markers_Annotation()
 # --------
 Markers_Annotation:
-  Markers_Annotation_output_path: "/home/andrew/docking_work/Tasks/scDock/scData"
+  Markers_Annotation_output_path: "/path/to/YourDirectory"
   Markers_Annotation_use_assay: null              # [string] The argument defines the assay in Seurat::FindAllMarkers(). Default is null.
   Markers_Annotation_group_by: seurat_clusters    # [string] The argument defines the group.by in Seurat::FindAllMarkers(). Default is seurat_clusters.
   Markers_Annotation_logfc_threshold: 0.1         # [float] The argument defines the min.pct in Seurat::FindAllMarkers(). Default is 0.1.
@@ -74,7 +74,7 @@ Markers_Annotation:
 # Step 5: DR_Plot()
 # --------
 DR_Plot:
-  DR_Plot_output_path: "/home/andrew/docking_work/Tasks/scDock/scData"     # [string] This path defines the output path for the DimPlot visualization. Please change the path based on your requirement.
+  DR_Plot_output_path: "/path/to/YourDirectory"     # [string] This path defines the output path for the DimPlot visualization. Please change the path based on your requirement.
   DR_Plot_reduction_method: umap                  # [string] Please choose "umap" or "tsne" for visualization. Default is umap.
   DR_Plot_group_by: Celltype                      # [string] Please choose a group condition (in seurat_obj metadata) for visualization. Default is Celltype.
   DR_Plot_pt_size: 0.5                            # [float] The argument defines the pt.size in Seurat::DimPlot(). Default is 0.5.
@@ -92,7 +92,7 @@ DR_Plot:
 # Step 6: Run_CellChat()
 # --------
 Run_CellChat:
-  Run_CellChat_output_path: "/home/andrew/docking_work/Tasks/scDock/scData/cellchat"   # [string] This path defines the output path for the DimPlot visualization. Please change the path based on your requirement.
+  Run_CellChat_output_path: "/path/to/YourDirectory"   # [string] This path defines the output path for the DimPlot visualization. Please change the path based on your requirement.
   Run_CellChat_species: human                                # [string] Choose the species of your data. Options are human and mouse. Default is human.
   Run_CellChat_group_by: sample_group                        # [string] This argument defines the group.by in CellChat::createCellChat(). Default is Celltype.
   Run_CellChat_source_celltype: null                         # [string] Choose your interested celltype as a signaling sender. Defualt is null.
@@ -106,11 +106,11 @@ Run_CellChat:
 # Step 7: Vina_Docking()
 # --------
 Vina_Docking:
-  Vina_Docking_input_path: "/home/andrew/docking_work/Tasks/scDock/scData/cellchat"             # [string] This path will read the topX_LR_XX.csv from run_cellchat(). Should be the same as output_dir in run_cellchat().
-  Vina_Docking_output_path: "/home/andrew/docking_work/Tasks/scDock/scData/docking"             # [string] This path defines the output path for the docking process.
-  Vina_Docking_ligand_ref_file: "/home/andrew/docking_work/Tasks/scDock/scData/ligand_reference.csv"       # [string] This path will read the ligand_reference.csv that we provide from the Github. The file helps you match the PDB model for ligand strucutre (found from CellChat L-R pairs).
-  Vina_Docking_receptor_ref_file: "/home/andrew/docking_work/Tasks/scDock/scData/receptor_reference.csv"   # [string] This path will read the receptor_reference.csv that we provide from the Github. The file helps you match the PDB model for receptor strucutre (found from CellChat L-R pairs).
-  Vina_Docking_cas_txt_file: "/home/andrew/docking_work/Tasks/scDock/scData/cas_txt_file.txt"             # [string] You can provide a .txt file with CAS number for each compound that you are interested. Seperate them with row. If you provide this, the program won't consider use_fda and fda_txt_path.
+  Vina_Docking_input_path: "/path/to/YourDirectory"             # [string] This path will read the topX_LR_XX.csv from run_cellchat(). Should be the same as output_dir in run_cellchat().
+  Vina_Docking_output_path: "/path/to/YourDirectory"             # [string] This path defines the output path for the docking process.
+  Vina_Docking_ligand_ref_file: "/path/to/ligand_reference.csv"       # [string] This path will read the ligand_reference.csv that we provide from the Github. The file helps you match the PDB model for ligand strucutre (found from CellChat L-R pairs).
+  Vina_Docking_receptor_ref_file: "/path/to/receptor_reference.csv"   # [string] This path will read the receptor_reference.csv that we provide from the Github. The file helps you match the PDB model for receptor strucutre (found from CellChat L-R pairs).
+  Vina_Docking_cas_txt_file: "/path/to/YourCas_file.txt"             # [string] You can provide a .txt file with CAS number for each compound that you are interested. Seperate them with row. If you provide this, the program won't consider use_fda and fda_txt_path.
   Vina_Docking_use_fda: false                                          # [boolean] Whether to use a FDA compound list (2025.09). Default is false.
   Vina_Docking_fda_txt: null                                         # [string] This path will read the fda.txt. You can download the fda.txt from pur Github website.
   Vina_Docking_docking_ligand_dir: null                               # [string] If you do not provide "cas_txt_file" nor both "use_fda" and "fda_txt_path", then you must provide a directory path which contains your own ligand.pdbqt files.
