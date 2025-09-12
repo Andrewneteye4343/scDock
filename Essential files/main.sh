@@ -514,7 +514,7 @@ validate_config <- function(config) {
   arg_DR_Plot_shuffle <- check_boolean_string(drp$DR_Plot_shuffle, arg_name = "DR_Plot_shuffle", default = 1)
 
   # DR_Plot_raster
-  arg_DR_Plot_raster <- check_boolean_string_optional(drp$DR_Plot_shuffle, arg_name = "DR_Plot_raster", default = FALSE)
+  arg_DR_Plot_raster <- check_boolean_string_optional(drp$DR_Plot_raster, arg_name = "DR_Plot_raster", default = FALSE)
 
   # DR_Plot_width
   arg_DR_Plot_width <- check_numeric_string(drp$DR_Plot_width, arg_name = "DR_Plot_width", default = 6)
