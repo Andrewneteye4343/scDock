@@ -25,11 +25,15 @@ For users, you just need to adjust the arguments in config.yaml for scDock based
 If you are not sure about what are the meaning of these arguments, we suggest you use the default setting.
 We have noted the corresponding usage and their original function of each argument in config.yaml. You can also refer the guidance in their original websites.
 
-## For Markers_Annotation$Markers_Annotation_tissue_type argument, you must input the below tissue name:
+## For using Vina_Docking_cas_txt_file, you can provide a .txt file with compound CAS number (seperate in row).
+For example:
+
+
+## For Markers_Annotation_tissue_type argument, you must input the below tissue name:
 adipose tissue, bladder, blood, bone, bone marrow, brain, breast, embryo, eye, gastrointestinal tract, heart, kidney, liver, lung, mammary gland, muscle, other, ovary, pancreas, placenta,
 prostate, skin, spleen, stomach, testis, thymus, tooth, uterus
 
-## For Run_CellChat$Run_CellChat_source_celltype and Run_CellChat$Run_CellChat_target_celltype arguments, you must input NULL or the below cell name:
+## For Run_CellChat_source_celltype and Run_CellChat_target_celltype arguments, you must input NULL or the below cell name:
 ### adipose tissue
 Adipocyte,Adipose-derived stem cell,B cell,Basophil,Brown fat cell,Dendritic cell,Endothelial cell,Hematopoietic cell, Luminal epithelial cell,Macrophage,Mammary epithelial cell,Mast cell,
 Monocyte,Natural killer cell,Neuron,Pericyte,Platelet,T cell,T memory cell
