@@ -1,9 +1,9 @@
 # scDock
 #### Overview  
 This repository provides an integrated analysis pipeline covering:  
-scRNA/snRNA-seq analysis  
-Cell–cell communication inference  
-Small-molecule docking  
+⚪ scRNA/snRNA-seq analysis  
+⚪ Cell–cell communication inference  
+⚪ Small-molecule docking  
 scDock streamlines the complex workflow from single-cell/nucleus RNA sequencing analysis to drug discovery, reducing manual preparation and making the process more efficient.
 
 #### Input:
