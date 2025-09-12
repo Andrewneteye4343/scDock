@@ -17,4 +17,5 @@ Using the FDA compound list as a drug library
 To enable this feature:
 1. Place the provided fda.txt file in your computer.  
 2. Set the argument Vina_Docking_use_fda = true and Vina_Docking_fda_txt to /path/to/fda.txt.  
+
 Once configured, scDock will automatically download and preprocess the corresponding FDA parent compounds for subsequent molecular docking.
