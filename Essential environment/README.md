@@ -1,1 +1,7 @@
+To establish the virtual environment for scDock, we provide "install.sh" which can automatically create a virtual environment name "scDock" with the essential Python & R version, and install their modules/packages by conduct a single line command.
+Please follow the instructions:
+1. Download and place the "install.sh" to your computer.
+2. conduct <bash install.sh>
 
+The installation process might take some time to finish.
+After the installation, your computer will be ready for scDock.
