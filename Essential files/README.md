@@ -1,7 +1,8 @@
 # To utilize scDock, we need the essential files (provided in Github) displayed below. Please follow the instructions:
+## You will need to adjust the path arguments (where belongs to ypur computer) in config.yaml.
 1. Please create and move to your work directory for scDock analysis. For example: /home/path/to/scDock
 2. Please place main.sh and config.yaml at /home/path/to/scDock.
-3. Please place the ligand_reference.csv and receptor_reference.csv in the environment. You can use config.yaml to define where they are.
+3. Please place the ligand_reference.csv and receptor_reference.csv in the environment.
 4. Please create a directory named "functions" at /home/path/to/scDock. You should get a directory /home/path/to/scDock/functions/
 5. Please place all the below scripts at /home/to/your/path/scDock/functions/. These functions are provided in this Github project.
 
