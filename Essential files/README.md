@@ -6,19 +6,19 @@
 4. Please create a directory named "functions" at `/home/path/to/scDock`. You should get a directory `/home/path/to/scDock/functions`
 5. Please place all the below scripts at `/home/to/your/path/scDock/functions`
 ##### R scripts
-(1) Load_QC.R  
-(2) Normalization_Scale.R  
-(3) DR_Cluster.R  
-(4) Markers_Annotation.R  
-(5) DR_Plot.R  
-(6) Run_CellChat.R  
-(7) Vina_Docking.R  
+● Load_QC.R  
+● Normalization_Scale.R  
+● DR_Cluster.R  
+● Markers_Annotation.R  
+● DR_Plot.R  
+● Run_CellChat.R  
+● Vina_Docking.R  
 
 ##### Python scripts
-(1) download_alphafold.py  
-(2) download_swissmodel.py  
-(3) download_cas_pubchem.py  
-(4) prepare_receptor.py  
+● download_alphafold.py  
+● download_swissmodel.py  
+● download_cas_pubchem.py  
+● prepare_receptor.py  
 
 #### config.yaml:
 Users only need to adjust the arguments in config.yaml according to their requirements.
