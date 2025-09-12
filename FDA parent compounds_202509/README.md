@@ -3,13 +3,13 @@ We provide a list of compounds (FDA_202509_compounds.xlsx) obtained from the FDA
 
 The .xlsx file was generated using the script Get CAS from compound name.py, which retrieves the PubChem CID and CAS number for each compound name in the FDA list, along with the corresponding parent compound’s name, PubChem CID, and CAS number.
 
-The spreadsheet contains six columns:
-● Input Name
-● Input CID
-● Input CAS
-● Parent Name
-● Parent CID
-● Parent CAS
+The spreadsheet contains six columns:  
+● Input Name  
+● Input CID  
+● Input CAS  
+● Parent Name  
+● Parent CID  
+● Parent CAS  
 
 Since molecular docking requires the major active component of a drug, only the parent compound is used. The CAS numbers of the parent compounds are recorded in fda.txt.
 
