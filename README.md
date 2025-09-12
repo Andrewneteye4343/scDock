@@ -16,10 +16,10 @@ Small molecular docking results based on the top strongest cellular signalings a
 `bash main.sh config.yaml 2>&1 | tee log.txt` 
 
 ### Preparation:
-1. [Mandatory] First, please follow the README in our Essential environment.
-2. [Mandatory] Then, please follow the README in our Essential files.
+1. [Mandatory] First, please follow the README.md in our Essential environment.
+2. [Mandatory] Then, please follow the README.md in our Essential files.
 3. [Optional] If you want to use FDA compounds as drug library, we can follow the README in our FDA parent compounds_202509.
-4. [Optional] If you want to group your input samples, you can follow the README in our Metadata.
+4. [Optional] If you want to group your input samples, you can follow the README.md in our Metadata.
 
 ### Note:  
 We recommend clearing the files in "Vina_Docking_output_path" (defined in config.yaml) before each run, as scDock does not automatically remove the ligand and receptor directories. Otherwise, unnecessary structural files may accumulate.
