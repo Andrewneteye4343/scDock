@@ -61,22 +61,16 @@ Adrenergic neurons, Anterior pituitary gland cell, Astrocyte, B cell, Basket cel
 B cell, Basal epithelial cell, Dendritic cell, Endothelial cell, Eosinophil, Epithelial cell, Fibroblast, Hematopoietic stem cell, Luminal epithelial cell, Luminal progenitor cell, Macrophage, Mast cell, Mesenchymal stem cell, Myoepithelial cell, Natural killer cell, Neutrophil, Pericyte, T cell
 
 #### embryo
-Arterial cell,Blastomere,Cardiomyocyte,Dorsal otocyst,Ectoderm cell,Embryonic stem cell,Endocardial cell,Endocrine cell,Endoderm cell,Endothelial cell,Epiblast cell,Germ cell,Hemangioblast,
-Hematopoietic stem cell,Macrophage,Mesenchymal stem cell,Mesoderm cell,Myeloblast,Neural crest cell,Neural stem cell,Neural tube cell,Neuron,Neutrophil,Oocyte,Primitive endoderm cell,
-Skeletal muscle cell,Trophectoderm cell,Trophoblast cell,Unrestricted somatic stem cell,Venous cell,Ventral otocyst
+Arterial cell, Blastomere, Cardiomyocyte, Dorsal otocyst, Ectoderm cell, Embryonic stem cell, Endocardial cell, Endocrine cell, Endoderm cell, Endothelial cell, Epiblast cell, Germ cell, Hemangioblast, Hematopoietic stem cell, Macrophage, Mesenchymal stem cell, Mesoderm cell, Myeloblast, Neural crest cell, Neural stem cell, Neural tube cell, Neuron, Neutrophil, Oocyte, Primitive endoderm cell, Skeletal muscle cell, Trophectoderm cell, Trophoblast cell, Unrestricted somatic stem cell, Venous cell, Ventral otocyst
 
 #### eye
-Bipolar cell,Endothelial cell,Epithelial cell,Epithelial stem cell,Erythroid cell,Ganglion cell,Hematopoietic stem cell,Lymphocyte,Macrophage,Mesenchymal cell,Mesenchymal stem cell,Muller cell,
-Myoepithelial cell,Photoreceptor cell,Progenitor cell
+Bipolar cell, Endothelial cell, Epithelial cell, Epithelial stem cell, Erythroid cell, Ganglion cell, Hematopoietic stem cell, Lymphocyte, Macrophage, Mesenchymal cell, Mesenchymal stem cell, Muller cell, Myoepithelial cell, Photoreceptor cell, Progenitor cell
 
 #### gastrointestinal tract
-Ciliated epithelial cell,Colonic stem cell,Crypt cell,Dendritic cell,Enteric glia cell,Enteric neuron,Enterochromaffin cell,Enterocyte,Enterocyte progenitor cell,Enteroendocrine cell,
-Enteroendocrine precursor cell,Foveolar cell,Gastric chief cell,Goblet cell,Goblet progenitor cell,Intestinal stem cell,Macrophage,Mast cell,Microfold cell,Paneth cell,Parietal cell,
-S cell,Secretory progenitor cell,T cell,Tuft cell,Tuft progenitor cell
+Ciliated epithelial cell, Colonic stem cell, Crypt cell, Dendritic cell, Enteric glia cell, Enteric neuron, Enterochromaffin cell, Enterocyte, Enterocyte progenitor cell, Enteroendocrine cell, Enteroendocrine precursor cell, Foveolar cell, Gastric chief cell, Goblet cell, Goblet progenitor cell, Intestinal stem cell, Macrophage, Mast cell, Microfold cell, Paneth cell, Parietal cell, S cell, Secretory progenitor cell, T cell, Tuft cell, Tuft progenitor cell
 
 #### heart
-Aorta valve interstitial cell,Cardiocyte,Cardiomyocyte,Cardiovascular progenitor cell,Endocardial cell,Endothelial cell,Erythroid cell,Fibroblast,Macrophage,Myofibroblast,Pericyte,
-Progenitor cell,Smooth muscle cell
+Aorta valve interstitial cell, Cardiocyte, Cardiomyocyte, Cardiovascular progenitor cell, Endocardial cell, Endothelial cell, Erythroid cell, Fibroblast, Macrophage, Myofibroblast, Pericyte, Progenitor cell, Smooth muscle cell
 
 #### kidney
 B cell,Basophil,Connecting tubule epithelial cell,Cortical cell,Dendritic cell,Descending vasa recta endothelial cell,Distal convoluted tubule cell,Endothelial cell,Epithelial cell,
