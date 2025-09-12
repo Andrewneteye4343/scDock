@@ -73,23 +73,13 @@ Ciliated epithelial cell, Colonic stem cell, Crypt cell, Dendritic cell, Enteric
 Aorta valve interstitial cell, Cardiocyte, Cardiomyocyte, Cardiovascular progenitor cell, Endocardial cell, Endothelial cell, Erythroid cell, Fibroblast, Macrophage, Myofibroblast, Pericyte, Progenitor cell, Smooth muscle cell
 
 #### kidney
-B cell,Basophil,Connecting tubule epithelial cell,Cortical cell,Dendritic cell,Descending vasa recta endothelial cell,Distal convoluted tubule cell,Endothelial cell,Epithelial cell,
-Erythroblast,Erythroid precursor cell,Fibroblast,Glomerular capillary endothelial cell,Granular cell,Infiltrated mononuclear cell,Inner medulla collecting duct epithelial cell,
-Intercalated cell,Juxtaglomerular cell,Kidney progenitor cell,Loop of Henle cell,Loop of Henle cortical thick ascending limb epithelial cell,
-Loop of Henle medullary thick ascending limb epithelial cell,Loop of Henle thin descending limb epithelial cell,Lymphatic endothelial cell,M2 Macrophage,Macrophage,Macula densa,
-Mast cell,Medullary fibroblast,Mesangial cell,Monocyte,Mononuclear phagocyte,Natural killer cell,Nephron epithelial cell,Neutrophil,Papillary tip epithelial cell,
-Parietal epithelial cell,Pericyte,Peritubular capilary endothelial cell,Plasma cell,Podocyte,Principal cell,Proximal tubule brush border cell,Proximal tubule cell,
-Proximal tubule epithelial cell,Renal alpha-intercalated cell,Schwann cell,T cell
+B cell, Basophil, Connecting tubule epithelial cell, Cortical cell, Dendritic cell, Descending vasa recta endothelial cell, Distal convoluted tubule cell, Endothelial cell, Epithelial cell, Erythroblast, Erythroid precursor cell, Fibroblast, Glomerular capillary endothelial cell, Granular cell, Infiltrated mononuclear cell, Inner medulla collecting duct epithelial cell, Intercalated cell, Juxtaglomerular cell, Kidney progenitor cell, Loop of Henle cell, Loop of Henle cortical thick ascending limb epithelial cell, Loop of Henle medullary thick ascending limb epithelial cell, Loop of Henle thin descending limb epithelial cell, Lymphatic endothelial cell, M2 Macrophage, Macrophage, Macula densa, Mast cell, Medullary fibroblast, Mesangial cell, Monocyte, Mononuclear phagocyte, Natural killer cell, Nephron epithelial cell, Neutrophil, Papillary tip epithelial cell, Parietal epithelial cell, Pericyte, Peritubular capilary endothelial cell, Plasma cell, Podocyte, Principal cell, Proximal tubule brush border cell, Proximal tubule cell, Proximal tubule epithelial cell, Renal alpha-intercalated cell, Schwann cell, T cell
 
 #### liver
-B cell,Cholangiocyte,Dendritic cell,Endothelial cell,Epithelial cell,Hematopoietic cell,Hepatoblast,Hepatocyte,Kupffer cell,Liver bud hepatic cell,Mesenchymal cell,
-Mesenchymal stem cell,Monocyte,Myofibroblast,Natural killer cell,Neutrophil,Progenitor cell,Stellate cell,Stem cell,T cell
+B cell, Cholangiocyte, Dendritic cell, Endothelial cell, Epithelial cell, Hematopoietic cell, Hepatoblast, Hepatocyte, Kupffer cell, Liver bud hepatic cell, Mesenchymal cell, Mesenchymal stem cell, Monocyte, Myofibroblast, Natural killer cell, Neutrophil, Progenitor cell, Stellate cell, Stem cell, T cell
 
 #### lung
-Adventitial fibroblast,B cell,Basal cell,Basophil,Bronchial epithelial cell,Brush Cell,Capillary aerocyte,Ciliated cell,Club cell,Dendritic cell,Endothelial cell,Eosinophil,
-Epithelial cell,Fibroblast,Fibromyocyte,Goblet cell,Granulocyte,Lipofibroblast,Lymphatic endothelial cell,Lymphoid cell,M1 Macrophage,M2 Macrophage,Macrophage,Mast cell,
-Mesenchymal progenitor cell,Mesothelial cell,Monocyte,Mucous cell,Myeloid cell,Myeloid leukocyte,Myofibroblast,Neuroendocrine cell,Neutrophil,Pericyte,Plasma cell,
-Pulmonary alveolar type I cell,Pulmonary alveolar type II cell,Pulmonary Ionocyte cell,Secretory cell,Serous cell,Smooth muscle cell,Stem cell,T cell
+Adventitial fibroblast, B cell, Basal cell, Basophil, Bronchial epithelial cell, Brush Cell, Capillary aerocyte, Ciliated cell, Club cell, Dendritic cell, Endothelial cell, Eosinophil, Epithelial cell, Fibroblast, Fibromyocyte, Goblet cell, Granulocyte, Lipofibroblast, Lymphatic endothelial cell, Lymphoid cell, M1 Macrophage, M2 Macrophage, Macrophage, Mast cell, Mesenchymal progenitor cell, Mesothelial cell, Monocyte, Mucous cell, Myeloid cell, Myeloid leukocyte, Myofibroblast, Neuroendocrine cell, Neutrophil, Pericyte, Plasma cell, Pulmonary alveolar type I cell,Pulmonary alveolar type II cell,Pulmonary Ionocyte cell,Secretory cell,Serous cell,Smooth muscle cell,Stem cell,T cell
 
 #### mammary gland
 B cell,Basal cell,Endothelial cell,Epithelial cell,Hormone sensing differentiated cell,Hormone sensing progenitor cell,Luminal cell,Luminal epithelial cell,Luminal progenitor cell,
