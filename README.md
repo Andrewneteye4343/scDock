@@ -16,8 +16,8 @@ Small molecular docking results based on the top strongest cellular signalings a
 `bash main.sh config.yaml 2>&1 | tee log.txt` 
 
 ### Preparation:
-1. [Recommand] Please follow the README.md in our Essential environment.
-2. [Recommand] Please follow the README.md in our Essential files.
+1. [Recommended] Please follow the README.md in our Essential environment.
+2. [Recommended] Please follow the README.md in our Essential files.
 3. [Optional] If you want to use FDA compounds as compound library in molecular docking, you can follow the README.md in our FDA parent compounds_202509.
 4. [Optional] If you want to group your input samples, you can follow the README.md in our Metadata.
 
