@@ -5,13 +5,13 @@
 4. Please place all the below scripts at /home/to/your/path/scDock/functions/. These functions are provided in this Github project.
 
 ## R scripts
-(1) Load_QC.R
-(2) Normalization_Scale.R
-(3) DR_Cluster.R
-(4) Markers_Annotation.R
-(5) DR_Plot.R
-(6) Run_CellChat.R
-(7) Vina_Docking.R
+Load_QC.R
+Normalization_Scale.R
+DR_Cluster.R
+Markers_Annotation.R
+DR_Plot.R
+Run_CellChat.R
+Vina_Docking.R
 
 ## Python scripts
 (1) download_alphafold.py
