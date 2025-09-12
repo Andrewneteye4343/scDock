@@ -46,34 +46,19 @@ Adipocyte, Adipose-derived stem cell, B cell, Basophil, Brown fat cell, Dendriti
 Basal epithelial cell, Dendritic cell, Endothelial cell, Macrophage, Smooth muscle cell, Smooth muscle progenitor cell, Umbrella cell, Ureteric epithelium cell, Urine-derived stem cell, Urothelial cell
 
 #### blood 
-B cell, Basophil, CD14 Monocyte, CD16 Monocyte, CD4 Central Memory T cell, CD4 Cytotoxic T cell, CD4 Effector Memory T cell, CD4 Naive T cell, CD4 Proliferating T cell, CD4 T cell, CD56-bright natural killer cell, CD56-dim natural killer cell, CD8 Central Memory T cell, CD8 Effector Memory T cell, CD8 Naive T cell, CD8 Proliferating T cell, CD8 T cell, Dendritic cell,
-Double-negative T cell,Embryonic stem cell,Endothelial cell,Endothelial progenitor cell, Endothelial stem cell,Eosinophil,Epithelial cell,Erythroblast,Erythroid cell,Erythroid precursor cell,
-Gamma delta T cell,Granulocyte,Hematopoietic stem cell,Immature myeloid cell,Innate lymphoid cell,Intermediate B cell,Leukocyte,Lymphoid cell,Megakaryocyte,Memory B cell,Mesenchymal stem cell,
-Monocyte,Mucosal-associated invariant T cell,Myeloid cell,Myeloid dendritic cell,Myeloid-derived suppressor cell,Naive B cell,Natural killer cell,Neutrophil,Plasma cell,Plasmablast,Plasmacytoid dendritic cell,
-Platelet,Regulatory T cell,Reticulocyte,T cell,Thymic emigrant cell
+B cell, Basophil, CD14 Monocyte, CD16 Monocyte, CD4 Central Memory T cell, CD4 Cytotoxic T cell, CD4 Effector Memory T cell, CD4 Naive T cell, CD4 Proliferating T cell, CD4 T cell, CD56-bright natural killer cell, CD56-dim natural killer cell, CD8 Central Memory T cell, CD8 Effector Memory T cell, CD8 Naive T cell, CD8 Proliferating T cell, CD8 T cell, Dendritic cell, Double-negative T cell, Embryonic stem cell, Endothelial cell, Endothelial progenitor cell, Endothelial stem cell, Eosinophil, Epithelial cell, Erythroblast, Erythroid cell, Erythroid precursor cell, Gamma delta T cell, Granulocyte, Hematopoietic stem cell, Immature myeloid cell, Innate lymphoid cell, Intermediate B cell, Leukocyte, Lymphoid cell, Megakaryocyte, Memory B cell, Mesenchymal stem cell, Monocyte, Mucosal-associated invariant T cell, Myeloid cell, Myeloid dendritic cell, Myeloid-derived suppressor cell, Naive B cell, Natural killer cell, Neutrophil, Plasma cell, Plasmablast, Plasmacytoid dendritic cell, Platelet, Regulatory T cell, Reticulocyte, T cell, Thymic emigrant cell
 
 #### bone
-Chondrocyte,Dendritic cell,Eosinophil,Erythroid cell,Granulocyte,Hematopoietic stem cell,Meniscus-derived progenitor cell,Mesenchymal progenitor cell,Mesenchymal stem cell,Monocyte,Myeloid progenitor cell,
-Neutrophil,Osteoblast,Osteoclast,Osteoclast precursor cell,Osteocyte,Periosteum-derived progenitor cell
+Chondrocyte, Dendritic cell, Eosinophil, Erythroid cell, Granulocyte, Hematopoietic stem cell, Meniscus-derived progenitor cell, Mesenchymal progenitor cell, Mesenchymal stem cell, Monocyte, Myeloid progenitor cell, Neutrophil, Osteoblast, Osteoclast, Osteoclast precursor cell, Osteocyte, Periosteum-derived progenitor cell
 
 #### bone marrow 
-B cell,Basophil,Blastema cell,Common lymphoid progenitor cell,Common myeloid progenitor,Dendritic cell,Dendritic progenitor cell,Endothelial cell,Endothelial progenitor cell,Eosinophil,Erythroid cell,
-Erythroid megakaryocyte progenitor cell,Erythroid precursor cell,Granulocyte monocyte progenitor cell,Hematopoietic stem cell,Immature dendritic cell,Innate lymphoid cell,Langerhans cell,
-Lymphoid-primed multipotent progenitor cell,Macrophage,Mast cell,Mature T cell,Megakaryocyte,Megakaryocyte progenitor cell,Mesenchymal stem cell,Monocyte,Monocyte derived dendritic cell,
-Mucosal-associated invariant T cell,Myeloid cell,Myeloid dendritic cell,Myeloid progenitor cell,Natural killer cell,Neutrophil,Osteoclast precursor cell,Plasma cell,Plasmacytoid dendritic cell,
-Platelet,Precursor plasmacytoid dendritic cell,T cell
+B cell, Basophil, Blastema cell, Common lymphoid progenitor cell, Common myeloid progenitor, Dendritic cell, Dendritic progenitor cell, Endothelial cell, Endothelial progenitor cell, Eosinophil, Erythroid cell, Erythroid megakaryocyte progenitor cell, Erythroid precursor cell, Granulocyte monocyte progenitor cell, Hematopoietic stem cell, Immature dendritic cell, Innate lymphoid cell, Langerhans cell, Lymphoid-primed multipotent progenitor cell, Macrophage, Mast cell, Mature T cell, Megakaryocyte, Megakaryocyte progenitor cell, Mesenchymal stem cell, Monocyte, Monocyte derived dendritic cell, Mucosal-associated invariant T cell, Myeloid cell, Myeloid dendritic cell, Myeloid progenitor cell, Natural killer cell, Neutrophil, Osteoclast precursor cell, Plasma cell, Plasmacytoid dendritic cell, Platelet, Precursor plasmacytoid dendritic cell, T cell
 
 #### brain 
-Adrenergic neurons,Anterior pituitary gland cell,Astrocyte,B cell,Basket cell,Bergmann glial cell,Cajal-Retzius cell,CCK basket cell,Chandelier cell,Cholinergic neuron,Choroid plexus cell,
-Dopaminergic neuron,Endothelial cell,Ependymal cell,GABAergic neuron,Ganglion cell,Glutamatergic neuron,Hypothalamic ependymal cell,Immature neuron,Interneuron,Interneuron-selective cell,
-Lepotomeningeal cell,Macrophage,Martinotti cell,Meningeal cell,Microglia cell,Motor neuron,Mural cell,Neural progenitor cell,Neural stem cell,Neuroblast,Neuroendocrine cell,Neuron,Noradrenergic neuron,
-Olfactory ensheathing glia,Olfactory sensory neuron,Oligodendrocyte,Oligodendrocyte precursor cell,Pan-gabaergic,Pericyte,Pinealocyte,Purkinje neuron,Pyramidal cell,Radial glia cell,Rhombic lip cell,
-Satellite glial cell,Schwann cell,Serotonergic neuron,Smooth muscle cell,T cell,Tanycyte,Trigeminal neuron,Type IA spiral ganglion neuron,Type IB spiral ganglion neuron,Type IC spiral ganglion neuron,
-Type II spiral ganglion neuron
+Adrenergic neurons, Anterior pituitary gland cell, Astrocyte, B cell, Basket cell, Bergmann glial cell, Cajal-Retzius cell, CCK basket cell, Chandelier cell, Cholinergic neuron, Choroid plexus cell, Dopaminergic neuron, Endothelial cell, Ependymal cell, GABAergic neuron, Ganglion cell, Glutamatergic neuron, Hypothalamic ependymal cell, Immature neuron, Interneuron, Interneuron-selective cell, Lepotomeningeal cell, Macrophage, Martinotti cell, Meningeal cell, Microglia cell, Motor neuron, Mural cell, Neural progenitor cell, Neural stem cell, Neuroblast, Neuroendocrine cell, Neuron, Noradrenergic neuron, Olfactory ensheathing glia, Olfactory sensory neuron, Oligodendrocyte, Oligodendrocyte precursor cell, Pan-gabaergic, Pericyte, Pinealocyte, Purkinje neuron, Pyramidal cell, Radial glia cell, Rhombic lip cell, Satellite glial cell, Schwann cell, Serotonergic neuron, Smooth muscle cell, T cell, Tanycyte, Trigeminal neuron, Type IA spiral ganglion neuron, Type IB spiral ganglion neuron, Type IC spiral ganglion neuron, Type II spiral ganglion neuron
 
 #### breast
-B cell,Basal epithelial cell,Dendritic cell,Endothelial cell,Eosinophil,Epithelial cell,Fibroblast,Hematopoietic stem cell,Luminal epithelial cell,Luminal progenitor cell,Macrophage,Mast cell,
-Mesenchymal stem cell,Myoepithelial cell,Natural killer cell,Neutrophil,Pericyte,T cell
+B cell, Basal epithelial cell, Dendritic cell, Endothelial cell, Eosinophil, Epithelial cell, Fibroblast, Hematopoietic stem cell, Luminal epithelial cell, Luminal progenitor cell, Macrophage, Mast cell, Mesenchymal stem cell, Myoepithelial cell, Natural killer cell, Neutrophil, Pericyte, T cell
 
 #### embryo
 Arterial cell,Blastomere,Cardiomyocyte,Dorsal otocyst,Ectoderm cell,Embryonic stem cell,Endocardial cell,Endocrine cell,Endoderm cell,Endothelial cell,Epiblast cell,Germ cell,Hemangioblast,
