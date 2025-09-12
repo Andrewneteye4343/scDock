@@ -79,53 +79,43 @@ B cell, Basophil, Connecting tubule epithelial cell, Cortical cell, Dendritic ce
 B cell, Cholangiocyte, Dendritic cell, Endothelial cell, Epithelial cell, Hematopoietic cell, Hepatoblast, Hepatocyte, Kupffer cell, Liver bud hepatic cell, Mesenchymal cell, Mesenchymal stem cell, Monocyte, Myofibroblast, Natural killer cell, Neutrophil, Progenitor cell, Stellate cell, Stem cell, T cell
 
 #### lung
-Adventitial fibroblast, B cell, Basal cell, Basophil, Bronchial epithelial cell, Brush Cell, Capillary aerocyte, Ciliated cell, Club cell, Dendritic cell, Endothelial cell, Eosinophil, Epithelial cell, Fibroblast, Fibromyocyte, Goblet cell, Granulocyte, Lipofibroblast, Lymphatic endothelial cell, Lymphoid cell, M1 Macrophage, M2 Macrophage, Macrophage, Mast cell, Mesenchymal progenitor cell, Mesothelial cell, Monocyte, Mucous cell, Myeloid cell, Myeloid leukocyte, Myofibroblast, Neuroendocrine cell, Neutrophil, Pericyte, Plasma cell, Pulmonary alveolar type I cell,Pulmonary alveolar type II cell,Pulmonary Ionocyte cell,Secretory cell,Serous cell,Smooth muscle cell,Stem cell,T cell
+Adventitial fibroblast, B cell, Basal cell, Basophil, Bronchial epithelial cell, Brush Cell, Capillary aerocyte, Ciliated cell, Club cell, Dendritic cell, Endothelial cell, Eosinophil, Epithelial cell, Fibroblast, Fibromyocyte, Goblet cell, Granulocyte, Lipofibroblast, Lymphatic endothelial cell, Lymphoid cell, M1 Macrophage, M2 Macrophage, Macrophage, Mast cell, Mesenchymal progenitor cell, Mesothelial cell, Monocyte, Mucous cell, Myeloid cell, Myeloid leukocyte, Myofibroblast, Neuroendocrine cell, Neutrophil, Pericyte, Plasma cell, Pulmonary alveolar type I cell,Pulmonary alveolar type II cell, Pulmonary Ionocyte cell, Secretory cell, Serous cell, Smooth muscle cell, Stem cell, T cell
 
 #### mammary gland
-B cell,Basal cell,Endothelial cell,Epithelial cell,Hormone sensing differentiated cell,Hormone sensing progenitor cell,Luminal cell,Luminal epithelial cell,Luminal progenitor cell,
-Macrophage,Mast cell,Muscle cell,Myoepithelial cell,Progenitor cell,Stem cell,T cell
+B cell, Basal cell, Endothelial cell, Epithelial cell, Hormone sensing differentiated cell, Hormone sensing progenitor cell, Luminal cell, Luminal epithelial cell, Luminal progenitor cell, Macrophage, Mast cell, Muscle cell, Myoepithelial cell, Progenitor cell, Stem cell, T cell
 
 #### muscle
-Adventitial cell,B cell,Endothelial cell,Erythroblast,Fibroblast,Granulocyte monocyte progenitor cell,Inflammatory cell,Macrophage,Mesenchymal progenitor cell,Mesenchymal stem cell,
-Muscle-derived cell,Myoblast,Myocyte,Myocyte progenitor cell,Myoepithelial cell,Myofibroblast,Myogenic endothelial cell,Neutrophil,Pericyte,Progenitor cell,Satellite cell,Schwann cell,
-Smooth muscle cell,T cell,Tenocyte
+Adventitial cell, B cell, Endothelial cell, Erythroblast, Fibroblast, Granulocyte monocyte progenitor cell, Inflammatory cell, Macrophage, Mesenchymal progenitor cell, Mesenchymal stem cell, Muscle-derived cell, Myoblast, Myocyte, Myocyte progenitor cell, Myoepithelial cell, Myofibroblast, Myogenic endothelial cell, Neutrophil, Pericyte, Progenitor cell, Satellite cell, Schwann cell, Smooth muscle cell, T cell, Tenocyte
 
 #### other
-Chromaffin cell,Epithelial cell,Follicular cell,Glomus cell,Hair cell,Invasive spongiotrophoblast,Langerhans cell,Mesothelial cell,Nucleus pulposus cell,Parathyroid chief cell,
-Salivary mucous cell,Thymocyte,Type III taste bud cell,Vomeronasal sensory neuron
+Chromaffin cell, Epithelial cell, Follicular cell, Glomus cell, Hair cell, Invasive spongiotrophoblast, Langerhans cell, Mesothelial cell, Nucleus pulposus cell, Parathyroid chief cell, Salivary mucous cell, Thymocyte, Type III taste bud cell, Vomeronasal sensory neuron
 
 #### ovary
-Cumulus cell,Endothelial cell,Endothelium cell,Epithelial cell,Germ cell,Granulosa cell,Luteal cell,Macrophage,Mesenchymal cell,Oocyte,Pluripotent stem cell,Stem cell,
-Theca interna cell,Thecal cell
+Cumulus cell, Endothelial cell, Endothelium cell, Epithelial cell, Germ cell, Granulosa cell, Luteal cell, Macrophage, Mesenchymal cell, Oocyte, Pluripotent stem cell, Stem cell, Theca interna cell, Thecal cell
 
 #### pancreas
-Acinar cell,Alpha cell,B cell,Beta cell,Delta cell,Dendritic cell,Ductal cell,Ductal stem cell,Endocrine cell,Endothelial cell,Epithelial cell,Epsilon cell,Gamma cell,Glial cell,
-Granulocyte,Macrophage,Mast cell,Pancreatic progenitor cell,Polypeptide cell,Schwann cell,Stellate cell,T cell
+Acinar cell, Alpha cell, B cell, Beta cell, Delta cell, Dendritic cell, Ductal cell, Ductal stem cell, Endocrine cell, Endothelial cell, Epithelial cell, Epsilon cell, Gamma cell, Glial cell, Granulocyte, Macrophage, Mast cell, Pancreatic progenitor cell, Polypeptide cell, Schwann cell, Stellate cell, T cell
 
 #### placenta
-Basophil,Decidual stem cell,Dendritic cell,Endodermal cell,Endothelial cell,Erythroid cell,Hofbauer cell,Invasive spongiotrophoblast,Labyrinthine trophoblast,Macrophage,
-Megakaryocyte progenitor cell,Mesenchymal stem cell,Monocyte,Natural killer cell,Pericyte,Spongiotrophoblast,Stem cell,Trophoblast cell,Basal cell,Epithelial cell,
-Luminal cell,Progenitor cell,Prostate epithelial cell,Prostate stem cell,Stem cell
+Basophil, Decidual stem cell, Dendritic cell, Endodermal cell, Endothelial cell, Erythroid cell, Hofbauer cell, Invasive spongiotrophoblast, Labyrinthine trophoblast, Macrophage, Megakaryocyte progenitor cell, Mesenchymal stem cell, Monocyte, Natural killer cell, Pericyte, Spongiotrophoblast, Stem cell, Trophoblast cell, Basal cell, Epithelial cell, Luminal cell, Progenitor cell, Prostate epithelial cell, Prostate stem cell, Stem cell
 
 #### skin
-B cell,Basal cell,Dendritic cell,Endothelial cell,Epidermal stem cell,Epithelial cell,Keratinocyte,Langerhans cell,Macrophage,Melanocyte,Merkel cell,Mesenchymal stem cell,
-Neural crest stem cell,Sebocyte,Stem cell,T cell,Trichocyte
+B cell, Basal cell, Dendritic cell, Endothelial cell, Epidermal stem cell, Epithelial cell, Keratinocyte, Langerhans cell, Macrophage, Melanocyte, Merkel cell, Mesenchymal stem cell, Neural crest stem cell, Sebocyte, Stem cell, T cell, Trichocyte
 
 #### spleen
-B cell,Dendritic cell,Erythroblast,Granulocyte,Lymphocyte,Macrophage,Monocyte,Natural killer cell,Neutrophil,Plasma cell,Plasmacytoid dendritic cell,T cell
+B cell, Dendritic cell, Erythroblast, Granulocyte, Lymphocyte, Macrophage, Monocyte, Natural killer cell, Neutrophil, Plasma cell, Plasmacytoid dendritic cell, T cell
 
 #### stomach
-Dendritic cell,Gastric stem cell,Multipotent stem cell,Parietal cell,Parietal progenitor cell,Pit cell,Pit progenitor cell,Smooth muscle cell,Tuft cell
+Dendritic cell, Gastric stem cell, Multipotent stem cell, Parietal cell, Parietal progenitor cell, Pit cell, Pit progenitor cell, Smooth muscle cell, Tuft cell
 
 #### testis
-Leydig cell,Macrophage,Peritubular myoid cell,Pre sertoli cell,Sertoli cell,Spermatids,Spermatocyte,Spermatogonia,Spermatogonial stem cell,Spermatogonium,Spermatozoa
+Leydig cell, Macrophage, Peritubular myoid cell, Pre sertoli cell, Sertoli cell, Spermatids, Spermatocyte, Spermatogonia, Spermatogonial stem cell, Spermatogonium, Spermatozoa
 
 #### thymus
-Cortical thymic epithelial cell,Dendritic cell,Epithelial cell,Medullary thymic epithelial cell,T cell,Thymocyte
+Cortical thymic epithelial cell, Dendritic cell, Epithelial cell, Medullary thymic epithelial cell, T cell, Thymocyte
 
 #### tooth
-Alveolar osteocyte,Dental follicle cell,Dental pulp cell,Dental pulp stem cell,Endothelial cell,Epithelial cell,Glial cell,Macrophage,Mesenchymal stem cell,
-Natural killer cell,Periodontal ligament stem cell,Perivascular cell,T cell
+Alveolar osteocyte, Dental follicle cell, Dental pulp cell, Dental pulp stem cell, Endothelial cell, Epithelial cell, Glial cell, Macrophage, Mesenchymal stem cell, Natural killer cell, Periodontal ligament stem cell, Perivascular cell, T cell
 
 #### uterus
-B cell,Decidual cell,Endometrial stem cell,Keratinocyte,Macrophage,Monocyte,Natural killer cell,Neutrophil,Smooth muscle cell,Stem cell
+B cell, Decidual cell, Endometrial stem cell, Keratinocyte, Macrophage, Monocyte, Natural killer cell, Neutrophil, Smooth muscle cell, Stem cell
