@@ -1,10 +1,10 @@
-To utilize scDock, we need the essential files displayed below. Please follow the instructions:
+# To utilize scDock, we need the essential files displayed below. Please follow the instructions:
 1. Please create and move to your work directory for scDock analysis. For example: /home/path/to/scDock
 2. Please place main.sh and config.yaml at /home/path/to/scDock. These files are provided in this Github project.
 3. Please create a directory named "functions" at /home/path/to/scDock. You should get a directory /home/path/to/scDock/functions/
 4. Please place all the below scripts at /home/to/your/path/scDock/functions/. These functions are provided in this Github project.
 
-=== R scripts ===
+## R scripts
 (1) Load_QC.R
 (2) Normalization_Scale.R
 (3) DR_Cluster.R
@@ -13,7 +13,7 @@ To utilize scDock, we need the essential files displayed below. Please follow th
 (6) Run_CellChat.R
 (7) Vina_Docking.R
 
-=== Python scripts ===
+## Python scripts
 (1) download_alphafold.py
 (2) download_swissmodel.py
 (3) download_cas_pubchem.py
@@ -27,16 +27,16 @@ If you are not sure about what are the meaning of these arguments, we suggest yo
 We have noted the corresponding usage and their original function of each argument in config.yaml. You can also refer the guidance in their original websites.
 If you want to change the argument, please confirm the format of your input. For example, you should input a value with integer format in min_features in load_and_qc(), not float format.
 
-### For Markers_Annotation$Markers_Annotation_tissue_type argument, you must input the below tissue name:
+## For Markers_Annotation$Markers_Annotation_tissue_type argument, you must input the below tissue name:
 adipose tissue, bladder, blood, bone, bone marrow, brain, breast, embryo, eye, gastrointestinal tract, heart, kidney, liver, lung, mammary gland, muscle, other, ovary, pancreas, placenta,
 prostate, skin, spleen, stomach, testis, thymus, tooth, uterus
 
-# For Run_CellChat$Run_CellChat_source_celltype and Run_CellChat$Run_CellChat_target_celltype arguments, you must input NULL or the below cell name:
-### adipose tissue ###
+## For Run_CellChat$Run_CellChat_source_celltype and Run_CellChat$Run_CellChat_target_celltype arguments, you must input NULL or the below cell name:
+### adipose tissue
 Adipocyte,Adipose-derived stem cell,B cell,Basophil,Brown fat cell,Dendritic cell,Endothelial cell,Hematopoietic cell, Luminal epithelial cell,Macrophage,Mammary epithelial cell,Mast cell,
 Monocyte,Natural killer cell,Neuron,Pericyte,Platelet,T cell,T memory cell
 
-### bladder ###
+### bladder
 Basal epithelial cell,Dendritic cell,Endothelial cell,Macrophage,Smooth muscle cell,Smooth muscle progenitor cell,Umbrella cell, Ureteric epithelium cell,Urine-derived stem cell,Urothelial cell
 
 ### blood ###
