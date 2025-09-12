@@ -1,8 +1,10 @@
 # scDock
 Here, we establish a series analysis pipeline, including scRNA/snRNA sequencing analysis, cell-cell communication and small molecular docking.  
 scDock simplifies the complicated process and preparation from single cell / nucleus RNA sequencing analysis to drug discovery.  
-#### Input:  scRNA/snRNA data (CellRanger output files [barcodes.tsv.gz, features.tsv.gz, matrix.mtx], .h5 and .txt are available in scDock)  
-#### Output:  Small molecular docking results based on the top strongest cellular signalings across cell types (you can choose your interested cell type)  
+#### Input:
+scRNA/snRNA data (CellRanger output files [barcodes.tsv.gz, features.tsv.gz, matrix.mtx], .h5 and .txt are available in scDock)  
+#### Output:
+Small molecular docking results based on the top strongest cellular signalings across cell types (you can choose your interested cell type)  
 
 How to use:  
 `bash main.sh config.yaml 2>&1 | tee log.txt` 
