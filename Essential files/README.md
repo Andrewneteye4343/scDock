@@ -1,11 +1,11 @@
 ### To utilize scDock, users need to download the essential files from Github. Please follow the instructions:
-### You will need to adjust the path arguments (where belong to your computer) in config.yaml later.
+#### You will need to adjust the path arguments (where belong to your computer) in config.yaml later.
 1. Please create and move to your work directory for scDock analysis. We will use `/home/path/to/scDock` as an example.
 2. Please place "main.sh" and "config.yaml" at `/home/path/to/scDock`
 3. Please place the ligand_reference.csv and receptor_reference.csv in your computer. For example, `/home/path/to/scDock`
 4. Please create a directory named "functions" at `/home/path/to/scDock`. You should get a directory `/home/path/to/scDock/functions`
 5. Please place all the below scripts at `/home/to/your/path/scDock/functions`
-#### R scripts
+##### R scripts
 (1) Load_QC.R  
 (2) Normalization_Scale.R  
 (3) DR_Cluster.R  
@@ -14,16 +14,17 @@
 (6) Run_CellChat.R  
 (7) Vina_Docking.R  
 
-#### Python scripts
+##### Python scripts
 (1) download_alphafold.py  
 (2) download_swissmodel.py  
 (3) download_cas_pubchem.py  
 (4) prepare_receptor.py  
 
-### For setting config.yaml:
-For users, you just need to adjust the arguments in config.yaml for scDock based on your requirement.
-If you are not sure about what are the meaning of these arguments, we suggest you use the default setting.
-We have noted the corresponding usage and their original function of each argument in config.yaml. You can also refer the guidance in their original websites.
+#### config.yaml:
+Users only need to adjust the arguments in config.yaml according to their requirements.
+If you are unsure about the meaning of certain argument, we recommend using the default settings.
+
+Each argument in config.yaml is documented with its usage and original function. For more details, you can also refer to the documentation provided on the respective official websites.
 
 #### For using Vina_Docking_cas_txt_file, you can provide a .txt file with compound CAS number (seperate in row).
 For example:
