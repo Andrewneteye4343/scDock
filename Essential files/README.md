@@ -1,23 +1,24 @@
-# To utilize scDock, we need the essential files displayed below. Please follow the instructions:
+# To utilize scDock, we need the essential files (provided in Github) displayed below. Please follow the instructions:
 1. Please create and move to your work directory for scDock analysis. For example: /home/path/to/scDock
-2. Please place main.sh and config.yaml at /home/path/to/scDock. These files are provided in this Github project.
-3. Please create a directory named "functions" at /home/path/to/scDock. You should get a directory /home/path/to/scDock/functions/
-4. Please place all the below scripts at /home/to/your/path/scDock/functions/. These functions are provided in this Github project.
+2. Please place main.sh and config.yaml at /home/path/to/scDock.
+3. Please place the ligand_reference.csv and receptor_reference.csv in the environment. You can use config.yaml to define where they are.
+4. Please create a directory named "functions" at /home/path/to/scDock. You should get a directory /home/path/to/scDock/functions/
+5. Please place all the below scripts at /home/to/your/path/scDock/functions/. These functions are provided in this Github project.
 
 ## R scripts
-Load_QC.R  
-Normalization_Scale.R  
-DR_Cluster.R  
-Markers_Annotation.R  
-DR_Plot.R  
-Run_CellChat.R  
-Vina_Docking.R  
+(1) Load_QC.R  
+(2) Normalization_Scale.R  
+(3) DR_Cluster.R  
+(4) Markers_Annotation.R  
+(5) DR_Plot.R  
+(6) Run_CellChat.R  
+(7) Vina_Docking.R  
 
 ## Python scripts
-(1) download_alphafold.py
-(2) download_swissmodel.py
-(3) download_cas_pubchem.py
-(4) prepare_receptor.py
+(1) download_alphafold.py  
+(2) download_swissmodel.py  
+(3) download_cas_pubchem.py  
+(4) prepare_receptor.py  
 
 5. Please place the ligand_reference.csv and receptor_reference.csv in the environment. You can use config.yaml to define where they are.
 
