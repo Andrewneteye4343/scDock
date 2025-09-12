@@ -1,5 +1,5 @@
 # To utilize scDock, we need the essential files (provided in Github) displayed below. Please follow the instructions:
-## You will need to adjust the path arguments (where belongs to ypur computer) in config.yaml.
+## You will need to adjust the path arguments (where belong to your computer) in config.yaml.
 1. Please create and move to your work directory for scDock analysis. For example: /home/path/to/scDock
 2. Please place main.sh and config.yaml at /home/path/to/scDock.
 3. Please place the ligand_reference.csv and receptor_reference.csv in the environment.
@@ -27,7 +27,6 @@
 For users, you just need to adjust the arguments in config.yaml for scDock based on your requirement.
 If you are not sure about what are the meaning of these arguments, we suggest you use the default setting.
 We have noted the corresponding usage and their original function of each argument in config.yaml. You can also refer the guidance in their original websites.
-If you want to change the argument, please confirm the format of your input. For example, you should input a value with integer format in min_features in load_and_qc(), not float format.
 
 ## For Markers_Annotation$Markers_Annotation_tissue_type argument, you must input the below tissue name:
 adipose tissue, bladder, blood, bone, bone marrow, brain, breast, embryo, eye, gastrointestinal tract, heart, kidney, liver, lung, mammary gland, muscle, other, ovary, pancreas, placenta,
