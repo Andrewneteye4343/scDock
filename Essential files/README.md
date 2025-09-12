@@ -27,18 +27,17 @@ If you are unsure about the meaning of certain argument, we recommend using the 
 Each argument in config.yaml is documented with its usage and original function. For more details, you can also refer to the documentation provided on the respective official websites.
 
 #### Decide the compound library for molecular docking
-We provides three options for ligand usage: FDA compounds, CAS number and your own structures.  
+We provide three options for ligand usage: FDA compounds, CAS number and your own structures.  
 ● For FDA compounds, you need to set Vina_Docking_use_fda = true and Vina_Docking_fda_txt = path/to/fda.txt. In this option, scDock will download and pre-process the parent compounds of FDA-approved compounds (version: September 2025). The fda.txt can be download from Github.  
 ● For CAS number, you need to set Vina_Docking_cas_txt_file = path/to/cas.txt. In this option, you can provide the CAS number of your interested compounds in the cas.txt file. The CAS number can be serached at PubChem webste (https://pubchem.ncbi.nlm.nih.gov/).  
 ● For your own structures, you need to set Vina_Docking_docking_ligand_dir = path/to/YourStucture. You can provide your compound structure.pdbqt file by using this argument.
 
-
-
-
-#### For Markers_Annotation_tissue_type argument, you must input the below tissue name:
+#### Provide the tissue type of your scRNA/snRNA data.  
+You must input the below tissue name into Markers_Annotation_tissue_type:  
 adipose tissue, bladder, blood, bone, bone marrow, brain, breast, embryo, eye, gastrointestinal tract, heart, kidney, liver, lung, mammary gland, muscle, other, ovary, pancreas, placenta, prostate, skin, spleen, stomach, testis, thymus, tooth, uterus
 
-#### For Run_CellChat_source_celltype and Run_CellChat_target_celltype arguments, you must input NULL or the below cell name:
+#### Determine your interested cell type in your provided tissue type.
+If you are interested in specific cell type in cell-cell communication, you can adjust the Run_CellChat_source_celltype and Run_CellChat_target_celltype argument to the below cell name according to provided tissue type. Default is NULL.
 #### ● adipose tissue
 Adipocyte, Adipose-derived stem cell, B cell, Basophil, Brown fat cell, Dendritic cell, Endothelial cell, Hematopoietic cell, Luminal epithelial cell, Macrophage, Mammary epithelial cell, Mast cell, Monocyte, Natural killer cell, Neuron, Pericyte, Platelet, T cell, T memory cell
 
