@@ -1,6 +1,11 @@
 # scDock
-Here, we establish a series analysis pipeline, including scRNA/snRNA sequencing analysis, cell-cell communication and small molecular docking.  
-scDock simplifies the complicated process and preparation from single cell / nucleus RNA sequencing analysis to drug discovery.  
+#### Overview  
+This repository provides an integrated analysis pipeline covering:  
+scRNA/snRNA-seq analysis  
+Cell–cell communication inference  
+Small-molecule docking  
+scDock streamlines the complex workflow from single-cell/nucleus RNA sequencing analysis to drug discovery, reducing manual preparation and making the process more efficient.
+
 #### Input:
 scRNA/snRNA data (CellRanger output files [barcodes.tsv.gz, features.tsv.gz, matrix.mtx], .h5 and .txt are available in scDock)  
 #### Output:
