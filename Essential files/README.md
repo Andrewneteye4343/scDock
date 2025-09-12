@@ -2,8 +2,9 @@
 ## You will need to adjust the path arguments (where belong to your computer) in config.yaml later.
 1. Please create and move to your work directory for scDock analysis. We will use `/home/path/to/scDock` as an example.
 2. Please place "main.sh" and "config.yaml" at `/home/path/to/scDock`
-3. Please create a directory named "functions" at /home/path/to/scDock. You should get a directory `/home/path/to/scDock/functions`
-4. Please place all the below scripts at `/home/to/your/path/scDock/functions`
+3. Please place the ligand_reference.csv and receptor_reference.csv in your computer. For example, `/home/path/to/scDock`
+4. Please create a directory named "functions" at `/home/path/to/scDock`. You should get a directory `/home/path/to/scDock/functions`
+5. Please place all the below scripts at `/home/to/your/path/scDock/functions`
 ## R scripts
 (1) Load_QC.R  
 (2) Normalization_Scale.R  
@@ -18,8 +19,6 @@
 (2) download_swissmodel.py  
 (3) download_cas_pubchem.py  
 (4) prepare_receptor.py  
-
-5. Please place the ligand_reference.csv and receptor_reference.csv in the environment. You can use config.yaml to define where they are.
 
 # For setting config.yaml:
 For users, you just need to adjust the arguments in config.yaml for scDock based on your requirement.
