@@ -1,5 +1,7 @@
-To utilize scDock, you need to establish the correct environment first. Please follow the whole instructions:
-1. We provide the conda environment list named "scDock_conda_environment.yaml". Please place it into your computer. Then, conduct "conda env create -f scDock_conda_environment.yaml".
-2. We provide the R environment list named "scDock_R_packages.csv". Please place it into your computer and enter R. Then, conduct "pkgs <- read.csv("scDock_R_packages.csv")" and "install.packages(pkgs$Package)".
+To establish the virtual environment for scDock, we provide "install.sh" which can automatically create the python, R environment and install their modules/packages by conduct a single line command.
+Please follow the instructions:
+1. Download and place the "install.sh" to your computer.
+2. conduct <bash install.sh>
 
-By following the instructions, your environment is ready for scDock pipeline.
+The installation process might take some times to finish.
+After the installation, your computer is
