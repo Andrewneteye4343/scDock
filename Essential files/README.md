@@ -26,7 +26,7 @@ If you are unsure about the meaning of certain argument, we recommend using the 
 
 Each argument in config.yaml is documented with its usage and original function. For more details, you can also refer to the documentation provided on the respective official websites.
 
-#### For using Vina_Docking_cas_txt_file, you can provide a .txt file with compound CAS number (seperate in row).
+#### If you have your interested compound
 For example:
 
 
