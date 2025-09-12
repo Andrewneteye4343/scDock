@@ -36,20 +36,17 @@ We provides three options for ligand usage: FDA compounds, CAS number and your o
 
 
 #### For Markers_Annotation_tissue_type argument, you must input the below tissue name:
-adipose tissue, bladder, blood, bone, bone marrow, brain, breast, embryo, eye, gastrointestinal tract, heart, kidney, liver, lung, mammary gland, muscle, other, ovary, pancreas, placenta,
-prostate, skin, spleen, stomach, testis, thymus, tooth, uterus
+adipose tissue, bladder, blood, bone, bone marrow, brain, breast, embryo, eye, gastrointestinal tract, heart, kidney, liver, lung, mammary gland, muscle, other, ovary, pancreas, placenta, prostate, skin, spleen, stomach, testis, thymus, tooth, uterus
 
 #### For Run_CellChat_source_celltype and Run_CellChat_target_celltype arguments, you must input NULL or the below cell name:
 #### adipose tissue
-Adipocyte,Adipose-derived stem cell,B cell,Basophil,Brown fat cell,Dendritic cell,Endothelial cell,Hematopoietic cell, Luminal epithelial cell,Macrophage,Mammary epithelial cell,Mast cell,
-Monocyte,Natural killer cell,Neuron,Pericyte,Platelet,T cell,T memory cell
+Adipocyte, Adipose-derived stem cell, B cell, Basophil, Brown fat cell, Dendritic cell, Endothelial cell, Hematopoietic cell, Luminal epithelial cell, Macrophage, Mammary epithelial cell, Mast cell, Monocyte, Natural killer cell, Neuron, Pericyte, Platelet, T cell, T memory cell
 
 #### bladder
-Basal epithelial cell,Dendritic cell,Endothelial cell,Macrophage,Smooth muscle cell,Smooth muscle progenitor cell,Umbrella cell, Ureteric epithelium cell,Urine-derived stem cell,Urothelial cell
+Basal epithelial cell, Dendritic cell, Endothelial cell, Macrophage, Smooth muscle cell, Smooth muscle progenitor cell, Umbrella cell, Ureteric epithelium cell, Urine-derived stem cell, Urothelial cell
 
 #### blood 
-B cell,Basophil,CD14 Monocyte,CD16 Monocyte,CD4 Central Memory T cell,CD4 Cytotoxic T cell,CD4 Effector Memory T cell,CD4 Naive T cell,CD4 Proliferating T cell,CD4 T cell,
-CD56-bright natural killer cell,CD56-dim natural killer cell,CD8 Central Memory T cell,CD8 Effector Memory T cell, CD8 Naive T cell,CD8 Proliferating T cell,CD8 T cell,Dendritic cell,
+B cell, Basophil, CD14 Monocyte, CD16 Monocyte, CD4 Central Memory T cell, CD4 Cytotoxic T cell, CD4 Effector Memory T cell, CD4 Naive T cell, CD4 Proliferating T cell, CD4 T cell, CD56-bright natural killer cell, CD56-dim natural killer cell, CD8 Central Memory T cell, CD8 Effector Memory T cell, CD8 Naive T cell, CD8 Proliferating T cell, CD8 T cell, Dendritic cell,
 Double-negative T cell,Embryonic stem cell,Endothelial cell,Endothelial progenitor cell, Endothelial stem cell,Eosinophil,Epithelial cell,Erythroblast,Erythroid cell,Erythroid precursor cell,
 Gamma delta T cell,Granulocyte,Hematopoietic stem cell,Immature myeloid cell,Innate lymphoid cell,Intermediate B cell,Leukocyte,Lymphoid cell,Megakaryocyte,Memory B cell,Mesenchymal stem cell,
 Monocyte,Mucosal-associated invariant T cell,Myeloid cell,Myeloid dendritic cell,Myeloid-derived suppressor cell,Naive B cell,Natural killer cell,Neutrophil,Plasma cell,Plasmablast,Plasmacytoid dendritic cell,
