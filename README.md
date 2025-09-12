@@ -5,7 +5,7 @@ scDock simplifies the complicated process and preparation from single cell / nuc
 #### Output: Small molecular docking results based on the top strongest cellular signalings across cell types (you can choose your interested cell type)  
 
 How to use:
-conduct `bash main.sh config.yaml 2>&1 | tee log.txt` # if you want to records the process into log.txt  
+conduct `bash main.sh config.yaml 2>&1 | tee log.txt` 
 
 Preparation:
 1. [Mandatory] First, please follow the README in our Essential environment/.
