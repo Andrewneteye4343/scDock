@@ -28,7 +28,7 @@ Each argument in config.yaml is documented with its usage and original function.
 
 #### Decide the compound library for molecular docking
 We provides three options for ligand usage: FDA compounds, CAS number and your own structures.  
-● For FDA compounds, you need to set Vina_Docking_use_fda = true and Vina_Docking_fda_txt = path/to/fda.txt. In this option, scDock will download and pre-process the parent compounds of FDA-approved compounds (version: September 2025). The fda.txt can be download from Github.
+● For FDA compounds, you need to set Vina_Docking_use_fda = true and Vina_Docking_fda_txt = path/to/fda.txt. In this option, scDock will download and pre-process the parent compounds of FDA-approved compounds (version: September 2025). The fda.txt can be download from Github.  
 ● For CAS number, you need to set Vina_Docking_cas_txt_file = path/to/cas.txt. In this option, you can provide the CAS number of your interested compounds in the cas.txt file. The CAS number can be serached at PubChem webste (https://pubchem.ncbi.nlm.nih.gov/).  
 ● For your own structures, you need to set Vina_Docking_docking_ligand_dir = path/to/YourStucture. You can provide your compound structure.pdbqt file by using this argument.
 
