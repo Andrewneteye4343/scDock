@@ -9,8 +9,12 @@ scDock streamlines the complex workflow from single-cell/nucleus RNA sequencing 
 
 ### Input:
 scRNA/snRNA data (CellRanger output files, .h5 and .txt are available in scDock)  
-### Output:
-Small molecular docking results based on the top strongest cellular signalings across cell types (you can choose your interested cell type)  
+### Output:  
+● Seurat_object.rds files from Seurat analysis steps.  
+● CellChat.rds file from CellChat analysis.  
+● Protein structure(s) found from top CellChat results.  
+● Compound strucutre(s) from cas.txt or fda.txt.  
+● Molecular docking results based on the strongest intercellular signaling pathways across cell types (you can select the cell types of interest).
 
 ### How to use:  
 Enter scDock virtual environment and conduct the following command  
