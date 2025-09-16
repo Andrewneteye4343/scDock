@@ -13,7 +13,7 @@ scRNA/snRNA data (CellRanger output files, .h5 and .txt are available in scDock)
 Small molecular docking results based on the top strongest cellular signalings across cell types (you can choose your interested cell type)  
 
 ### How to use:  
-Enter scDock virtual environment and conduct the following command
+Enter scDock virtual environment and conduct the following command  
 `conda activate scDock`  
 `bash main.sh config.yaml 2>&1 | tee log.txt` 
 
