@@ -33,8 +33,11 @@ We provide three options for ligand usage: FDA compounds, CAS number and your ow
 ● For your own structures, you need to set Vina_Docking_docking_ligand_dir = path/to/YourStucture. You can provide your compound structure.pdbqt file by using this argument. Please make sure your structure fulfills the requirement for AutoDock Vina.
 
 #### Decide the protein structure for molecular docking  
-In default, the protein structures will be automatically downloaded and pre-processed for subsequent molecular docking according to ligand_reference.csv and receptor_reference.csv. In these two files, we recorded the best protein model for each protein identified by Uniprot-PDB-mapper (https://github.com/iriziotis/Uniprot-PDB-mapper) (accessed on August 8 2025). If you consider a beeter model for a protein, you can directly modify these files.   
-Besides that, we provide an option for user to use their own protein structure.pdbqt. To do so, you need to set Vina_Docking_docking_receptor_dir = path/to/YourDirectory. Please make sure your structure fulfills the requirement for AutoDock Vina.
+By default, protein structures are automatically downloaded and pre-processed for molecular docking based on the information in ligand_reference.csv and receptor_reference.csv. These files record the most suitable protein model for each protein, as identified by the Uniprot-PDB-mapper (accessed August 8, 2025). If you believe a better model exists for a given protein, you can directly update these files.
+
+In addition, we provide an option for users to supply their own protein_structure.pdbqt file. To enable this, set
+Vina_Docking_docking_receptor_dir = path/to/YourDirectory.
+Please ensure that your structure meets the input requirements for AutoDock Vina.
 
 #### Provide the tissue type of your scRNA/snRNA data.  
 You must input the below tissue name into Markers_Annotation_tissue_type:  
