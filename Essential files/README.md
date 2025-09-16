@@ -44,7 +44,7 @@ You must input the below tissue name into Markers_Annotation_tissue_type:
 adipose tissue, bladder, blood, bone, bone marrow, brain, breast, embryo, eye, gastrointestinal tract, heart, kidney, liver, lung, mammary gland, muscle, other, ovary, pancreas, placenta, prostate, skin, spleen, stomach, testis, thymus, tooth, uterus
 
 #### Determine your interested cell type in your provided tissue type.
-If you are interested in specific cell type in cell-cell communication, you can adjust the Run_CellChat_source_celltype and Run_CellChat_target_celltype argument to the below cell name according to provided tissue type. Default is NULL.
+If you are interested in specific cell types in cell–cell communication, you can set the Run_CellChat_source_celltype and Run_CellChat_target_celltype arguments to the corresponding cell names provided for each tissue type. By default, both are set to NULL.
 #### ● adipose tissue
 Adipocyte, Adipose-derived stem cell, B cell, Basophil, Brown fat cell, Dendritic cell, Endothelial cell, Hematopoietic cell, Luminal epithelial cell, Macrophage, Mammary epithelial cell, Mast cell, Monocyte, Natural killer cell, Neuron, Pericyte, Platelet, T cell, T memory cell
 
