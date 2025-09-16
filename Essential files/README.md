@@ -1,10 +1,16 @@
-### To utilize scDock, users need to download the essential files from Github. Please follow the instructions:
-#### You will need to adjust the path arguments (where belong to your computer) in config.yaml later.
-1. Please create and move to your work directory for scDock analysis. We will use `/home/path/to/scDock` as an example.
-2. Please place "main.sh" and "config.yaml" at `/home/path/to/scDock`
-3. Please place the ligand_reference.csv and receptor_reference.csv in your computer. For example, `/home/path/to/scDock`
-4. Please create a directory named "functions" at `/home/path/to/scDock`. You should get a directory `/home/path/to/scDock/functions`
-5. Please place all the below scripts at `/home/to/your/path/scDock/functions`
+### To use scDock, users need to download the required files from GitHub. Please follow the steps below:
+#### Note: You will need to update the path arguments in config.yaml to match your local system.
+1. Create and navigate to your working directory for the scDock analysis. In this example, we use:
+/home/path/to/scDock
+
+2. Place main.sh and config.yaml in /home/path/to/scDock.
+
+3. Place ligand_reference.csv and receptor_reference.csv on your computer, for example in /home/path/to/scDock.
+
+4. Create a directory named functions inside /home/path/to/scDock. After this step, you should have:
+/home/path/to/scDock/functions
+
+5. Place all scripts listed below into /home/path/to/scDock/functions
 ##### R scripts
 ● Load_QC.R  
 ● Normalization_Scale.R  
