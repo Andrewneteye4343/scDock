@@ -1,3 +1,6 @@
+Before establishing the scDock environment, the below system packages might be required. Please check whether these packages have been installed: build-essential, libcurl4-openssl-dev, libssl-dev, libxml2-dev, zlib1g-dev, libbz2-dev, liblzma-dev, libhdf5-dev, pkg-config, gfortran, libpcre2-dev, libgsl-dev, libglpk-dev  
+For example, you can use `dpkg -l | grep build-essential` to clarify the exist of the corresponding package.
+
 To establish the virtual environment for scDock, we provide "install.sh" which can automatically create a virtual environment named "scDock" with the essential system requirment, Python & R version, and install their modules/packages by conduct a single line command.
 Please follow the instructions:
 1. Download and place the "install.sh" to your computer.
