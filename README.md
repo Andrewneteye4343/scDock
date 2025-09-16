@@ -8,7 +8,11 @@ This repository provides an integrated analysis pipeline covering:
 scDock streamlines the complex workflow from single-cell/nucleus RNA sequencing analysis to drug discovery, reducing manual preparation and making the process more efficient.
 
 ### Input:
-scRNA/snRNA data (CellRanger output files, .h5 and .txt format)  
+Available scRNA/snRNA format:  
+● barcodes.tsv.gz, features.tsv.gz, matrix.mtx  
+● .h5  
+● .txt  
+
 ### Output:  
 ● Seurat_object.rds files from Seurat analysis steps.  
 ● CellChat.rds file from CellChat analysis.  
