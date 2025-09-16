@@ -9,7 +9,7 @@ scDock streamlines the complex workflow from single-cell/nucleus RNA sequencing 
 
 ### Input:
 Available scRNA/snRNA format:  
-● barcodes.tsv.gz, features.tsv.gz, matrix.mtx  
+● barcodes.tsv.gz, features.tsv.gz, matrix.mtx.gz  
 ● .h5  
 ● .txt  
 
