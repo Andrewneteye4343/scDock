@@ -12,9 +12,9 @@ scRNA/snRNA data (CellRanger output files, .h5 and .txt are available in scDock)
 ### Output:  
 ● Seurat_object.rds files from Seurat analysis steps.  
 ● CellChat.rds file from CellChat analysis.  
-● Protein structure(s) found from CellChat analysis.  
+● Protein structure(s) from CellChat analysis.  
 ● Compound strucutre(s) from cas.txt or fda.txt.  
-● Molecular docking results based on the strongest intercellular signaling pathways across cell types (you can select the cell types of interest).
+● Molecular docking results (binding affinity and binding position) based on the strongest intercellular signaling pathways across cell types (you can select the cell types of interest).
 
 ### How to use:  
 Enter scDock virtual environment and conduct the following command  
