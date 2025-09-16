@@ -13,28 +13,8 @@ fi
 eval "$(conda shell.bash hook)"
 conda activate scDock
 
-echo "=== Step 1: install system packages ==="
-sudo apt update
-sudo apt install -y \
-  build-essential \
-  libcurl4-openssl-dev \
-  libssl-dev \
-  libxml2-dev \
-  zlib1g-dev \
-  libncurses-dev \
-  libbz2-dev \
-  liblzma-dev \
-  libpcre2-dev \
-  libhdf5-dev \
-  libgsl-dev \
-  libharfbuzz-dev \
-  libfribidi-dev \
-  libglpk-dev \
-  pkg-config \
-  gfortran
-
-echo "=== Step 2: install conda packages ==="
-conda install -y -c conda-forge \
+echo "=== Step 1: install conda packages ==="
+conda install -y -c conda-forge -c bioconda --strict-channel-priority \
   zlib \
   r-curl \
   r-httr \
@@ -76,21 +56,21 @@ conda install -y -c conda-forge \
   r-pbkrtest \
   r-car \
   r-rstatix \
-  r-ggpubr
-
-conda install -y -c bioconda \
+  r-ggpubr \
   bioconductor-biobase \
   bioconductor-complexheatmap \
   bioconductor-biocneighbors \
-  presto
+  presto \
+  openbabel \
+  autodock-vina
 
-echo "=== Step 3: install Python pip modules ==="
+echo "=== Step 2: install Python pip modules ==="
 python -m pip install --upgrade pip
 python -m pip install \
   git+https://github.com/Valdes-Tresanco-MS/AutoDockTools_py3 \
   umap-learn
 
-echo "=== Step 4: install R GitHub packages ==="
+echo "=== Step 3: install R GitHub packages ==="
 Rscript -e 'if (!requireNamespace("devtools", quietly = TRUE)) install.packages("devtools", repos="https://cloud.r-project.org")'
 Rscript -e 'devtools::install_github("jinworks/CellChat")'
 Rscript -e 'devtools::install_github("chloelulu/scMayoMap")'
