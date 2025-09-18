@@ -30,4 +30,8 @@ Users should adjust the paths according to your requirement.  Except the path ar
 `Normalization_Scale_model_use: linear` # Set the model.use for Seurat::ScaleData().  
 `Normalization_Scale_scale_max: 10` # Set the scale.max for Seurat::ScaleData().  
 `Normalization_Scale_scale_features: variable` # Set the features for Seurat::ScaleData().  
+`Normalization_Scale_verbose: TRUE` # Whether to display the detailed process.  
+`DR_Cluster_pca_features: variable` # Set the features for Seurat::RunPCA().  
+`DR_Cluster_seed: 42` # Set the seed number for set.seed().  
+`DR_Cluster_dims: 20` # Set how many top dimensions of reduction for Seurat::FindNeighbors(), Seurat::RunUMAP() and Seurat::RunTSNE().  
 ``
