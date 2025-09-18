@@ -1,5 +1,5 @@
 In this tutorial, we will demonstrate how to utilize scDock with GSE149878 dataset from NCBI GEO website (https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE149878). This scRNA dataset contains 4 lung tissue samples from a COVID-19 severe patient.  
-In the tutorial, my scDock workpath is `/home/andrew/scDock`  
+
 ● Data preparation:  
 Please manually download those data to your computer and should get:  
 `GSM4516279_C166_filtered_feature_bc_matrix.h5`  
@@ -8,5 +8,9 @@ Please manually download those data to your computer and should get:
 `GSM4516282_C172_filtered_feature_bc_matrix.h5`  
 
 ● Modify config.yaml:  
-Here are the demonstrate setting for config.yaml:  
-`work_path: "/home/andrew/scDock"`
+In the tutorial, the scDock workpath is set as `/home/andrew/scDock`. 
+Users should adjust the paths according to your requirement.    
+Here are the demonstratation for config.yaml:  
+`work_path: /home/andrew/scDock` # Users should adjust the path for yourself.  
+`Seurat_output_dir: seurat_output` # This will be the output directory under the work_path.  
+`Load_QC_input_files: /home/andrew/scDock/datasets` # Users can put your scRNA in this directory
