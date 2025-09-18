@@ -34,4 +34,25 @@ Users should adjust the paths according to your requirement.  Except the path ar
 `DR_Cluster_pca_features: variable`  
 `DR_Cluster_seed: 42`  
 `DR_Cluster_dims: 20`  
+`DR_Cluster_k_param: 20`  
+`DR_Cluster_n_trees: 50`  
+`DR_Cluster_resolution: 0.1`  
+`DR_Cluster_reduction_method: umap`  
+`DR_Cluster_reduction_assay: NULL`  
+`DR_Cluster_clustering_algorithm: 1`  
+`DR_Cluster_verbose: TRUE`  
+`Markers_Annotation_output_path: /home/andrew/scDock`  
+`Markers_Annotation_use_assay: RNA`  
+`Markers_Annotation_group_by: seurat_clusters`  
+`Markers_Annotation_logfc_threshold: 0.1`  
+`Markers_Annotation_min_pct:  0.01`  
+`Markers_Annotation_test_use: wilcox`  
+`Markers_Annotation_only_pos: TRUE`  
+`Markers_Annotation_verbose: TRUE`  
+`Markers_Annotation_top_n: 100`  
+`Markers_Annotation_tissue_type: lung`  
+`Markers_Annotation_label_column: Celltype`  
+`DR_Plot_output_path: /home/andrew/scDock`  
+`DR_Plot_reduction_method: umap`  
+`DR_Plot_group_by: Celltype`  
 ``
