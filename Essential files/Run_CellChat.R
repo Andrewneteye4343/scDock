@@ -85,7 +85,7 @@ Run_CellChat <- function(seurat_obj,
     # ================================
     # 單組別
     # ================================
-    message("▶ Single-group CellChat analysis, grouping by: ", Run_CellChat_group_by)
+    message("Single-group CellChat analysis, grouping by: ", Run_CellChat_group_by)
     cellchat <- createCellChat(object = GetAssayData(seurat_obj, slot = "data"),
                                meta = seurat_obj@meta.data,
                                group.by = Run_CellChat_group_by)
@@ -181,7 +181,7 @@ Run_CellChat <- function(seurat_obj,
     if ("prob" %in% colnames(comm)) comm <- comm[order(-comm$prob), ]
     if (nrow(comm) > 0) {
       top_comm <- head(comm, Run_CellChat_ntop_signaling)
-      csv_file <- file.path(Run_CellChat_output_path, "topLR_singleGroup.csv")
+      csv_file <- file.path(Run_CellChat_output_path, paste0("top", Run_CellChat_ntop_signaling, "_LR_singleGroup.csv"))
       write.csv(top_comm, file = csv_file, row.names = FALSE)
       message("✅ Saved top L-R pairs to: ", csv_file)
 
