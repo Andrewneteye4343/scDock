@@ -25,6 +25,9 @@ Users should adjust the paths according to your requirement.  Except the path ar
 `Normalization_Scale_CLR_margin: 2` # If `Normalization_Scale_normalization_method` is set as CLR, you can adjust CLR margin.  
 `Normalization_Scale_scale_factor: 10000` # Set the scale.factor for Seurat::NormalizeData().  
 `Normalization_Scale_hvg_method: vst` # Set the selection.method for Seurat::FindVariableFeatures().  
-`Normalization_Scale_nVariableFeatures: 2000` # Set the nfeatures in Seurat::FindVariableFeatures().  
-`Normalization_Scale_split_by: NULL` # Set the split.by in Seurat::ScaleData().  
-
+`Normalization_Scale_nVariableFeatures: 2000` # Set the nfeatures for Seurat::FindVariableFeatures().  
+`Normalization_Scale_split_by: NULL` # Set the split.by for Seurat::ScaleData().  
+`Normalization_Scale_model_use: linear` # Set the model.use for Seurat::ScaleData().  
+`Normalization_Scale_scale_max: 10` # Set the scale.max for Seurat::ScaleData().  
+`Normalization_Scale_scale_features: variable` # Set the features for Seurat::ScaleData().  
+``
