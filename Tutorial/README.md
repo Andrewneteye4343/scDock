@@ -1,5 +1,5 @@
 In this tutorial, we will demonstrate how to utilize scDock with GSE149878 dataset from NCBI GEO website (https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE149878). This scRNA dataset contains 4 lung tissue samples from a COVID-19 severe patient.  
-
+In the tutorial, my scDock workpath is `/home/andrew/scDock`  
 ● Data preparation:  
 Please manually download those data to your computer and should get:  
 `GSM4516279_C166_filtered_feature_bc_matrix.h5`  
