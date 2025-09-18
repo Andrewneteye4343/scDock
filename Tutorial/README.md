@@ -9,7 +9,7 @@ Please manually download those data to your computer and should get:
 
 ● Modify config.yaml:  
 In the tutorial, the scDock workpath is set as `/home/andrew/scDock`. 
-Users should adjust the paths according to your requirement.    
+Users should adjust the paths according to your requirement.  Except the path argument, users can stay default settings if you are not sure how to adjust them.     
 Here are the demonstratation for config.yaml:  
 `work_path: /home/andrew/scDock` #This is the workpath where you conduct `bash main.sh config.yaml`.  
 `Seurat_output_dir: seurat_output` #This will be the output directory under the work_path.  
