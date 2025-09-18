@@ -55,4 +55,8 @@ Users should adjust the paths according to your requirement.  Except the path ar
 `DR_Plot_output_path: /home/andrew/scDock`  
 `DR_Plot_reduction_method: umap`  
 `DR_Plot_group_by: Celltype`  
+`DR_Plot_pt_size: 0.5`  
+`DR_Plot_label: TRUE`  
+`DR_Plot_label_size: 4`  
+`DR_Plot_label_color: black`  
 ``
