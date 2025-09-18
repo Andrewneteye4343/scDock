@@ -6,4 +6,7 @@ Please manually download those data to your computer and should get:
 `GSM4516280_C168_filtered_feature_bc_matrix.h5`  
 `GSM4516281_C170_filtered_feature_bc_matrix.h5`  
 `GSM4516282_C172_filtered_feature_bc_matrix.h5`  
+
 ● Modify config.yaml:  
+Here are the demonstrate setting for config.yaml:  
+`work_path: "/home/andrew/scDock"`
