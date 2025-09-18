@@ -9,14 +9,22 @@ Please manually download those data to your computer and should get:
 
 ● Modify config.yaml:  
 In the tutorial, the scDock workpath is set as `/home/andrew/scDock`. 
-Users should adjust the paths according to your requirement.  Except the path argument, users can stay default settings if you are not sure how to adjust them.     
-Here are the demonstratation for config.yaml:  
-`work_path: /home/andrew/scDock` #This is the workpath where you conduct `bash main.sh config.yaml`.  
-`Seurat_output_dir: seurat_output` #This will be the output directory under the work_path.  
-`Load_QC_input_files: /home/andrew/scDock/datasets` #Users should place your scRNA in this directory.  
-`Load_QC_input_type: h5` #Users should set the correct file format type.  
-`Load_QC_min_features: 200` #Set the min.features for Seurat::CreateSeuratObject().  
-`Load_QC_min_cells: 3` #Set the min.cells for Seurat::CreateSeuratObject().  
-`Load_QC_names_delim: "_"` #Set the names.delim for Seurat::CreateSeuratObject().  
-`Load_QC_max_mito: 0.1` #Set the QC of mitochondrial counts percent.  
-`Load_QC_metadata_file: NULL` #Should be set NULL or path/to/metadata.txt (Please refer README.md in MetaData).
+Users should adjust the paths according to your requirement.  Except the path arguments, users can stay default settings if you are not sure how to adjust them.     
+`work_path: /home/andrew/scDock` # This is the workpath where you conduct `bash main.sh config.yaml`.  
+`Seurat_output_dir: seurat_output` # This will be the output directory under the work_path.  
+`Load_QC_input_files: /home/andrew/scDock/datasets` # Users should place your scRNA in this directory.  
+`Load_QC_input_type: h5` # Users should set the correct file format type.  
+`Load_QC_min_features: 200` # Set the min.features for Seurat::CreateSeuratObject().  
+`Load_QC_min_cells: 3` # Set the min.cells for Seurat::CreateSeuratObject().  
+`Load_QC_names_delim: "_"` # Set the names.delim for Seurat::CreateSeuratObject().  
+`Load_QC_max_mito: 0.1` # Set the QC of mitochondrial counts percent.  
+`Load_QC_metadata_file: NULL` # Should be set NULL or path/to/metadata.txt (Please refer README.md in MetaData).  
+`Load_QC_verbose: TRUE` # Whether to display the detailed process.  
+`Normalization_Scale_use_assay: RNA` # Set the assay for Seurat::NormalizeData().  
+`Normalization_Scale_normalization_method: LogNormalize` # Set normalization method for Seurat::NormalizeData().  
+`Normalization_Scale_CLR_margin: 2` # If `Normalization_Scale_normalization_method` is set as CLR, you can adjust CLR margin.  
+`Normalization_Scale_scale_factor: 10000` # Set the scale.factor for Seurat::NormalizeData().  
+`Normalization_Scale_hvg_method: vst` # Set the selection.method for Seurat::FindVariableFeatures().  
+`Normalization_Scale_nVariableFeatures: 2000` # Set the nfeatures in Seurat::FindVariableFeatures().  
+`Normalization_Scale_split_by: NULL` # Set the split.by in Seurat::ScaleData().  
+
