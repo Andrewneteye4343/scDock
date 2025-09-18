@@ -10,28 +10,28 @@ Please manually download those data to your computer and should get:
 ● Modify config.yaml:  
 In the tutorial, the scDock workpath is set as `/home/andrew/scDock`. 
 Users should adjust the paths according to your requirement.  Except the path arguments, users can stay default settings if you are not sure how to adjust them.     
-`work_path: /home/andrew/scDock` # This is the workpath where you conduct `bash main.sh config.yaml`.  
-`Seurat_output_dir: seurat_output` # This will be the output directory under the work_path.  
-`Load_QC_input_files: /home/andrew/scDock/datasets` # Users should place your scRNA in this directory.  
-`Load_QC_input_type: h5` # Users should set the correct file format type.  
-`Load_QC_min_features: 200` # Set the min.features for Seurat::CreateSeuratObject().  
-`Load_QC_min_cells: 3` # Set the min.cells for Seurat::CreateSeuratObject().  
-`Load_QC_names_delim: "_"` # Set the names.delim for Seurat::CreateSeuratObject().  
-`Load_QC_max_mito: 0.1` # Set the QC of mitochondrial counts percent.  
-`Load_QC_metadata_file: NULL` # Should be set NULL or path/to/metadata.txt (Please refer README.md in MetaData).  
-`Load_QC_verbose: TRUE` # Whether to display the detailed process.  
-`Normalization_Scale_use_assay: RNA` # Set the assay for Seurat::NormalizeData().  
-`Normalization_Scale_normalization_method: LogNormalize` # Set normalization method for Seurat::NormalizeData().  
-`Normalization_Scale_CLR_margin: 2` # If `Normalization_Scale_normalization_method` is set as CLR, you can adjust CLR margin.  
-`Normalization_Scale_scale_factor: 10000` # Set the scale.factor for Seurat::NormalizeData().  
-`Normalization_Scale_hvg_method: vst` # Set the selection.method for Seurat::FindVariableFeatures().  
-`Normalization_Scale_nVariableFeatures: 2000` # Set the nfeatures for Seurat::FindVariableFeatures().  
-`Normalization_Scale_split_by: NULL` # Set the split.by for Seurat::ScaleData().  
-`Normalization_Scale_model_use: linear` # Set the model.use for Seurat::ScaleData().  
-`Normalization_Scale_scale_max: 10` # Set the scale.max for Seurat::ScaleData().  
-`Normalization_Scale_scale_features: variable` # Set the features for Seurat::ScaleData().  
-`Normalization_Scale_verbose: TRUE` # Whether to display the detailed process.  
-`DR_Cluster_pca_features: variable` # Set the features for Seurat::RunPCA().  
-`DR_Cluster_seed: 42` # Set the seed number for set.seed().  
-`DR_Cluster_dims: 20` # Set how many top dimensions of reduction for Seurat::FindNeighbors(), Seurat::RunUMAP() and Seurat::RunTSNE().  
+`work_path: /home/andrew/scDock`  
+`Seurat_output_dir: seurat_output`  
+`Load_QC_input_files: /home/andrew/scDock/datasets`  
+`Load_QC_input_type: h5`  
+`Load_QC_min_features: 200`  
+`Load_QC_min_cells: 3`  
+`Load_QC_names_delim: "_"`  
+`Load_QC_max_mito: 0.1`  
+`Load_QC_metadata_file: NULL`  
+`Load_QC_verbose: TRUE`  
+`Normalization_Scale_use_assay: RNA`  
+`Normalization_Scale_normalization_method: LogNormalize`  
+`Normalization_Scale_CLR_margin: 2`  
+`Normalization_Scale_scale_factor: 10000`  
+`Normalization_Scale_hvg_method: vst`  
+`Normalization_Scale_nVariableFeatures: 2000`  
+`Normalization_Scale_split_by: NULL`  
+`Normalization_Scale_model_use: linear`  
+`Normalization_Scale_scale_max: 10`  
+`Normalization_Scale_scale_features: variable`  
+`Normalization_Scale_verbose: TRUE`  
+`DR_Cluster_pca_features: variable`  
+`DR_Cluster_seed: 42`  
+`DR_Cluster_dims: 20`  
 ``
