@@ -6,7 +6,7 @@ if conda info --envs | grep -q "^scDock"; then
   echo "✅ Conda environment 'scDock' already exists."
 else
   echo "=== Creating conda environment: scDock ==="
-  conda create -y -n scDock python=3.10 r-base=4.1.3 -c conda-forge
+  conda create -y -n scDock python=3.10 r-base=4.4.3 -c conda-forge
 fi
 
 # activate environment
