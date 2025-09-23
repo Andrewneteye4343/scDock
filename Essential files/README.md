@@ -49,7 +49,7 @@ Vina_Docking_docking_receptor_dir = path/to/YourDirectory.
 Please ensure that your structure meets the input requirements for AutoDock Vina.
 
 #### Provide the tissue type of your scRNA/snRNA data.  
-You must input the below tissue name into Markers_Annotation_tissue_type:  
+You must input one of the below tissue names into Markers_Annotation_tissue_type:  
 adipose tissue, bladder, blood, bone, bone marrow, brain, breast, embryo, eye, gastrointestinal tract, heart, kidney, liver, lung, mammary gland, muscle, other, ovary, pancreas, placenta, prostate, skin, spleen, stomach, testis, thymus, tooth, uterus
 
 #### Determine your interested cell type in your provided tissue type.
