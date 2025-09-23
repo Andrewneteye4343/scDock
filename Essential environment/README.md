@@ -4,10 +4,15 @@ For example, you can use `dpkg -l | grep build-essential` to clarify the exist o
 
 conda is also required for scDock. Please make sure you have installed miniconda (https://www.anaconda.com/docs/getting-started/miniconda/main) or Anaconda (https://www.anaconda.com/) before operating the further process.  
 
+Please make sure there are `conda-forge` and `bioconda` channels in your conda. The channel can be added by:  
+`conda config –add channels conda-forge`  
+`conda config –add channels bioconda`  
+`conda config –set channel_priority strict`  
+
 ● Installation:  
 To establish the virtual environment for scDock, we provide "install.sh" which can automatically create a virtual environment named "scDock" with the essential system requirment, Python (3.10.0) & R version (4.4.3), and install their modules/packages by conduct a single line command.
-Please make sure there are `conda-forge` and `bioconda` channels in your computer.  
-Please follow the instructions:
+
+Please follow the instructions to install scDock:  
 1. Download and place the "install.sh" to your computer.
 2. Conduct `bash install.sh`
 
