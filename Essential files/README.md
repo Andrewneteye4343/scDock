@@ -7,7 +7,7 @@
 
 3. Place ligand_reference.csv and receptor_reference.csv on your computer, for example in /home/path/to/scDock.
 
-4. Create a directory named functions inside /home/path/to/scDock. After this step, you should have:
+4. Create a directory named "functions" inside /home/path/to/scDock. After this step, you should have:
 /home/path/to/scDock/functions
 
 5. Place all scripts listed below into /home/path/to/scDock/functions
