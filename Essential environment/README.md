@@ -22,4 +22,5 @@ After the installation, your computer will be ready for scDock.
 We have confirm the success of scDock installation and operation in the following linux systems:  
 1. Ubuntu 18.04.6
 2. Ubuntu 20.04.6  
-3. Debian 12
+3. Ubuntu 22.04.4
+4. Debian 12
