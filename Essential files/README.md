@@ -1,7 +1,7 @@
 ### To use scDock, users need to download the required files from GitHub. Please follow the steps below:
 #### Note: You will need to update the path arguments in config.yaml to match your local system.
 1. Create and navigate to your working directory for the scDock analysis. In this example, we use:
-/home/path/to/scDock
+/home/path/to/scDock (set argument work_path).
 
 2. Place main.sh and config.yaml in /home/path/to/scDock.
 
