@@ -20,7 +20,7 @@ Load_QC:
   Load_QC_names_delim: "_"                              # [Required] [string] This argument defines the names.delim in Seurat::CreateSeuratObject(). Default is "_".
   Load_QC_max_mito: 0.1                                 # [Required] [float] This argument defines the persent of mitochondrial counts cut off in subset(). The valid range locates from 0 to 1. Default is 0.1.
   Load_QC_metadata_file: null                           # [Optional] [string] This path defines where to find metadata for grouping your samples. Should not be the same path with Load_QC_input_files when you input txt as Load_QC_input_type.
-  Load_QC_verbose: false                                # [Optional] [boolean] Whether to display the progress detail. Default is true.
+  Load_QC_verbose: true                                 # [Optional] [boolean] Whether to display the progress detail. Default is true.
 
 # --------
 # Step 2 Normalization_Scale()
@@ -36,7 +36,7 @@ Normalization_Scale:
   Normalization_Scale_model_use: linear                    # [Required] [string] This argument defines the model.use in Seurat::ScaleData(). Default is linear. Options are linear, poisson, and negbinom.
   Normalization_Scale_scale_max: 10                        # [Required] [integer] This argument defines the scale.max in Seurat::ScaleData(). Default is 10.
   Normalization_Scale_scale_features: variable             # [Required] [string] This argument defines the features in Seurat::ScaleData(). Default is variable. 
-  Normalization_Scale_verbose: false                       # [Optional] [boolean] Whether to display the progress detail. Default is true.
+  Normalization_Scale_verbose: true                        # [Optional] [boolean] Whether to display the progress detail. Default is true.
 
 # --------
 # Step 3.1: DR_Cluster()
@@ -51,19 +51,19 @@ DR_Cluster:
   DR_Cluster_reduction_method: umap    # [Required] [string] This argument defines the method for dimensional reduction, including umap or tsne. Default is umap.
   DR_Cluster_reduction_assay: RNA      # [Required] [string] This argument defines assay in Seurat::RunUMAP() or Seurat::RunTSNE(). Default is RNA.
   DR_Cluster_clustering_algorithm: 1   # [Required] [integer] This argument defines the algorithm in Seurat::FindClusters(), including 1, 2, 3, 4. The corresponding methods are 1: Louvain, 2: Louvain + refinement, 3: SLM, 4: Leiden. Default is 1.
-  DR_Cluster_verbose: false            # [Optional] [boolean] Whether to display the progress detail. Default is true.
+  DR_Cluster_verbose: true             # [Optional] [boolean] Whether to display the progress detail. Default is true.
 
 # --------
 # Step 3.2: Run_Integration() (Optional)
 # --------
 Run_Integration:
-  Run_Integration_run_integration: true
+  Run_Integration_run_integration: false
   Run_Integration_group_by: orig.ident                 # [Required] [string] This argument determines which seurat metadata will be used for data integration. Default is orig.ident (each sample).
   Run_Integration_method: CCA                          # [Required] [string] This argument defines the method in Seurat::IntegrateLayers(). The valid value are CCA, Harmony and RPCA. Default is CCA.
   Run_Integration_nfeatures: 2000                      # [Required] [integer] This argument defines the nfeatures in Seurat::FindVariableFeatures(). Default is 2000.
   Run_Integration_normalization_method: SCT            # [Required] [string] This argument defines the normalization method. The valid value are SCT and LogNormalize. Default is SCT.
   Run_Integration_dims: 20                             # [Required] [integer] This argument defines how many top dimensions of reduction to use in integration and dimensional redution. For instance, set 20 as 1:20. Default is 20.
-  Run_Integration_verbose: false                       # [Optional] [boolean] Whether to display the progress detail. Default is true.
+  Run_Integration_verbose: true                        # [Optional] [boolean] Whether to display the progress detail. Default is true.
 
 
 # --------
@@ -77,7 +77,7 @@ Markers_Annotation:
   Markers_Annotation_min_pct: 0.01                        # [Required] [float] The argument defines the min.pct in Seurat::FindAllMarkers(). Default is 0.01.
   Markers_Annotation_test_use: wilcox                     # [Required] [string] The argument defines the test.use in Seurat::FindAllMarkers(). Default is wilcox.
   Markers_Annotation_only_pos: true                       # [Required] [boolean] Whether to only calculate the positive differential expression genes in each cluster. Default is false.
-  Markers_Annotation_verbose: false                       # [Optional] [boolean] Whether to display the progress detail. Default is true.
+  Markers_Annotation_verbose: true                        # [Optional] [boolean] Whether to display the progress detail. Default is true.
   Markers_Annotation_top_n: 100                           # [Required] [integer] The number of top positive differential expresseion genes (ranked by avf_log2) in each cluster that will be utilized in the annotation. Default is 100. 
   Markers_Annotation_tissue_type: lung                    # [Required] [string] Please choose the one of the following tissue type of your sample: adipose tissue, bladder, blood, bone, bone marrow, brain, breast, embryo, eye, 
   # gastrointestinal tract, heart, kidney, liver, lung, mammary gland, muscle, other, ovary, pancreas, placenta, prostate, skin, spleen, stomach, testis, thymus, tooth, uterus.
@@ -98,8 +98,8 @@ DR_Plot:
   DR_Plot_alpha: 1                             # [Required] [float] The argument defines the alpha in Seurat::DimPlot(). Default is 1.
   DR_Plot_shuffle: false                       # [Required] [boolean] The argument defines the shuffle in Seurat::DimPlot(). Default is false.
   DR_Plot_raster: null                         # [Required] [boolean] The argument defines the raster in Seurat::DimPlot(). Default is null.
-  DR_Plot_width: 6                             # [Required] [float] The width of the output plot. Default is 6.
-  DR_Plot_height: 6                            # [Required] [float] The height of the output plot. Default is 6.
+  DR_Plot_width: 12                            # [Required] [float] The width of the output plot. Default is 6.
+  DR_Plot_height: 12                           # [Required] [float] The height of the output plot. Default is 6.
 
 # --------
 # Step 6: Run_CellChat()
@@ -112,9 +112,9 @@ Run_CellChat:
   Run_CellChat_source_celltype: null                # [Optional] [string] Choose your interested celltype as a signaling sender. Defualt is null.
   Run_CellChat_target_celltype: null                # [Optional] [string] Choose your interested celltype as a signaling receiver. Defualt is null.
   Run_CellChat_plot_heatmap: true                   # [Required] [boolean] Whether to draw a overall signal outgoing and incoming plot. Default is true.
-  Run_CellChat_ntop_signaling: 3                    # [Required] [integer] Choose how many top signalings (detailed L-R pairs in each pathway) you want to explore. More signalings will increase the time cost for further docking. Defualt is 5.
+  Run_CellChat_ntop_signaling: 2                    # [Required] [integer] Choose how many top signalings (detailed L-R pairs in each pathway) you want to explore. More signalings will increase the time cost for further docking. Defualt is 5.
   Run_CellChat_pdf_width: 8                         # [Required] [float] Choose the width of the bubble plots from CellChat::netVisual_bubble().
-  Run_CellChat_pdf_height: 6                        # [Required] [float] Choose the height of the bubble plots from CellChat::netVisual_bubble().
+  Run_CellChat_pdf_height: 16                        # [Required] [float] Choose the height of the bubble plots from CellChat::netVisual_bubble().
 # --------
 # Step 7: Vina_Docking()
 # --------
@@ -123,9 +123,9 @@ Vina_Docking:
   Vina_Docking_output_path: "/home/andrew/scDock"                                # [Required] [string] This path defines the output path for the docking process.
   Vina_Docking_ligand_ref_file: "/home/andrew/scDock/ligand_reference.csv"       # [Required] [string] This path will read the ligand_reference.csv that we provide from the Github. The file helps you match the PDB model for ligand strucutre (found from CellChat L-R pairs).
   Vina_Docking_receptor_ref_file: "/home/andrew/scDock/receptor_reference.csv"   # [Required] [string] This path will read the receptor_reference.csv that we provide from the Github. The file helps you match the PDB model for receptor strucutre (found from CellChat L-R pairs).
-  Vina_Docking_cas_txt_file: null                                                # [Optional] [string] You can provide a .txt file with CAS number for each compound that you are interested. Seperate them with row. If you provide this, the program won't consider use_fda and fda_txt_path.
-  Vina_Docking_use_fda: true                                                     # [Optional] [boolean] Whether to use a FDA compound list (2025.09). Default is false.
-  Vina_Docking_fda_txt: "/home/andrew/scDock/fda.txt"                            # [Optional] [string] This path will read the fda.txt. You can download the fda.txt from pur Github website.
+  Vina_Docking_cas_txt_file: "/home/andrew/scDock/cas.txt"                       # [Optional] [string] You can provide a .txt file with CAS number for each compound that you are interested. Seperate them with row. If you provide this, the program won't consider use_fda and fda_txt_path.
+  Vina_Docking_use_fda: false                                                    # [Optional] [boolean] Whether to use a FDA compound list (2025.09). Default is false.
+  Vina_Docking_fda_txt: null                                                     # [Optional] [string] This path will read the fda.txt. You can download the fda.txt from pur Github website.
   Vina_Docking_docking_ligand_dir: null                                          # [Optional] [string] If you do not provide "cas_txt_file" nor both "use_fda" and "fda_txt_path", then you must provide a directory path which contains your own ligand.pdbqt files.
   Vina_Docking_docking_receptor_dir: null                                        # [Optional] [string] If you want to use your own receptor.pdbqt for docking, input your directory path. The .pdbqt file(s) must be named in the following pattern. ex: YourName_prepare.pdbqt. Default is null.
   Vina_Docking_vina_exhaustiveness: 8                                            # [Optional] [integer] This argument defines the exhaustiveness in AudoDock Vina. Default is 8.
