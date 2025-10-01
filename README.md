@@ -32,4 +32,4 @@ Enter scDock virtual environment and conduct the following command
 4. [Optional] If you want to group your input samples, you can follow the README.md in our Metadata.
 
 ### Note:  
-We recommend clearing the files in "Vina_Docking_output_path" (defined in config.yaml) before each run, as scDock does not automatically remove the ligand and receptor directories. Otherwise, unnecessary structural files may accumulate.
+We recommend clearing the files in argument "Vina_Docking_output_path" (in config.yaml) before each run, as scDock does not automatically remove the ligand and receptor directories. Otherwise, unnecessary structural files may accumulate.
