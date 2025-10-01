@@ -41,7 +41,7 @@ We provide three options for ligand usage: FDA compounds, CAS number and your ow
 ● For your own structures, you need to set Vina_Docking_docking_ligand_dir = path/to/YourStucture. You can provide your compound structure.pdbqt file by using this argument. Please make sure your structure fulfills the requirement for AutoDock Vina.
 
 #### Decide the protein structure for molecular docking  
-By default, protein structures, which have been recorded in CellChat, are automatically downloaded and pre-processed for molecular docking based on the information in ligand_reference.csv and receptor_reference.csv. These files record the most suitable protein model for each protein, as identified by the Uniprot-PDB-mapper (https://github.com/iriziotis/Uniprot-PDB-mapper) (accessed August 8, 2025). If you believe a better model exists for a given protein, you can directly update those files.
+By default, protein structures, which have been recorded in CellChat v2 (https://github.com/jinworks/CellChat), will be automatically downloaded and pre-processed for molecular docking based on the information in ligand_reference.csv and receptor_reference.csv. These files record the most suitable protein model for each protein, as identified by the Uniprot-PDB-mapper (https://github.com/iriziotis/Uniprot-PDB-mapper) (accessed August 8, 2025). If you believe a better model exists for a given protein, you can directly update those files.
 
 In addition, we provide an option for users to supply their own protein_structure.pdbqt file. To enable this, set
 Vina_Docking_docking_receptor_dir = path/to/YourDirectory.
