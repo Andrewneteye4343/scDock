@@ -34,25 +34,24 @@ Each argument in config.yaml is documented with its usage and original function.
 #### Decide the compound library for molecular docking
 We provide three options for ligand usage: FDA compounds, CAS number and your own structures. You can use one of the options as your compound library.  
 
-● For FDA compounds, you need to set Vina_Docking_use_fda = true and Vina_Docking_fda_txt = path/to/fda.txt. In this option, scDock will download and pre-process the parent compounds of FDA-approved compounds (version: September 2025). The fda.txt can be download from Github.
+● For FDA compounds, you need to set argument Vina_Docking_use_fda = true and Vina_Docking_fda_txt = path/to/fda.txt. In this option, scDock will download and pre-process the parent compounds of FDA-approved compounds (version: September 2025). The fda.txt can be download from Github.
 
-● For CAS number, you need to set Vina_Docking_cas_txt_file = path/to/cas.txt. In this option, you can provide the CAS number of your interested compounds (seperated by row) in the cas.txt file. The CAS number can be serached at PubChem website (https://pubchem.ncbi.nlm.nih.gov/).  
+● For CAS number, you need to set argument Vina_Docking_cas_txt_file = path/to/cas.txt. In this option, you can provide the CAS number of your interested compounds (seperated by row) in the cas.txt file. The CAS number can be serached at PubChem website (https://pubchem.ncbi.nlm.nih.gov/).  
 
-● For your own structures, you need to set Vina_Docking_docking_ligand_dir = path/to/YourStucture. You can provide your compound structure.pdbqt file by using this argument. Please make sure your structure fulfills the requirement for AutoDock Vina.
+● For your own structures, you need to set argument Vina_Docking_docking_ligand_dir = path/to/YourStucture. You can provide your compound structure.pdbqt file by using this argument. Please make sure your structure fulfills the requirement for AutoDock Vina.
 
 #### Decide the protein structure for molecular docking  
 By default, protein structures, which have been recorded in CellChat v2 (https://github.com/jinworks/CellChat), will be automatically downloaded and pre-processed for molecular docking based on the information in ligand_reference.csv and receptor_reference.csv. These files record the most suitable protein model for each protein, as identified by the Uniprot-PDB-mapper (https://github.com/iriziotis/Uniprot-PDB-mapper) (accessed August 8, 2025). If you believe a better model exists for a given protein, you can directly update those files.
 
-In addition, we provide an option for users to supply their own protein_structure.pdbqt file. To enable this, set
-Vina_Docking_docking_receptor_dir = path/to/YourDirectory.
+In addition, we provide an option for users to supply their own protein_structure.pdbqt file. To enable this, set argument Vina_Docking_docking_receptor_dir = path/to/YourDirectory.
 Please ensure that your structure meets the input requirements for AutoDock Vina.
 
 #### Provide the tissue type of your scRNA/snRNA data.  
-You must input one of the below tissue names into Markers_Annotation_tissue_type for proper cell annotation:  
+You must input one of the below tissue names into argument Markers_Annotation_tissue_type for proper cell annotation:  
 adipose tissue, bladder, blood, bone, bone marrow, brain, breast, embryo, eye, gastrointestinal tract, heart, kidney, liver, lung, mammary gland, muscle, other, ovary, pancreas, placenta, prostate, skin, spleen, stomach, testis, thymus, tooth, uterus
 
 #### Determine your interested cell type in your provided tissue type.
-If you are interested in specific cell types in cell–cell communication, you can set the Run_CellChat_source_celltype and Run_CellChat_target_celltype arguments to the corresponding cell names provided for each tissue type. By default, both are set to NULL.
+If you are interested in specific cell types in cell–cell communication, you can set argument Run_CellChat_source_celltype and Run_CellChat_target_celltype to the corresponding cell names provided for each tissue type. By default, both are set to NULL.
 #### ● adipose tissue
 Adipocyte, Adipose-derived stem cell, B cell, Basophil, Brown fat cell, Dendritic cell, Endothelial cell, Hematopoietic cell, Luminal epithelial cell, Macrophage, Mammary epithelial cell, Mast cell, Monocyte, Natural killer cell, Neuron, Pericyte, Platelet, T cell, T memory cell
 
