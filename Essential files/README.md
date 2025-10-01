@@ -15,6 +15,7 @@
 ● Load_QC.R  
 ● Normalization_Scale.R  
 ● DR_Cluster.R  
+● Run_Integration.R  
 ● Markers_Annotation.R  
 ● DR_Plot.R  
 ● Run_CellChat.R  
