@@ -419,6 +419,45 @@ validate_config <- function(config) {
   # DR_Cluster_verbose
   arg_DR_Cluster_verbose <- check_boolean_string(drc$DR_Cluster_verbose, arg_name = "DR_Cluster_verbose")
 
+  # --- Run_Integration ---
+  ri <- config$Run_Integration
+  if (is.null(ri)) stop("Error: Run_Integration block is missing in config.yaml")
+
+  # Run_Integration_run_integration
+  arg_Run_Integration_run_integration <- check_boolean_string(ri$Run_Integration_run_integration, arg_name = "Run_Integration_run_integration")
+
+  # Run_Integration_group_by
+  arg_Run_Integration_group_by <- check_group_by(ri$Run_Integration_group_by, arg_name = "Run_Integration_group_by", default = "orig.ident")
+
+  # Run_Integration_method
+  valid_integration_method <- c("cca","rpca","harmony")
+  if (!(ri$Run_Integration_method %in% valid_integration_method)) {
+    warning(paste0("Error: Run_Integration_method must be one of: ", paste(valid_integration_method, collapse = ", ")))
+    message(paste0("Using default value: umap for Run_Integration_method"))
+    arg_Run_Integration_method <- "cca"
+  } else {
+    arg_Run_Integration_method <- ri$Run_Integration_method
+  }
+
+  # Run_Integration_nfeatures
+  arg_Run_Integration_nfeatures <- check_integer_string(ri$Run_Integration_nfeatures, "Run_Integration_nfeatures", default = 2000)
+
+  # Run_Integration_normalization_method
+  valid_integration_normalization_method <- c("SCT","LogNormalize")
+  if (!(ri$Run_Integration_normalization_method %in% valid_integration_normalization_method)) {
+    warning(paste0("Error: Run_Integration_normalization_method must be one of: ", paste(valid_integration_normalization_method, collapse = ", ")))
+    message(paste0("Using default value: umap for Run_Integration_normalization_method"))
+    arg_Run_Integration_normalization_method <- "SCT"
+  } else {
+    arg_Run_Integration_normalization_method <- ri$Run_Integration_normalization_method
+  }
+
+  # Run_Integration_dims
+  arg_Run_Integration_dims <- check_integer_string(ri$Run_Integration_dims, "Run_Integration_dims", default = 20)
+  
+  # Run_Integration_verbose
+  arg_Run_Integration_verbose <- check_boolean_string(ri$Run_Integration_verbose, arg_name = "Run_Integration_verbose", default = TRUE)
+
   # --- Markers_Annotation ---
   ma <- config$Markers_Annotation
   if (is.null(ma)) stop("Error: Markers_Annotation block is missing in config.yaml")
@@ -1368,6 +1407,13 @@ validate_config <- function(config) {
   DR_Cluster_reduction_assay = arg_DR_Cluster_reduction_assay,
   DR_Cluster_clustering_algorithm = arg_DR_Cluster_clustering_algorithm,
   DR_Cluster_verbose = arg_DR_Cluster_verbose,
+  Run_Integration_run_integration = arg_Run_Integration_run_integration,
+  Run_Integration_group_by = arg_Run_Integration_group_by,
+  Run_Integration_method = arg_Run_Integration_method,
+  Run_Integration_nfeatures = arg_Run_Integration_nfeatures,
+  Run_Integration_normalization_method = arg_Run_Integration_normalization_method,
+  Run_Integration_dims = arg_Run_Integration_dims,
+  Run_Integration_verbose = arg_Run_Integration_verbose,
   Markers_Annotation_output_path = arg_Markers_Annotation_output_path,
   Markers_Annotation_use_assay = arg_Markers_Annotation_use_assay,
   Markers_Annotation_group_by = arg_Markers_Annotation_group_by,
@@ -1431,6 +1477,7 @@ message("✅ Config validation passed.")
 source("functions/Load_QC.R")
 source("functions/Normalization_Scale.R")
 source("functions/DR_Cluster.R")
+source("functions/Run_Integration.R")
 source("functions/Markers_Annotation.R")
 source("functions/DR_Plot.R")
 source("functions/Run_CellChat.R")
@@ -1457,7 +1504,7 @@ message("========== QC process complete. ==========")
 message("")
 
 # -------------------------
-# Step 3: Normalize, HVG, and Scale
+# Step 2: Normalization
 # -------------------------
 message("========== Starting normalization and scaling ... ==========")
 args$Normalization_Scale_scale_factor <- as.numeric(args$Normalization_Scale_scale_factor)
@@ -1484,7 +1531,7 @@ message("========== Normalization and scaling complete. ==========")
 message("")
 
 # -------------------------
-# Step 5: Run DR_Cluster
+# Step 3.1: Run DR_Cluster
 # -------------------------
 message("========== Starting dimensional reduction and clustering ... ==========")
 args$DR_Cluster_dims <- seq_len(as.integer(args$DR_Cluster_dims))
@@ -1509,7 +1556,28 @@ message("========== Dimensional reduction and clustering complete. ==========")
 message("")
 
 # -------------------------
-# Step 6: Find markers and annotate
+# Step 3.2: Run Integration (Optional)
+# -------------------------
+if (!is.null(config$Run_Integration) && args$Run_Integration_run_integration == TRUE) {
+  message("========== Starting Seurat integration ... ==========")
+  seurat_obj <- Run_Integration(
+    seurat_obj                           = seurat_obj,
+    Run_Integration_group_by             = args$Run_Integration_group_by,
+    Run_Integration_method               = args$Run_Integration_method,
+    Run_Integration_nfeatures            = args$Run_Integration_nfeatures,
+    Run_Integration_normalization_method = args$Run_Integration_normalization_method,
+    Run_Integration_dims                 = as.integer(args$Run_Integration_dims),
+    Run_Integration_verbose              = args$Run_Integration_verbose
+  )
+
+  message("Saving the integrated file to seurat_integrated.rds")
+  saveRDS(seurat_obj, file = file.path(seurat_output_dir, "seurat_integrated.rds"))
+  message("========== Integration complete. ==========")
+  message("")
+}
+
+# -------------------------
+# Step 4: Find markers and annotate
 # -------------------------
 message("========== Starting cluster markers calculating ... ==========")
 
@@ -1534,7 +1602,7 @@ message("========== Find marker and annotation complete. ==========")
 message("")
 
 # -------------------------
-# Step 7: Check + Dimensional Reduction Plot
+# Step 5: Check + Dimensional Reduction Plot
 # -------------------------
 message("========== Starting visualization with Dimplot... ==========")
 
@@ -1559,7 +1627,7 @@ message("========== Visualization complete. ==========")
 message("")
 
 # -------------------------
-# Step 8: CellChat analysis
+# Step 6: CellChat analysis
 # -------------------------
 message("========== Running CellChat on Seurat object ... ==========")
 
@@ -1584,7 +1652,7 @@ message("========== CellChat complete. ==========")
 message("")
 
 # -------------------------
-# Step 9: AutoDock Vina docking
+# Step 7: AutoDock Vina docking
 # -------------------------
 message("========== Starting docking ... ==========")
 

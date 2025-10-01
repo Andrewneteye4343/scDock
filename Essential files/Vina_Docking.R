@@ -72,15 +72,15 @@ Vina_Docking <- function(Vina_Docking_input_path,
   csv_files <- list.files(Vina_Docking_input_path, pattern = "^top\\d+_LR_.*\\.csv$", full.names = TRUE)
 
   if (length(csv_files) == 0) {
-  # fallback: try multi-group file
+    # fallback: try multi-group file
     multi_csv <- file.path(Vina_Docking_input_path, "multiGroup_significant_LR_by_prob_diff.csv")
-  if (file.exists(multi_csv)) {
-    message("[INFO] No top*_LR_*.csv found. Using multiGroup_significant_LR_by_prob_diff.csv instead.")
-    csv_files <- c(multi_csv)   # <-- 確保是 vector
-  } else {
-    stop("No LR CSV files found (neither top*_LR_*.csv nor multiGroup_significant_LR_by_prob_diff.csv) in: ",
-         Vina_Docking_input_path)
-    } 
+    if (file.exists(multi_csv)) {
+      message("[INFO] No top*_LR_*.csv found. Using multiGroup_significant_LR_by_prob_diff.csv instead.")
+      csv_files <- c(multi_csv)
+    } else {
+      stop("No LR CSV files found (neither top*_LR_*.csv nor multiGroup_significant_LR_by_prob_diff.csv) in: ",
+           Vina_Docking_input_path)
+    }
   }
 
   ligands <- receptors <- c()
@@ -89,7 +89,6 @@ Vina_Docking <- function(Vina_Docking_input_path,
     if (is.null(df)) next
 
     # Ensure ligand/receptor columns exist
-    
     if (!all(c("ligand","receptor") %in% colnames(df)) && "interaction" %in% colnames(df)) {
       parts <- strsplit(df$interaction, "_")
       df$ligand <- sapply(parts, `[`, 1)
@@ -154,7 +153,7 @@ Vina_Docking <- function(Vina_Docking_input_path,
       }
     }
   }
-  
+
   download_structures(ligand_match, ligand_dir, "ligand")
 
   # only download receptors if user did NOT provide Vina_Docking_docking_receptor_dir
@@ -226,6 +225,35 @@ Vina_Docking <- function(Vina_Docking_input_path,
         out_dir = rec_subdir,
         params = vina_params
       )
+    }
+
+    # ---- Collect docking results per receptor ----
+    message("[Vina] Collecting docking results for receptor folder: ", rec_subdir)
+    log_files <- list.files(rec_subdir,
+                            pattern = "_AutoDockVina_result_score.txt$",
+                            full.names = TRUE,
+                            recursive = FALSE)
+
+    results <- lapply(log_files, function(logf) {
+      lines <- readLines(logf, warn = FALSE)
+      affinity <- NA
+      # Get the first mode 
+      line1 <- grep("^\\s*1\\s", lines, value = TRUE)
+      if (length(line1) > 0) {
+        affinity <- as.numeric(strsplit(trimws(line1), "\\s+")[[1]][2])
+      }
+      ligand <- sub("_AutoDockVina_result_score.txt$", "", basename(logf))
+      data.frame(ligand = ligand,
+                 affinity = affinity,
+                 stringsAsFactors = FALSE)
+    })
+
+    if (length(results) > 0) {
+      results_df <- do.call(rbind, results) %>%
+        arrange(affinity)
+      out_csv <- file.path(rec_subdir, "AutoDockVina_score.csv")
+      write.csv(results_df, out_csv, row.names = FALSE)
+      message("[Vina] Receptor score summary saved to: ", out_csv)
     }
   }
 }

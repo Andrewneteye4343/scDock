@@ -18,7 +18,7 @@ DR_Cluster <- function(seurat_obj,
   # PCA
   # -------------------------
   if (DR_Cluster_pca_features == "variable") {
-    if (DR_Cluster_verbose) message("Using variabel features for PCA...")
+    if (DR_Cluster_verbose) message("Using variable features for PCA...")
     seurat_obj <- RunPCA(seurat_obj,
                          features = VariableFeatures(seurat_obj),
                          verbose = DR_Cluster_verbose)

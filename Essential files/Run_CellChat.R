@@ -27,6 +27,19 @@ Run_CellChat <- function(seurat_obj,
   dir.create(Run_CellChat_output_path, showWarnings = FALSE, recursive = TRUE)
 
   # ================================
+  # 檢查 assay → 若有 SCT 用 SCT，否則用 RNA
+  # ================================
+  if ("SCT" %in% names(seurat_obj@assays)) {
+    DefaultAssay(seurat_obj) <- "SCT"
+    message("📌 Using SCT assay for CellChat input")
+  } else if ("RNA" %in% names(seurat_obj@assays)) {
+    DefaultAssay(seurat_obj) <- "RNA"
+    message("📌 Using RNA assay for CellChat input")
+  } else {
+    stop("❌ Neither SCT nor RNA assay found in Seurat object. Cannot run CellChat.")
+  }
+
+  # ================================
   # 判斷單組別或多組別
   # ================================
   is_multi_group <- FALSE

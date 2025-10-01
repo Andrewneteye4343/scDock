@@ -14,65 +14,58 @@ Markers_Annotation <- function(seurat_obj,
   library(Seurat)
   library(dplyr)
   library(scMayoMap)
-  
-  # ----------- Step 0: Check if assay contains layers (v4/v5 compatible) -----------
+
+  # ----------- Step 0: Assay selection -----------
   assay_name <- if (!is.null(Markers_Annotation_use_assay)) {
     Markers_Annotation_use_assay
   } else {
     Seurat::DefaultAssay(seurat_obj)
   }
-  
-  has_layers <- FALSE
-  if (assay_name %in% names(seurat_obj@assays)) {
-    assay_obj <- seurat_obj[[assay_name]]
-    # v5+ uses layers slot
-    if ("layers" %in% slotNames(assay_obj) && length(assay_obj@layers) > 0) {
-      has_layers <- TRUE
-    }
-    # v4+ may store layers differently (check Assay@misc)
-    if ("misc" %in% slotNames(assay_obj) && "layers" %in% names(assay_obj@misc)) {
-      if (length(assay_obj@misc$layers) > 0) has_layers <- TRUE
-    }
-  }
-  
+
+  assay_obj <- seurat_obj[[assay_name]]
+
+  # 判斷 assay 類型
+  assay_class <- class(assay_obj)[1]
   if (Markers_Annotation_verbose) {
-    if (has_layers) {
-      message("Detected layers in assay [", assay_name, "] → will apply JoinLayers()")
-    } else {
-      message("No layers detected in assay [", assay_name, "] → skipping JoinLayers()")
-    }
+    message("Using assay [", assay_name, "] of class: ", assay_class)
   }
-  
-  # ----------- Step 1: Find markers -----------
-  if (has_layers) {
+
+  # ----------- Step 1: JoinLayers only if Assay5 -----------
+  if (inherits(assay_obj, "Assay5")) {
+    if (Markers_Annotation_verbose) {
+      message("Detected Assay5 with layers → applying JoinLayers()")
+    }
     if (exists("JoinLayers", where = asNamespace("SeuratObject"), inherits = FALSE)) {
-      seurat_obj <- SeuratObject::JoinLayers(seurat_obj)
-    } else if ("JoinLayers" %in% ls(getNamespace("Seurat"))) {
-      seurat_obj <- Seurat:::JoinLayers(seurat_obj)
+      seurat_obj[[assay_name]] <- SeuratObject::JoinLayers(assay_obj)
     } else {
-      message("JoinLayers() function not found in Seurat → skipping")
+      message("⚠️ JoinLayers() not found in SeuratObject namespace → skipping")
+    }
+  } else {
+    if (Markers_Annotation_verbose) {
+      message("Assay class [", assay_class, "] does not support JoinLayers() → skipping")
     }
   }
-  
+
+  # ----------- Step 2: Find markers -----------
   if (Markers_Annotation_verbose) message("Finding markers using FindAllMarkers() ...")
-  
+
   markers <- FindAllMarkers(seurat_obj,
-                            assay = Markers_Annotation_use_assay,
+                            assay = assay_name,
                             group.by = Markers_Annotation_group_by,
                             logfc.threshold = Markers_Annotation_logfc_threshold,
                             test.use = Markers_Annotation_test_use,
                             min.pct = Markers_Annotation_min_pct,
                             only.pos = Markers_Annotation_only_pos)
-  
+
   if (Markers_Annotation_verbose) message("Marker finding complete. Total markers: ", nrow(markers))
-  
+
   if (!is.null(Markers_Annotation_output_path)) {
     Marker_output <- file.path(Markers_Annotation_output_path, "Markers.csv")
     write.csv(markers, Marker_output, row.names = FALSE)
     message("Markers.csv saved to: ", Markers_Annotation_output_path)
   }
-  
-  # ----------- Step 2: Select top markers per cluster -----------
+
+  # ----------- Step 3: Select top markers per cluster -----------
   if (!is.null(Markers_Annotation_top_n) && Markers_Annotation_top_n > 0) {
     top_markers <- markers %>%
       filter(avg_log2FC > 0) %>%
@@ -80,21 +73,20 @@ Markers_Annotation <- function(seurat_obj,
       slice_max(order_by = avg_log2FC, n = Markers_Annotation_top_n, with_ties = FALSE) %>%
       ungroup()
   } else {
-    top_markers <- markers %>%
-      filter(avg_log2FC > 0)
+    top_markers <- markers %>% filter(avg_log2FC > 0)
   }
-  
+
   if (Markers_Annotation_verbose) message("Running scMayoMap for cell annotation...")
   annotation <- scMayoMap::scMayoMap(data = top_markers, tissue = Markers_Annotation_tissue_type)
-  
-  # ----------- Step 3: Save annotation result -----------
+
+  # ----------- Step 4: Save annotation result -----------
   if (!is.null(Markers_Annotation_output_path) && "res" %in% names(annotation)) {
     Annotation_output <- file.path(Markers_Annotation_output_path, "Annotations.csv")
     write.csv(annotation$res, Annotation_output, row.names = FALSE)
     message("Annotation.csv saved to: ", Markers_Annotation_output_path)
   }
-  
-  # ----------- Step 4: Add annotation to Seurat object -----------
+
+  # ----------- Step 5: Add annotation to Seurat object -----------
   if ("markers" %in% names(annotation) && is.data.frame(annotation$markers)) {
     cluster_map_df <- annotation$markers %>%
       mutate(cluster = as.character(cluster),
@@ -119,24 +111,24 @@ Markers_Annotation <- function(seurat_obj,
   } else {
     stop("scMayoMap returned an unexpected structure without 'markers' or 'res'.")
   }
-  
-  # ----------- Step 5: Map annotation to Seurat object metadata -----------
+
+  # ----------- Step 6: Map annotation to Seurat metadata -----------
   celltype_map <- setNames(cluster_map_df$celltype, cluster_map_df$cluster)
   clusters_in_obj <- as.character(seurat_obj$seurat_clusters)
   celltype_per_cell <- unname(celltype_map[clusters_in_obj])
   celltype_per_cell[is.na(celltype_per_cell)] <- "Unknown"
-  
+
   meta_df <- data.frame(
     tmp = celltype_per_cell,
     row.names = colnames(seurat_obj),
     stringsAsFactors = FALSE
   )
   colnames(meta_df) <- Markers_Annotation_label_column
-  
+
   seurat_obj <- SeuratObject::AddMetaData(
     object   = seurat_obj,
     metadata = meta_df
   )
-  
+
   return(seurat_obj)
 }
