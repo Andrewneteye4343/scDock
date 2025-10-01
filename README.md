@@ -23,7 +23,7 @@ Available scRNA/snRNA format:
 ### How to use:  
 Enter scDock virtual environment and conduct the following command  
 `conda activate scDock`  
-`bash main.sh config.yaml 2>&1 | tee log.txt` 
+`bash main.sh config.yaml` 
 
 ### Preparation:
 1. [Recommended] Please follow the README.md in our Essential environment.
