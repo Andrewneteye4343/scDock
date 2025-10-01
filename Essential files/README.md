@@ -5,12 +5,10 @@
 
 2. Place main.sh and config.yaml in /home/path/to/scDock.
 
-3. Place ligand_reference.csv and receptor_reference.csv on your computer, for example in /home/path/to/scDock.
+3. Place ligand_reference.csv and receptor_reference.csv on your computer (set path in config.yaml).  
 
 4. Create a directory named "functions" inside /home/path/to/scDock. After this step, you should have:
-/home/path/to/scDock/functions
-
-5. Place all scripts listed below into /home/path/to/scDock/functions
+/home/path/to/scDock/functions. Then, place all scripts listed below into /home/path/to/scDock/functions. (or directlly download the functions folder we provided in Github.)  
 ##### R scripts
 ● Load_QC.R  
 ● Normalization_Scale.R  
