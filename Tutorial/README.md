@@ -32,7 +32,7 @@ Users should adjust the paths according to your requirement.  Except the path ar
 `Normalization_Scale_scale_features: variable`  
 `Normalization_Scale_verbose: TRUE`  
 `DR_Cluster_pca_features: variable`  
-`DR_Cluster_seed: 42`  
+`DR_Cluster_seed: 10`  
 `DR_Cluster_dims: 20`  
 `DR_Cluster_k_param: 20`  
 `DR_Cluster_n_trees: 50`  
