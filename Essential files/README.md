@@ -5,7 +5,7 @@
 
 2. Place main.sh and config.yaml in /home/path/to/scDock.
 
-3. Place ligand_reference.csv and receptor_reference.csv on your computer (set path in config.yaml).  
+3. Place ligand_reference.csv and receptor_reference.csv in your computer (set path in config.yaml).  
 
 4. Create a directory named "functions" inside /home/path/to/scDock. After this step, you should have:
 /home/path/to/scDock/functions. Then, place all scripts listed below into /home/path/to/scDock/functions. (or directlly download the functions folder we provided in Github.)  
@@ -26,13 +26,13 @@
 ● prepare_receptor.py  
 
 #### config.yaml:
-Users only need to adjust the arguments in config.yaml according to their requirements.
+Basically, users only need to adjust the arguments in config.yaml according to their requirements.
 If you are unsure about the meaning of certain argument, we recommend using the default settings.
 
 Each argument in config.yaml is documented with its usage and original function. For more details, you can also refer to the documentation provided on the respective official websites.
 
 #### Decide the compound library for molecular docking
-We provide three options for ligand usage: FDA compounds, CAS number and your own structures.
+We provide three options for ligand usage: FDA compounds, CAS number and your own structures. You can use one of the options as your compound library.  
 
 ● For FDA compounds, you need to set Vina_Docking_use_fda = true and Vina_Docking_fda_txt = path/to/fda.txt. In this option, scDock will download and pre-process the parent compounds of FDA-approved compounds (version: September 2025). The fda.txt can be download from Github.
 
@@ -41,7 +41,7 @@ We provide three options for ligand usage: FDA compounds, CAS number and your ow
 ● For your own structures, you need to set Vina_Docking_docking_ligand_dir = path/to/YourStucture. You can provide your compound structure.pdbqt file by using this argument. Please make sure your structure fulfills the requirement for AutoDock Vina.
 
 #### Decide the protein structure for molecular docking  
-By default, protein structures are automatically downloaded and pre-processed for molecular docking based on the information in ligand_reference.csv and receptor_reference.csv. These files record the most suitable protein model for each protein, as identified by the Uniprot-PDB-mapper (https://github.com/iriziotis/Uniprot-PDB-mapper) (accessed August 8, 2025). If you believe a better model exists for a given protein, you can directly update these files.
+By default, protein structures are automatically downloaded and pre-processed for molecular docking based on the information in ligand_reference.csv and receptor_reference.csv. These files record the most suitable protein model for each protein, as identified by the Uniprot-PDB-mapper (https://github.com/iriziotis/Uniprot-PDB-mapper) (accessed August 8, 2025). If you believe a better model exists for a given protein, you can directly update those files.
 
 In addition, we provide an option for users to supply their own protein_structure.pdbqt file. To enable this, set
 Vina_Docking_docking_receptor_dir = path/to/YourDirectory.
