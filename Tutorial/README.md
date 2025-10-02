@@ -7,6 +7,6 @@ Please manually download those data to your computer and should get:
 `GSM4516281_C170_filtered_feature_bc_matrix.h5`  
 `GSM4516282_C172_filtered_feature_bc_matrix.h5`  
 
-● Modify config.yaml (read in the above config.yaml file):  
+● Modify config.yaml (read in the above GSE149878_config.yaml file):  
 In the tutorial, the scDock workpath is set as `/home/andrew/scDock`. 
 Users should adjust the paths according to your requirement.  Except the path arguments, users can stay default settings if you are not sure how to adjust them.  
