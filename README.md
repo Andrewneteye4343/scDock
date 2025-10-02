@@ -14,9 +14,9 @@ Available scRNA/snRNA format:
 ● .txt  
 
 ### Output:  
-● Seurat_object.rds files from Seurat analysis steps  
+● Seurat_object.rds files from Seurat analysis    
 ● CellChat.rds file from CellChat analysis  
-● Protein structure(s) from CellChat analysis  
+● Protein structure(s) from top signalings  
 ● Compound strucutre(s) from cas.txt or fda.txt  
 ● Molecular docking results (binding affinity and binding position) based on the strongest intercellular signaling pathways across cell types (you can select the cell types of interest)
 
