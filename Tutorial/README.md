@@ -15,8 +15,7 @@ Users can modify the paths according to your requirement.  Except the path argum
 
 Here, we mention some important arguments that users might want to modify:  
 1. `Load_QC_max_mito` This argument defines the persent of mitochondrial counts cut off in subset(). The valid range locates from 0 to 1. Default is 0.1. Lower cut off will remove more cells in the further analysis.
-2. `Load_QC_metadata_file` This path defines where to find metadata for grouping your samples. Should not be the same path with Load_QC_input_files when you input txt as Load_QC_input_type. Only use it if you want to group your samples.
-3. `DR_Cluster_resolution` This argument defines the resoltion in Seurat::FindClusters(). Default is 0.1. Higher resolution might bring more clusters in results.
+2. `DR_Cluster_resolution` This argument defines the resoltion in Seurat::FindClusters(). Default is 0.1. Higher resolution might bring more clusters in results.
 
 
 #############################################  
