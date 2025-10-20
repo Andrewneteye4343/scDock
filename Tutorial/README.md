@@ -6,7 +6,7 @@ Please manually download those data to your computer. We recommend users rename 
 `features.tsv.gz`  
 `matrix.mtx.gz`  
 
-● Meta data preparation (optional):  
+● Meta data preparation (Optional):  
 If you are interested in the difference of cellular interaction between control and DN mice, you can provide metadata.txt as we have prepared.  
 
 ● Modify config.yaml (read in the above GSE218563_config.yaml file):  
