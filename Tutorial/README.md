@@ -1,11 +1,30 @@
-In this tutorial, we will demonstrate how to utilize scDock with GSE218563 dataset from NCBI GEO website (https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE218563). This scRNA dataset contains 16 kidney tissue samples from control and diabetic nephropathy mice.  
+In this tutorial, we will demonstrate how to utilize scDock with GSE218563 dataset from NCBI GEO website (https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE218563). This scRNA dataset contains 16 kidney tissue samples from control and diabetic nephropathy (DN) mice.  
 
 ● Data preparation:  
-Please manually download those data to your computer. We recommend users rename their files as shown in the example below for 10X Cell Ranger data. For example, each sample directory should contain the following files:
+Please manually download those data to your computer. We recommend users rename their files as shown in the example below for 10X Cell Ranger data. For example, each sample directory should contain the following files:  
 `barcodes.tsv.gz`  
 `features.tsv.gz`  
 `matrix.mtx.gz`  
 
+● Meta data preparation (optional):  
+If you are interested in the difference of cellular interaction between control and DN mice, you can provide meadata.txt with the following content:  
+`file_name	group`  
+`GSM6752560	Control`  
+`GSM6752561	Control`  
+`GSM6752562	Control`  
+`GSM6752563	Control`  
+`GSM6752564	Control`  
+`GSM6752565	Control`  
+`GSM6752566	Control`  
+`GSM6752567	Control`  
+`GSM6752568	DN`  
+`GSM6752569	DN`  
+`GSM6752570	DN`  
+`GSM6752571	DN`  
+`GSM6752572	DN`  
+`GSM6752573	DN`  
+`GSM6752574	DN`  
+`GSM6752575	DN`  
 ● Modify config.yaml (read in the above GSE149878_config.yaml file):  
 In the tutorial, the scDock workpath is set as `/home/andrew/scDock`. 
 Users should adjust the paths according to your requirement.  Except the path arguments, users can stay default settings if you are not sure how to adjust them.  
