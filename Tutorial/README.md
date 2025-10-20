@@ -7,7 +7,7 @@ Please manually download those data to your computer. We recommend users rename 
 `matrix.mtx.gz`  
 
 ● Meta data preparation (optional):  
-If you are interested in the difference of cellular interaction between control and DN mice, you can provide meadata.txt with the following content:  
+If you are interested in the difference of cellular interaction between control and DN mice, you can provide meatdata.txt with the following content:  
 `file_name	group`  
 `GSM6752560	Control`  
 `GSM6752561	Control`  
