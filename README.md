@@ -9,16 +9,16 @@ scDock streamlines the complex workflow from single-cell/nucleus RNA sequencing 
 
 ### Input:
 Available scRNA/snRNA format:  
-● barcodes.tsv.gz, features.tsv.gz, matrix.mtx.gz  
+● 10X Cell Ranger output (barcodes.tsv.gz, features.tsv.gz, matrix.mtx.gz)  
 ● .h5  
 ● .txt  
 
 ### Output:  
 ● Seurat_object.rds files from Seurat analysis    
 ● CellChat.rds file from CellChat analysis  
-● Protein structure(s) from top signalings  
-● Compound strucutre(s) from cas.txt or fda.txt  
-● Molecular docking results (binding affinity and binding position) based on the strongest intercellular signaling pathways across cell types (you can select the cell types of interest)
+● Protein structure(s) from top signalings (found from CellChat)
+● Compound structure(s) from cas.txt or fda.txt  
+● Molecular docking results (binding affinity and position) based on the top intercellular signaling pathways across cell types (you can select the cell types of interest)
 
 ### How to use:  
 Enter scDock virtual environment and conduct the following command  
