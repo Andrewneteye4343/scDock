@@ -5,9 +5,7 @@
 
 2. Place main.sh and config.yaml in /home/path/to/scDock.
 
-3. Place ligand_reference.csv and receptor_reference.csv in your computer (set argument Vina_Docking_ligand_ref_file and Vina_Docking_receptor_ref_file). In this example, we use: /home/path/to/scDock/functions/ligand_reference.csv and /home/path/to/scDock/functions/receptor_reference.csv  
-
-4. Create a directory named "functions" inside /home/path/to/scDock. After this step, you should have:
+3. Create a directory named "functions" inside /home/path/to/scDock. After this step, you should have:
 /home/path/to/scDock/functions. Then, place all scripts listed below into /home/path/to/scDock/functions. (or directlly download the functions folder we provided in Github.)  
 ##### R scripts
 ● Load_QC.R  
@@ -23,7 +21,9 @@
 ● download_alphafold.py  
 ● download_swissmodel.py  
 ● download_cas_pubchem.py  
-● prepare_receptor.py  
+● prepare_receptor.py 
+
+4. Place ligand_reference.csv and receptor_reference.csv in your computer (set argument Vina_Docking_ligand_ref_file and Vina_Docking_receptor_ref_file). In this example, we use: /home/path/to/scDock/functions/ligand_reference.csv and /home/path/to/scDock/functions/receptor_reference.csv   
 
 #### config.yaml:
 Basically, users only need to adjust the arguments in config.yaml according to their requirements.
