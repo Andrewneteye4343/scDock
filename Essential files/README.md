@@ -45,6 +45,7 @@ In addition, we provide an option for users to supply their own protein_structur
 Please ensure that your structure meets the input requirements for AutoDock Vina.
 
 #### Provide the tissue type of your scRNA/snRNA data.  
+In addtion to regular organs, we also expand the annotation database with neuroblastoma and breast cancer for research.  
 You must input one of the below tissue names into argument Markers_Annotation_tissue_type for proper cell annotation:  
 adipose tissue, bladder, blood, bone, bone marrow, brain, breast, embryo, eye, gastrointestinal tract, heart, kidney, liver, lung, mammary gland, muscle, other, ovary, pancreas, placenta, prostate, skin, spleen, stomach, testis, thymus, tooth, uterus
 
