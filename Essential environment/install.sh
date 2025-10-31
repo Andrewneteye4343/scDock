@@ -57,12 +57,19 @@ conda install -y -c conda-forge -c bioconda --strict-channel-priority \
   r-car \
   r-rstatix \
   r-ggpubr \
+  r-homologene\
+  r-matrix.utils \
   bioconductor-biobase \
   bioconductor-complexheatmap \
   bioconductor-biocneighbors \
+  bioconductor-glmgampoi \
+  bioconductor-org.hs.eg.db \
+  bioconductor-org.mm.eg.db \
+  bioconductor-annotationdbi \
   presto \
   openbabel \
-  autodock-vina
+  autodock-vina \
+  jq
 
 echo "=== Step 2: install Python pip modules ==="
 python -m pip install --upgrade pip
@@ -75,6 +82,8 @@ Rscript -e 'if (!requireNamespace("devtools", quietly = TRUE)) install.packages(
 Rscript -e 'devtools::install_github("jinworks/CellChat")'
 Rscript -e 'devtools::install_github("chloelulu/scMayoMap")'
 Rscript -e 'devtools::install_github("immunogenomics/presto")'
+Rscript -e 'devtools::install_github("immunogenomics/harmony")'
+
 
 echo "=== Step 5: check R packages for scMayoMap ==="
 Rscript -e 'pkgs <- c("ggplot2","dplyr","tidyr","tibble","reshape2"); new.pkgs <- pkgs[!(pkgs %in% installed.packages()[,"Package"])]; if(length(new.pkgs)) install.packages(new.pkgs, repos="https://cloud.r-project.org")'
