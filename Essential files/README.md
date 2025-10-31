@@ -131,3 +131,9 @@ Alveolar osteocyte, Dental follicle cell, Dental pulp cell, Dental pulp stem cel
 
 #### ● uterus
 B cell, Decidual cell, Endometrial stem cell, Keratinocyte, Macrophage, Monocyte, Natural killer cell, Neutrophil, Smooth muscle cell, Stem cell
+
+#### ● neuroblastoma
+B cell, Endothelial cell, Fibroblast, Neuroendocrine tumor cell, NK cell, Plasmacytoid dendritic cell, Conventional dendritic cell, Monocyte, Macrophage, Plasma cell, Red blood cell, Schwann cell, Mesenchyme, T cell, Other stromal cell
+
+#### ● breast_cancer
+Malignant epithelial cell, Basal-like tumor cell, Luminal tumor cell, HER2-enriched tumor cell, Endothelial cell, Fibroblast, Myofibroblast, Pericyte, Adipocyte, T cell, B cell, Plasma cell, Macrophage, Monocyte, Dendritic cell, NK cell, Mast cell, Red blood cell, Other stromal cell
