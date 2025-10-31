@@ -11,5 +11,5 @@ sample1.txt  Control
 sample2.txt  Treatment
 ```
 
-For example, with two input files (sample1.txt and sample2.txt):  
+For example, with two input scRNA files (sample1.txt and sample2.txt):  
 In this case, sample1 belongs to the Control group, while sample2 belongs to the Treatment group.
