@@ -1,12 +1,10 @@
 ### To use scDock, users need to download the required files from GitHub. Please follow the steps below:
 #### Note: You will need to update the path arguments in config.yaml to match your local system.
-1. Create and navigate to your working directory for the scDock analysis. In this example, we use:
-/home/path/to/scDock (set argument work_path).
+1. Create and navigate to your working directory for the scDock analysis. In this example, we use: /home/path/to/scDock (set argument work_path).
 
 2. Place main.sh and config.yaml in /home/path/to/scDock.
 
-3. Create a directory named "functions" inside /home/path/to/scDock. After this step, you should have:
-/home/path/to/scDock/functions. Then, place all scripts listed below into /home/path/to/scDock/functions. (or directlly download the functions folder we provided in Github.)  
+3. Create a directory named "functions" inside /home/path/to/scDock. After this step, you should have: /home/path/to/scDock/functions. Then, place all scripts listed below into /home/path/to/scDock/functions. (or directlly download the functions folder we provided in Github.)  
 ##### R scripts
 ● Load_QC.R  
 ● Normalization_Scale.R  
