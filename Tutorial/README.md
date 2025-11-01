@@ -48,3 +48,17 @@ Here, we mention some important arguments that users might want to modify:
 
 11. In the final, you should get a similar results as in the figure.
 <img width="374" height="393" alt="Figure 13" src="https://github.com/user-attachments/assets/3d43956f-f1da-4d8a-b2e6-ef6d5e454f89" />
+
+● Result explanation:  
+1. ElbowPlot_SeuratProject.pdf: visualize Elbow plot.  
+2. ElbowPlot_Integration_SeuratProject.pdf: visualize Elbow plot during data integration.  
+3. DimPlot.png: visuaizes the distribution of cells with annotated label.  
+4. Markers.csv: records the differential expression genes in each clusters.  
+4. Annotation.csv: records the detailed annotation results, which is calcluated by scMayoMap (https://github.com/chloelulu/scMayoMap)  
+5. signalingRole_heatmap_incoming.pdf & signalingRole_heatmap_outgoing.pdf: visualize incoming and outgoing signaling in groups.
+6. netVisual_bubble_maxGroup_DN.pdf: visualize the higher signaling in corresponding group (ex: DN) compared to others.
+7. multiGroup_significant_LR_by_prob_diff.csv: records the detailed information of top signaling in groups or specific group.  
+8. ligands_with_PDB.csv and receptors_with_PDB.csv: records ligand and receptor proteins involve in top signalings in groups or specific group.
+9. ligand_from_PDB_LR_pairs directory: records the protein structure and detailed docking results of ligand protein from ligands_with_PDB.csv
+10. receptor_from_PDB_LR_pairs directory: records the protein structure and detailed docking results of ligand protein from receptors_with_PDB.csv
+11. ligand_structures_from_CAStxt_for_AutoDockVina: records the prepared-compound structures for molecular docking which is provides by cas.txt.  
