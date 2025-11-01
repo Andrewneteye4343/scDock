@@ -27,7 +27,8 @@ Here, we mention some important arguments that users might want to modify:
 
 ● Start tutorial:  
 1. If you havn't installed scDock, you can conduct `bash install.sh`. The installation might be finished in minutes.
-2. Before analysis, you should place "main.sh", "config.yaml", and "functions" directory in your workpath.  <img width="119" height="91" alt="Figure 1" src="https://github.com/user-attachments/assets/6596c326-d52b-4651-aed3-173fef6a198f" />  
+2. Before analysis, you should place "main.sh", "config.yaml", and "functions" directory in your workpath.
+<img width="119" height="91" alt="Figure 1" src="https://github.com/user-attachments/assets/6596c326-d52b-4651-aed3-173fef6a198f" />  
 
 3. Please make sure you are in scDock virtual environment. If not, you should conduct `conda activate scDock` first. Then, Condut `bash main.sh config.yaml` to start scDock analysis.  First, scDock will check the validity of arguments in config.yaml. We provide default setting for some conditions if the setting goes wrong. After the configuration, scDock will start loading your data.  <img width="885" height="203" alt="Figure 2" src="https://github.com/user-attachments/assets/168130be-c6c7-49c7-84f6-64a4b86e322e" />
 
@@ -45,4 +46,5 @@ Here, we mention some important arguments that users might want to modify:
 
 10. During molecular docking, scDock will display the current docking participators. When the docking is finished, scDock will automatically rank the binding affinity of compounds in the single receptor results and save it ().  <img width="1169" height="862" alt="Figure 12" src="https://github.com/user-attachments/assets/30d4c2d6-4bf9-4c1d-be15-7c9a9ae6a4f6" />  
 
-11. In the final, you should get a similar results as in the figure.  <img width="374" height="393" alt="Figure 13" src="https://github.com/user-attachments/assets/3d43956f-f1da-4d8a-b2e6-ef6d5e454f89" />
+11. In the final, you should get a similar results as in the figure.
+<img width="374" height="393" alt="Figure 13" src="https://github.com/user-attachments/assets/3d43956f-f1da-4d8a-b2e6-ef6d5e454f89" />
