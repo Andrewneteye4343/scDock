@@ -21,4 +21,5 @@ Here, we mention some important arguments that users might want to modify:
 5. `Markers_Annotation_tissue_type` This argument defines the tissue type of your scRNA/snRNA data. Please remember to set this correctly.
 6. `Run_CellChat_group_by` This argument defines the group.by in CellChat::createCellChat(). Default is "Celltype". If you are interested in groups from metadata.txt, you can set this argument with "sample_group".  
 7. `Run_CellChat_ntop_signaling` Choose how many top signalings (detailed L-R pairs in each pathway) you want to explore. More signalings will increase the time cost for further docking. Defualt is 5.
-
+8. `Vina_Docking_vina_exhaustiveness` This argument defines the exhaustiveness in AudoDock Vina. Default is 8.
+9. `Vina_Docking_vina_cpu` This argument defines the cpu in AutoDock Vina. Default is 1.
