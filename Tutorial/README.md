@@ -26,6 +26,6 @@ Here, we mention some important arguments that users might want to modify:
 
 ● Start tutorial:  
 1. If you havn't installed scDock, you can conduct `bash install.sh`. The installation might be finished in minutes.
-2. First, you should place "main.sh", "config.yaml", and "functions" directory in your work place (Figure 1).  
-<img width="119" height="91" alt="Figure 1" src="https://github.com/user-attachments/assets/6596c326-d52b-4651-aed3-173fef6a198f" />
-
+2. First, you should place "main.sh", "config.yaml", and "functions" directory in your workpath (Figure 1).  
+<img width="119" height="91" alt="Figure 1" src="https://github.com/user-attachments/assets/6596c326-d52b-4651-aed3-173fef6a198f" />  
+3. 
