@@ -43,23 +43,23 @@ Here, we mention some important arguments that users might want to modify:
 8. If users set Run_CellChat_group_by = "sample_group", the interaction strength and probability between groups will be compared during the CellChat analysis. The results — including incoming and outgoing heatmaps, bubble plots (with different groups as the max group), and detailed probability differences in a CSV file — will be saved as:
 netVisual_bubble_maxGroup_Control.pdf, netVisual_bubble_maxGroup_DN.pdf, signalingRole_heatmap_incoming.pdf, signalingRole_heatmap_outgoing.pdf, and multiGroup_significant_LR_by_prob_diff.csv.  <img width="1891" height="144" alt="Figure 8" src="https://github.com/user-attachments/assets/583ca4a4-40fb-4239-a6f2-fa7aa6008985" />  <img width="1896" height="142" alt="Figure 9" src="https://github.com/user-attachments/assets/2d1230d4-9607-48ef-a2bc-85b3d648e6e3" />  <img width="1224" height="346" alt="Figure 10" src="https://github.com/user-attachments/assets/f16737cc-afbb-4a43-8309-cda7298ef2d5" />  
 
-10. Before molecular docking, scDock will retreive the PDB id of ligand and receptor which involves in top cellular sigalings bewteen groups, download the corresponding protein strucutre from SWISS-MODEL template library, and conduct pre-processing for docking preparation. After that, scDock will download and pre-process the compouds that you provide their names. The final-prepared structure is .pdbqt file.  <img width="1172" height="391" alt="Figure 11" src="https://github.com/user-attachments/assets/62b1c0a9-1564-4f4f-9a2b-3bee1dc5604e" />
+9. Before molecular docking, scDock retrieves the PDB IDs of ligands and receptors involved in the top cellular signaling interactions between groups. It then downloads the corresponding protein structures from the SWISS-MODEL template library and performs preprocessing for docking preparation. Afterward, scDock downloads and preprocesses the compounds specified by the user. The final prepared structures are saved as .pdbqt files.  <img width="1172" height="391" alt="Figure 11" src="https://github.com/user-attachments/assets/62b1c0a9-1564-4f4f-9a2b-3bee1dc5604e" />
 
-11. During molecular docking, scDock will display the current docking participators. When the docking is finished, scDock will automatically rank the binding affinity of compounds in the single receptor results and save it ().  <img width="1169" height="862" alt="Figure 12" src="https://github.com/user-attachments/assets/30d4c2d6-4bf9-4c1d-be15-7c9a9ae6a4f6" />  
+10. During molecular docking, scDock will display the current docking participators. When the docking is finished, scDock will automatically rank the binding affinity of compounds in the single receptor results and save it (AutoDockVina_score.csv).  <img width="1169" height="862" alt="Figure 12" src="https://github.com/user-attachments/assets/30d4c2d6-4bf9-4c1d-be15-7c9a9ae6a4f6" />  
 
-12. In the final, you should get a similar results as in the figure.
+11. In the end, you should obtain results similar to those shown in the figure.
 <img width="374" height="393" alt="Figure 13" src="https://github.com/user-attachments/assets/3d43956f-f1da-4d8a-b2e6-ef6d5e454f89" />
 
 ● Result explanation:  
-1. ElbowPlot_SeuratProject.pdf: visualize Elbow plot.  
-2. ElbowPlot_Integration_SeuratProject.pdf: visualize Elbow plot during data integration.  
-3. DimPlot.png: visuaizes the distribution of cells with annotated label.  
-4. Markers.csv: records the differential expression genes in each cluster.  
-4. Annotation.csv: records the detailed annotation results, which is calcluated by scMayoMap (https://github.com/chloelulu/scMayoMap)  
-5. signalingRole_heatmap_incoming.pdf & signalingRole_heatmap_outgoing.pdf: visualize incoming and outgoing signaling in groups.
-6. netVisual_bubble_maxGroup_DN.pdf: visualize the higher signaling in corresponding group (ex: DN) compared to others.
-7. multiGroup_significant_LR_by_prob_diff.csv: records the detailed information of top signaling in groups or specific group.  
-8. ligands_with_PDB.csv and receptors_with_PDB.csv: records ligand and receptor proteins involve in top signalings in groups or specific group.
-9. ligand_from_PDB_LR_pairs directory: records the protein structure and detailed docking results of ligand protein from ligands_with_PDB.csv
-10. receptor_from_PDB_LR_pairs directory: records the protein structure and detailed docking results of ligand protein from receptors_with_PDB.csv
-11. ligand_structures_from_CAStxt_for_AutoDockVina: records the prepared-compound structures for molecular docking which is provides by cas.txt.  
+1. ElbowPlot_SeuratProject.pdf – Visualizes the Elbow plot.
+2. ElbowPlot_Integration_SeuratProject.pdf – Visualizes the Elbow plot during data integration.
+3. DimPlot.png – Visualizes the distribution of cells with annotated labels.
+4. Markers.csv – Records the differentially expressed genes (DEGs) in each cluster.
+5. Annotation.csv – Records detailed annotation results calculated by scMayoMap (https://github.com/chloelulu/scMayoMap).
+6. signalingRole_heatmap_incoming.pdf & signalingRole_heatmap_outgoing.pdf – Visualize incoming and outgoing signaling activities among groups.
+7. netVisual_bubble_maxGroup_DN.pdf – Visualizes signaling pathways that are more active in a specific group (e.g., DN) compared to others.
+8. multiGroup_significant_LR_by_prob_diff.csv – Records detailed information on top signaling pathways across all groups or a specific group.
+9. ligands_with_PDB.csv & receptors_with_PDB.csv – Record ligand and receptor proteins involved in top signaling pathways across or within specific groups.
+10. ligand_from_PDB_LR_pairs/ – Contains the protein structures and detailed docking results of ligand proteins listed in ligands_with_PDB.csv.
+11. receptor_from_PDB_LR_pairs/ – Contains the protein structures and detailed docking results of receptor proteins listed in receptors_with_PDB.csv.
+12. ligand_structures_from_CAStxt_for_AutoDockVina/ – Stores the prepared compound structures for molecular docking provided in cas.txt.
