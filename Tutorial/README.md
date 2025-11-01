@@ -50,6 +50,7 @@ netVisual_bubble_maxGroup_Control.pdf, netVisual_bubble_maxGroup_DN.pdf, signali
 11. In the end, you should obtain results similar to those shown in the figure.
 <img width="374" height="393" alt="Figure 13" src="https://github.com/user-attachments/assets/3d43956f-f1da-4d8a-b2e6-ef6d5e454f89" />
 
+
 ● Result explanation:  
 1. ElbowPlot_SeuratProject.pdf – Visualizes the Elbow plot.
 2. ElbowPlot_Integration_SeuratProject.pdf – Visualizes the Elbow plot during data integration.
