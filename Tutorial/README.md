@@ -25,5 +25,5 @@ Here, we mention some important arguments that users might want to modify:
 9. `Vina_Docking_vina_cpu` This argument defines the cpu in AutoDock Vina. Default is 1.  
 
 ● Start tutorial:  
-0. If you havn't installed scDock, you can conduct `bash install.sh`. The installation might be finished in minutes.  
-1. First, you should place "main.sh", "config.yaml", and "functions" directory in your work place (Figure 1).  
+1. If you havn't installed scDock, you can conduct `bash install.sh`. The installation might be finished in minutes.
+2. First, you should place "main.sh", "config.yaml", and "functions" directory in your work place (Figure 1). 
