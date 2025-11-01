@@ -46,6 +46,7 @@ Here, we mention some important arguments that users might want to modify:
 7. After marker identification and cell annotation are finished, the those results will be saved. If the data comes from mouse samples, the gene names will be converted into human gene names before the cell annotation.
 <img width="957" height="164" alt="Figure 7" src="https://github.com/user-attachments/assets/7e9b6996-43ed-4294-973f-a3944adc7cc5" />
 
-8. If users set Run_CellChat_group_by = "sample_group", interation strength between groups will be compared during CellChat analysis.
+8. If users set Run_CellChat_group_by = "sample_group", interaction strength and probability between groups will be compared during CellChat analysis. The results, including incoming and outgoing heatmaps, bubble plot with different group as max group, and the detailed probability differece in csv file, will be saved.
 <img width="1891" height="144" alt="Figure 8" src="https://github.com/user-attachments/assets/583ca4a4-40fb-4239-a6f2-fa7aa6008985" />  
 <img width="1896" height="142" alt="Figure 9" src="https://github.com/user-attachments/assets/2d1230d4-9607-48ef-a2bc-85b3d648e6e3" />  
+<img width="1224" height="346" alt="Figure 10" src="https://github.com/user-attachments/assets/f16737cc-afbb-4a43-8309-cda7298ef2d5" />  
