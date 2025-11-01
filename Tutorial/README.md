@@ -35,4 +35,6 @@ Here, we mention some important arguments that users might want to modify:
 4. During QC process, the cell and gene number before and after qulaity control will be displayed.  
 <img width="463" height="303" alt="Figure 3" src="https://github.com/user-attachments/assets/5d2a64e7-aa93-4dc7-a7dd-00e76e319f7f" />
 
-5. 
+5. During dimensional reduction, if users set "auto" to find a proper PCs number. You will get the information below and output a Elbow plot.pdf.
+  <img width="891" height="81" alt="Figure 4" src="https://github.com/user-attachments/assets/f881a352-f7ea-4e94-aa34-1249a129cfe3" />  
+
