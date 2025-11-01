@@ -27,14 +27,11 @@ Here, we mention some important arguments that users might want to modify:
 
 ● Start tutorial:  
 1. If you havn't installed scDock, you can conduct `bash install.sh`. The installation might be finished in minutes.
-2. Before analysis, you should place "main.sh", "config.yaml", and "functions" directory in your workpath.
-<img width="119" height="91" alt="Figure 1" src="https://github.com/user-attachments/assets/6596c326-d52b-4651-aed3-173fef6a198f" />  
+2. Before analysis, you should place "main.sh", "config.yaml", and "functions" directory in your workpath.  <img width="119" height="91" alt="Figure 1" src="https://github.com/user-attachments/assets/6596c326-d52b-4651-aed3-173fef6a198f" />  
 
-3. Please make sure you are in scDock virtual environment. If not, you should conduct `conda activate scDock` first. Then, Condut `bash main.sh config.yaml` to start scDock analysis.  First, scDock will check the validity of arguments in config.yaml. We provide default setting for some conditions if the setting goes wrong. After the configuration, scDock will start loading your data.
-<img width="885" height="203" alt="Figure 2" src="https://github.com/user-attachments/assets/168130be-c6c7-49c7-84f6-64a4b86e322e" />
+3. Please make sure you are in scDock virtual environment. If not, you should conduct `conda activate scDock` first. Then, Condut `bash main.sh config.yaml` to start scDock analysis.  First, scDock will check the validity of arguments in config.yaml. We provide default setting for some conditions if the setting goes wrong. After the configuration, scDock will start loading your data.  <img width="885" height="203" alt="Figure 2" src="https://github.com/user-attachments/assets/168130be-c6c7-49c7-84f6-64a4b86e322e" />
 
-4. During QC process, the cell and gene number before and after qulaity control will be displayed.
-<img width="463" height="303" alt="Figure 3" src="https://github.com/user-attachments/assets/5d2a64e7-aa93-4dc7-a7dd-00e76e319f7f" />
+4. During QC process, the cell and gene number before and after qulaity control will be displayed.  <img width="463" height="303" alt="Figure 3" src="https://github.com/user-attachments/assets/5d2a64e7-aa93-4dc7-a7dd-00e76e319f7f" />
 
 5. During dimensional reduction, if users set "auto" to find a proper PCs number. You will get the information below and output a Elbow plot (ElbowPlot_Integration_SeuratProject.pdf).  <img width="891" height="81" alt="Figure 4" src="https://github.com/user-attachments/assets/f881a352-f7ea-4e94-aa34-1249a129cfe3" />  
 
