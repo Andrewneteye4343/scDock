@@ -30,7 +30,7 @@ Here, we mention some important arguments that users might want to modify:
 2. Before analysis, you should place "main.sh", "config.yaml", and "functions" directory in your workpath.  
 <img width="119" height="91" alt="Figure 1" src="https://github.com/user-attachments/assets/6596c326-d52b-4651-aed3-173fef6a198f" />  
 
-3. Please make sure you are in scDock virtual environment. If not, you should conduct `conda activate scDock` first. Then, Condut `bash main.sh config.yaml` to start scDock analysis.  First, scDock will check the validity of arguments in config.yaml. We provide default setting for some conditions if the setting goes wrong. After the configuration, scDock will start load your data.  
+3. Please make sure you are in scDock virtual environment. If not, you should conduct `conda activate scDock` first. Then, Condut `bash main.sh config.yaml` to start scDock analysis.  First, scDock will check the validity of arguments in config.yaml. We provide default setting for some conditions if the setting goes wrong. After the configuration, scDock will start loading your data.  
 <img width="885" height="203" alt="Figure 2" src="https://github.com/user-attachments/assets/168130be-c6c7-49c7-84f6-64a4b86e322e" />
 
 4. During QC process, the cell and gene number before and after qulaity control will be displayed.  
@@ -39,8 +39,13 @@ Here, we mention some important arguments that users might want to modify:
 5. During dimensional reduction, if users set "auto" to find a proper PCs number. You will get the information below and output a Elbow plot.pdf.
   <img width="891" height="81" alt="Figure 4" src="https://github.com/user-attachments/assets/f881a352-f7ea-4e94-aa34-1249a129cfe3" />  
 
-6. If users set Run_Integration_run_integration = true in config.yaml, you will see the information below.
+6. If users set Run_Integration_run_integration = true in config.yaml, you might see the information below.
 <img width="532" height="65" alt="Figure 5" src="https://github.com/user-attachments/assets/a7718b3a-5158-423e-843b-39d148cab5ec" />  
 <img width="931" height="416" alt="Figure 6" src="https://github.com/user-attachments/assets/8f37f278-d12c-416c-8e9c-2be97190e48f" />  
 
-7. 
+7. After marker identification and cell annotation are finished, the those results will be saved. If the data comes from mouse samples, the gene names will be converted into human gene names before the cell annotation.
+<img width="957" height="164" alt="Figure 7" src="https://github.com/user-attachments/assets/7e9b6996-43ed-4294-973f-a3944adc7cc5" />
+
+8. If users set Run_CellChat_group_by = "sample_group", interation strength between groups will be compared during CellChat analysis.
+<img width="1891" height="144" alt="Figure 8" src="https://github.com/user-attachments/assets/583ca4a4-40fb-4239-a6f2-fa7aa6008985" />  
+<img width="1896" height="142" alt="Figure 9" src="https://github.com/user-attachments/assets/2d1230d4-9607-48ef-a2bc-85b3d648e6e3" />  
