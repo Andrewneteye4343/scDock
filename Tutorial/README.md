@@ -43,8 +43,6 @@ Here, we mention some important arguments that users might want to modify:
 
 9. Before molecular docking, scDock will retreive the PDB id of ligand and receptor which involves in top cellular sigalings bewteen groups, download the corresponding protein strucutre from SWISS-MODEL library, and conduct pre-processing for docking preparation. After that, scDock will download and pre-process the compouds that you provide their names. The final-prepared structure is .pdbqt file.  <img width="1172" height="391" alt="Figure 11" src="https://github.com/user-attachments/assets/62b1c0a9-1564-4f4f-9a2b-3bee1dc5604e" />
 
-10. During molecular docking, scDock will display the current docking participators. When the docking is finished, scDock will automatically rank the binding affinity of compounds in the single receptor results and save it ().
-<img width="1169" height="862" alt="Figure 12" src="https://github.com/user-attachments/assets/30d4c2d6-4bf9-4c1d-be15-7c9a9ae6a4f6" />  
+10. During molecular docking, scDock will display the current docking participators. When the docking is finished, scDock will automatically rank the binding affinity of compounds in the single receptor results and save it ().  <img width="1169" height="862" alt="Figure 12" src="https://github.com/user-attachments/assets/30d4c2d6-4bf9-4c1d-be15-7c9a9ae6a4f6" />  
 
-11. In the final, you should get a similar results as in the figure.
-<img width="374" height="393" alt="Figure 13" src="https://github.com/user-attachments/assets/3d43956f-f1da-4d8a-b2e6-ef6d5e454f89" />
+11. In the final, you should get a similar results as in the figure.  <img width="374" height="393" alt="Figure 13" src="https://github.com/user-attachments/assets/3d43956f-f1da-4d8a-b2e6-ef6d5e454f89" />
