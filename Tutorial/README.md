@@ -38,3 +38,8 @@ Here, we mention some important arguments that users might want to modify:
 5. During dimensional reduction, if users set "auto" to find a proper PCs number. You will get the information below and output a Elbow plot.pdf.
   <img width="891" height="81" alt="Figure 4" src="https://github.com/user-attachments/assets/f881a352-f7ea-4e94-aa34-1249a129cfe3" />  
 
+6. If users set Run_Integration_run_integration = true in config.yaml, you will see the information below.
+<img width="532" height="65" alt="Figure 5" src="https://github.com/user-attachments/assets/a7718b3a-5158-423e-843b-39d148cab5ec" />  
+<img width="931" height="416" alt="Figure 6" src="https://github.com/user-attachments/assets/8f37f278-d12c-416c-8e9c-2be97190e48f" />  
+
+7. 
