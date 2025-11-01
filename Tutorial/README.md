@@ -46,13 +46,16 @@ Here, we mention some important arguments that users might want to modify:
 7. After marker identification and cell annotation are finished, the those results will be saved. If the data comes from mouse samples, the gene names will be converted into human gene names before the cell annotation.
 <img width="957" height="164" alt="Figure 7" src="https://github.com/user-attachments/assets/7e9b6996-43ed-4294-973f-a3944adc7cc5" />
 
-8. If users set Run_CellChat_group_by = "sample_group", interaction strength and probability between groups will be compared during CellChat analysis. The results, including incoming and outgoing heatmaps, bubble plot with different group as max group, and the detailed probability differece in csv file, will be saved.
+8. If users set Run_CellChat_group_by = "sample_group", interaction strength and probability between groups will be compared during CellChat analysis. The results, including incoming and outgoing heatmaps, bubble plot with different group as max group, and the detailed probability differece in csv file, will be saved (netVisual_bubble_maxGroup_Control.pdf, netVisual_bubble_maxGroup_DN.pdf, signalingRole_heatmap_incoming.pdf, signalingRole_heatmap_outgoing.pdf, multiGroup_significant_LR_by_prob_diff.csv).  
 <img width="1891" height="144" alt="Figure 8" src="https://github.com/user-attachments/assets/583ca4a4-40fb-4239-a6f2-fa7aa6008985" />  
 <img width="1896" height="142" alt="Figure 9" src="https://github.com/user-attachments/assets/2d1230d4-9607-48ef-a2bc-85b3d648e6e3" />  
 <img width="1224" height="346" alt="Figure 10" src="https://github.com/user-attachments/assets/f16737cc-afbb-4a43-8309-cda7298ef2d5" />  
 
-9. Before molecular docking, scDock will retreive the PDB id of ligand and receptor which involves in top cellular sigalings bewteen groups, download the corresponding protein strucutre from SWISS-MODEL library, and conduct pre-processing for docking preparation. After that, scDock will download and pre-process the compouds that you provide their names.
+9. Before molecular docking, scDock will retreive the PDB id of ligand and receptor which involves in top cellular sigalings bewteen groups, download the corresponding protein strucutre from SWISS-MODEL library, and conduct pre-processing for docking preparation. After that, scDock will download and pre-process the compouds that you provide their names. The final-prepared structure is .pdbqt file.
 <img width="1172" height="391" alt="Figure 11" src="https://github.com/user-attachments/assets/62b1c0a9-1564-4f4f-9a2b-3bee1dc5604e" />
 
-10. During molecular docking, scDock will display the current docking participators. When the docking is finished, scDock will automatically rank the binding affinity of compounds in the single receptor results and save it.
+10. During molecular docking, scDock will display the current docking participators. When the docking is finished, scDock will automatically rank the binding affinity of compounds in the single receptor results and save it ().
 <img width="1169" height="862" alt="Figure 12" src="https://github.com/user-attachments/assets/30d4c2d6-4bf9-4c1d-be15-7c9a9ae6a4f6" />  
+
+11. In the final, you should get a similar results as in the figure.
+<img width="374" height="393" alt="Figure 13" src="https://github.com/user-attachments/assets/3d43956f-f1da-4d8a-b2e6-ef6d5e454f89" />
