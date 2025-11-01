@@ -32,3 +32,7 @@ Here, we mention some important arguments that users might want to modify:
 3. Condut `bash main.sh config.yaml` to start scDock analysis.  First, scDock will check the validity of arguments in config.yaml. We provide default setting for some conditions if the setting goes wrong. After the configuration, scDock will start load your data.  
 <img width="885" height="203" alt="Figure 2" src="https://github.com/user-attachments/assets/168130be-c6c7-49c7-84f6-64a4b86e322e" />
 
+4. During QC process, the cell and gene number before and after qulaity control will be displayed.  
+<img width="463" height="303" alt="Figure 3" src="https://github.com/user-attachments/assets/5d2a64e7-aa93-4dc7-a7dd-00e76e319f7f" />
+
+5. 
