@@ -30,7 +30,7 @@ Here, we mention some important arguments that users might want to modify:
 2. Before analysis, you should place "main.sh", "config.yaml", and "functions" directory in your workpath.  
 <img width="119" height="91" alt="Figure 1" src="https://github.com/user-attachments/assets/6596c326-d52b-4651-aed3-173fef6a198f" />  
 
-3. Condut `bash main.sh config.yaml` to start scDock analysis.  First, scDock will check the validity of arguments in config.yaml. We provide default setting for some conditions if the setting goes wrong. After the configuration, scDock will start load your data.  
+3. Please make sure you are in scDock virtual environment. If not, you should conduct `conda activate scDock` first. Then, Condut `bash main.sh config.yaml` to start scDock analysis.  First, scDock will check the validity of arguments in config.yaml. We provide default setting for some conditions if the setting goes wrong. After the configuration, scDock will start load your data.  
 <img width="885" height="203" alt="Figure 2" src="https://github.com/user-attachments/assets/168130be-c6c7-49c7-84f6-64a4b86e322e" />
 
 4. During QC process, the cell and gene number before and after qulaity control will be displayed.  
