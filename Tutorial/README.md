@@ -53,7 +53,7 @@ netVisual_bubble_maxGroup_Control.pdf, netVisual_bubble_maxGroup_DN.pdf, signali
 1. ElbowPlot_SeuratProject.pdf – Visualizes the ranking of principal components based on the percentage of variance explained in the Elbow plot.
 The optimal number of PCs should be chosen at the point where an “elbow” is observed.
 2. ElbowPlot_Integration_SeuratProject.pdf – Visualizes the ranking of principal components based on the percentage of variance explained in the Elbow plot during data integration. The optimal number of PCs should be chosen at the point where an “elbow” is observed.
-3. DimPlot.png – Visualizes the distribution of cells with annotated labels.
+3. DimPlot.png – Visualizes the distribution of cells with annotated labels.  <img width="3000" height="2400" alt="DimPlot" src="https://github.com/user-attachments/assets/475cffb8-b98e-4c35-95a8-04a38f1331d3" />
 4. Markers.csv – Records the detailed information of differentially expressed genes (DEGs), including p-value, adjusted p-value and average log2 fold change, and additional related details in each cluster. 
 5. Annotation.csv – Records detailed annotation results calculated by scMayoMap (https://github.com/chloelulu/scMayoMap).  
 6. signalingRole_heatmap_incoming.pdf & signalingRole_heatmap_outgoing.pdf – Visualize incoming and outgoing signaling activities among groups.
