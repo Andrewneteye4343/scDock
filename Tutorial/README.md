@@ -54,12 +54,12 @@ netVisual_bubble_maxGroup_Control.pdf, netVisual_bubble_maxGroup_DN.pdf, signali
 The optimal number of PCs should be chosen at the point where an “elbow” is observed.
 2. ElbowPlot_Integration_SeuratProject.pdf – Visualizes the ranking of principal components based on the percentage of variance explained in the Elbow plot during data integration. The optimal number of PCs should be chosen at the point where an “elbow” is observed.
 3. DimPlot.png – Visualizes the distribution of cells with annotated labels.
-4. Markers.csv – Records the detailed information of differentially expressed genes (DEGs), including p-value, adjusted p-value and average log2 fold change in each cluster. 
+4. Markers.csv – Records the detailed information of differentially expressed genes (DEGs), including p-value, adjusted p-value and average log2 fold change, and additional related details in each cluster. 
 5. Annotation.csv – Records detailed annotation results calculated by scMayoMap (https://github.com/chloelulu/scMayoMap).  
 6. signalingRole_heatmap_incoming.pdf & signalingRole_heatmap_outgoing.pdf – Visualize incoming and outgoing signaling activities among groups.
 7. netVisual_bubble_maxGroup_DN.pdf – Visualizes signaling pathways that are more active in a specific group (e.g., DN) compared to others.
 8. multiGroup_significant_LR_by_prob_diff.csv – Records detailed information on top signaling pathways across all groups or within a specific group, including: interaction name, source (signaling-providing cell type), target (signaling-receiving cell type), group name, prob1 (probability in group 1), prob2 (probability in group 2), prob_diff (probability difference), higher_group (group with higher probability), and additional related details.  
-9. ligands_with_PDB.csv & receptors_with_PDB.csv – Record ligand and receptor proteins involved in top signaling pathways across or within specific groups.
+9. ligands_with_PDB.csv & receptors_with_PDB.csv – Record ligand and receptor proteins involved in top signaling pathways across or within specific groups. Information includes protein name and their PDB model matched from 
 10. ligand_from_PDB_LR_pairs/ – Contains the protein structures and detailed docking results of ligand proteins listed in ligands_with_PDB.csv.
 11. receptor_from_PDB_LR_pairs/ – Contains the protein structures and detailed docking results of receptor proteins listed in receptors_with_PDB.csv.
 12. ligand_structures_from_CAStxt_for_AutoDockVina/ – Stores the prepared compound structures for molecular docking provided in cas.txt.
