@@ -16,13 +16,13 @@ Users can modify the paths according to your requirement.  Except the path argum
 Here, we mention some important arguments that users might want to modify:  
 1. `Load_QC_max_mito` This argument defines the persent of mitochondrial counts cut off in subset(). The valid range locates from 0 to 1. Default is 0.1. Lower cut off will remove more cells in the further analysis.
 2. `Load_QC_metadata_file` This path defines where to find metadata for grouping your samples (Optional).  
-3. `Run_Integration_method` This argument defines the method in Seurat::IntegrateLayers(). The valid value are "cca", "harmony" and "rpca". Default is "cca" (Optional).  
+3. `Run_Integration_method` This argument defines the method in Seurat::IntegrateLayers(). The valid values are "cca", "harmony" and "rpca". Default is "cca". Should be modified only if you intend to run integration (Optional).  
 4. `Run_Integration_dims` This argument defines how many PCs will be used in the dimensional reduction analysis. Default is "auto". The default setting will use a proper PC number based on geometric Elbow method. Should be modified only if you intend to run integration (Optional).  
-5. `Run_Integration_resolution` This argument defines the resoltion in Seurat::FindClusters(). Default is 0.5. Higher resolution might bring more clusters in results. This argument is optional. Should be modified only if you intend to run integration (Optional).  
+5. `Run_Integration_resolution` This argument defines the resoltion in Seurat::FindClusters(). Default is 0.5. Higher resolution might bring more clusters in results. Should be modified only if you intend to run integration (Optional).  
 6. `Markers_Annotation_tissue_type` This argument defines the tissue type of your scRNA/snRNA data. Please remember to set this correctly.
 7. `Run_CellChat_group_by` This argument defines the group.by in CellChat::createCellChat(). Default is "Celltype". If you are interested in groups from metadata.txt, you can set this argument with "sample_group".  
-8. `Run_CellChat_ntop_signaling` Choose how many top signalings (detailed L-R pairs in each pathway) you want to explore. More signalings will increase the time cost for further docking. Defualt is 5.
-9. `Vina_Docking_vina_exhaustiveness` This argument defines the exhaustiveness in AudoDock Vina. Default is 8.
+8. `Run_CellChat_ntop_signaling` Choose how many top signalings (detailed L-R pairs in each pathway) you want to explore. More signalings will increase the time cost for further molecular docking. Defualt is 5.
+9. `Vina_Docking_vina_exhaustiveness` This argument defines the exhaustiveness in AudoDock Vina. The higher value will increase the exhaustiveness of the global search, but also increase the time cost. Default is 8.
 10. `Vina_Docking_vina_cpu` This argument defines the cpu in AutoDock Vina. Default is 1.  
 
 ● Start tutorial:  
