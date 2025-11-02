@@ -23,7 +23,7 @@ Here, we mention some important arguments that users might want to modify:
 7. `Run_CellChat_group_by` This argument defines the group.by in CellChat::createCellChat(). Default is "Celltype". If you are interested in groups from metadata.txt, you can set this argument with "sample_group".  
 8. `Run_CellChat_ntop_signaling` Choose how many top signalings (detailed L-R pairs in each pathway) you want to explore. More signalings will increase the time cost for further molecular docking. Defualt is 5.
 9. `Vina_Docking_vina_exhaustiveness` This argument defines the exhaustiveness in AudoDock Vina. The higher value will increase the exhaustiveness of the global search, but also increase the time cost. Default is 8.
-10. `Vina_Docking_vina_cpu` This argument defines the cpu in AutoDock Vina. Default is 1.  
+10. `Vina_Docking_vina_cpu` This argument defines the how many cpu(s) will be used in AutoDock Vina. Default is 1.  
 
 ● Start tutorial:  
 1. If you haven’t installed scDock, run `bash install.sh`. The installation should complete within a few minutes.  
@@ -50,8 +50,9 @@ netVisual_bubble_maxGroup_Control.pdf, netVisual_bubble_maxGroup_DN.pdf, signali
 <img width="374" height="393" alt="Figure 13" src="https://github.com/user-attachments/assets/3d43956f-f1da-4d8a-b2e6-ef6d5e454f89" />
 
 ● Result explanation:  
-1. ElbowPlot_SeuratProject.pdf – Visualizes the Elbow plot.
-2. ElbowPlot_Integration_SeuratProject.pdf – Visualizes the Elbow plot during data integration.
+1. ElbowPlot_SeuratProject.pdf – Visualizes the ranking of principal components based on the percentage of variance explained in the Elbow plot.
+The optimal number of PCs should be chosen at the point where an “elbow” is observed.
+2. ElbowPlot_Integration_SeuratProject.pdf – Visualizes the ranking of principal components based on the percentage of variance explained in the Elbow plot during data integration. The optimal number of PCs should be chosen at the point where an “elbow” is observed.
 3. DimPlot.png – Visualizes the distribution of cells with annotated labels.
 4. Markers.csv – Records the differentially expressed genes (DEGs) in each cluster.
 5. Annotation.csv – Records detailed annotation results calculated by scMayoMap (https://github.com/chloelulu/scMayoMap).
