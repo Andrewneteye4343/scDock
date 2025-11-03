@@ -31,7 +31,7 @@ suppressPackageStartupMessages({
   library(ComplexHeatmap)
 })
 
-# 讀取 YAML
+# Read YAML
 config <- yaml::read_yaml(config_file)
 
 # -------------------------
@@ -272,6 +272,14 @@ validate_config <- function(config) {
     arg_Load_QC_input_type <- qc$Load_QC_input_type
   }
 
+  # Load_QC_species
+  valid_types <- c("human","mouse")
+  if (!(qc$Load_QC_species %in% valid_types)) {
+    stop(paste0("Error: Load_QC_species must be one of: ", paste(valid_types, collapse = ", ")))
+  } else {
+    arg_Load_QC_species <- qc$Load_QC_species
+  }
+
   # Load_QC_min_features
   arg_Load_QC_min_features <- check_integer_string(qc$Load_QC_min_features, "Load_QC_min_features", default = 200)
 
@@ -382,7 +390,7 @@ validate_config <- function(config) {
   arg_DR_Cluster_seed <- check_integer_string(drc$DR_Cluster_seed, arg_name = "DR_Cluster_seed", default = 42)
 
   # DR_Cluster_dims
-  arg_DR_Cluster_dims <- check_integer_string(drc$DR_Cluster_dims, arg_name = "DR_Cluster_dims", default = 20)
+  arg_DR_Cluster_dims <- check_integer_string(drc$DR_Cluster_dims, arg_name = "DR_Cluster_dims", default = "auto")
 
   # DR_Cluster_k_param
   arg_DR_Cluster_k_param <- check_integer_string(drc$DR_Cluster_k_param, arg_name = "DR_Cluster_k_param", default = 20)
@@ -433,7 +441,7 @@ validate_config <- function(config) {
   valid_integration_method <- c("cca","rpca","harmony")
   if (!(ri$Run_Integration_method %in% valid_integration_method)) {
     warning(paste0("Error: Run_Integration_method must be one of: ", paste(valid_integration_method, collapse = ", ")))
-    message(paste0("Using default value: umap for Run_Integration_method"))
+    message(paste0("Using default value: cca for Run_Integration_method"))
     arg_Run_Integration_method <- "cca"
   } else {
     arg_Run_Integration_method <- ri$Run_Integration_method
@@ -453,8 +461,11 @@ validate_config <- function(config) {
   }
 
   # Run_Integration_dims
-  arg_Run_Integration_dims <- check_integer_string(ri$Run_Integration_dims, "Run_Integration_dims", default = 20)
+  arg_Run_Integration_dims <- check_integer_string(ri$Run_Integration_dims, "Run_Integration_dims", default = "auto")
   
+  # Run_Integration_resolution
+  arg_Run_Integration_resolution <- check_numeric_string(ri$Run_Integration_resolution, arg_name = "Run_Integration_resolution", default = 0.5)
+
   # Run_Integration_verbose
   arg_Run_Integration_verbose <- check_boolean_string(ri$Run_Integration_verbose, arg_name = "Run_Integration_verbose", default = TRUE)
 
@@ -494,12 +505,12 @@ validate_config <- function(config) {
   arg_Markers_Annotation_verbose <- check_boolean_string(ma$Markers_Annotation_verbose, arg_name = "Markers_Annotation_verbose", default = TRUE)
 
   # Markers_Annotation_top_n
-  arg_Markers_Annotation_top_n <- check_integer_string(ma$Markers_Annotation_top_n, arg_name = "Markers_Annotation_top_n", default = 100)
+  arg_Markers_Annotation_top_n <- check_integer_string(ma$Markers_Annotation_top_n, arg_name = "Markers_Annotation_top_n", default = 150)
 
   # Markers_Annotation_tissue_type
   valid_tissue_type <- c("adipose tissue", "bladder", "blood", "bone", "bone marrow", "brain", "breast", "embryo", "eye", "gastrointestinal tract", "heart",
                          "kidney", "liver", "lung", "mammary gland", "muscle", "other", "ovary", "pancreas", "placenta", "prostate", "skin", "spleen", "stomach",
-                         "testis", "thymus", "tooth", "uterus")
+                         "testis", "thymus", "tooth", "uterus","neuroblastoma", "breast_cancer")
   if (!(ma$Markers_Annotation_tissue_type %in% valid_tissue_type)) {
     stop(paste0("Error: Markers_Annotation_tissue_type must be one of: ", paste(valid_tissue_type, collapse = ", ")))
   } else {
@@ -518,16 +529,6 @@ validate_config <- function(config) {
   # DR_Plot_output_path
   arg_DR_Plot_output_path <- check_string_path(drp$DR_Plot_output_path, arg_name = "DR_Plot_output_path")
 
-  # DR_Plot_reduction_method
-  valid_reduction_method <- c("umap","tsne")
-  if (!(drp$DR_Plot_reduction_method %in% valid_reduction_method)) {
-    warning(paste0("Warning: DR_Plot_reduction_method must be one of: ", paste(valid_reduction_method, collapse = ", ")))
-    message(paste0("Using default value: umap for DR_Plot_reduction_method"))
-    arg_DR_Plot_reduction_method <- "umap"
-  } else {
-    arg_DR_Plot_reduction_method <- drp$DR_Plot_reduction_method
-  }
-
   # DR_Plot_group_by
   arg_DR_Plot_group_by <- check_group_by(drp$DR_Plot_group_by, arg_name = "DR_Plot_group_by", default = "Celltype")
 
@@ -538,7 +539,7 @@ validate_config <- function(config) {
   arg_DR_Plot_label <- check_boolean_string(drp$DR_Plot_label, arg_name = "DR_Plot_label", default = TRUE)
 
   # DR_Plot_label_size
-  arg_DR_Plot_label_size <- check_numeric_string(drp$DR_Plot_label_size, arg_name = "DR_Plot_label_size", default = 4)
+  arg_DR_Plot_label_size <- check_numeric_string(drp$DR_Plot_label_size, arg_name = "DR_Plot_label_size", default = 3)
 
   # DR_Plot_label_color
   arg_DR_Plot_label_color <- check_string(drp$DR_Plot_label_color, arg_name = "DR_Plot_label_color")
@@ -550,7 +551,7 @@ validate_config <- function(config) {
   arg_DR_Plot_alpha <- check_numeric_string(drp$DR_Plot_alpha, arg_name = "DR_Plot_alpha", default = 1)
 
   # DR_Plot_shuffle
-  arg_DR_Plot_shuffle <- check_boolean_string(drp$DR_Plot_shuffle, arg_name = "DR_Plot_shuffle", default = 1)
+  arg_DR_Plot_shuffle <- check_boolean_string(drp$DR_Plot_shuffle, arg_name = "DR_Plot_shuffle", default = FALSE)
 
   # DR_Plot_raster
   arg_DR_Plot_raster <- check_boolean_string_optional(drp$DR_Plot_raster, arg_name = "DR_Plot_raster", default = FALSE)
@@ -569,14 +570,6 @@ validate_config <- function(config) {
 
   # Run_CellChat_output_path
   arg_Run_CellChat_output_path <- check_string_path(rc$Run_CellChat_output_path, arg_name = "Run_CellChat_output_path")
-
-  # Run_CellChat_species
-  valid_species <- c("human","mouse")
-  if (!(rc$Run_CellChat_species %in% valid_species)) {
-    stop(paste0("Error: Run_CellChat_species must be one of: ", paste(valid_species, collapse = ", ")))
-  } else {
-    arg_Run_CellChat_species <- rc$Run_CellChat_species
-  }
 
   # Run_CellChat_group_by
   arg_Run_CellChat_group_by <- check_group_by(rc$Run_CellChat_group_by, arg_name = "Run_CellChat_group_by", default = "Celltype")
@@ -1316,17 +1309,62 @@ validate_config <- function(config) {
   }
 }
 
+  # Run_CellChat_source_celltype & Run_CellChat_target_celltype - neuroblastoma
+  valid_neuroblastoma_celltype = c("B cell","Endothelial cell","Fibroblast","Neuroendocrine tumor cell","NK cell","Plasmacytoid dendritic cell","Conventional dendritic cell",
+  "Monocyte","Macrophage","Plasma cell","Red blood cell","Schwann cell","Mesenchyme","T cell","Other stromal cell")
+  if (ma$Markers_Annotation_tissue_type == "neuroblastoma") {
+  if (!is.null(rc$Run_CellChat_source_celltype)) {
+    if (!(rc$Run_CellChat_source_celltype %in% valid_neuroblastoma_celltype)) {
+      stop(paste0("Error: For neuroblastoma, Run_CellChat_source_celltype must be NULL or one of: ", paste(valid_neuroblastoma_celltype, collapse = ", ")))
+    } else {
+      arg_Run_CellChat_source_celltype <- rc$Run_CellChat_source_celltype
+    }
+  } else {
+    arg_Run_CellChat_source_celltype <- NULL
+  }
+}
+  if (ma$Markers_Annotation_tissue_type == "neuroblastoma") {
+  if (!is.null(rc$Run_CellChat_target_celltype)) {
+    if (!(rc$Run_CellChat_target_celltype %in% valid_neuroblastoma_celltype)) {
+        stop(paste0("Error: For muscle, Run_CellChat_target_celltype must be NULL or one of: ", paste(valid_neuroblastoma_celltype, collapse = ", ")))
+    } else {
+      arg_Run_CellChat_target_celltype <- rc$Run_CellChat_target_celltype
+    }
+  } else {
+    arg_Run_CellChat_target_celltype <- NULL
+  }
+}
+
+  # Run_CellChat_source_celltype & Run_CellChat_target_celltype - breast_cancer
+  valid_breast_cancer_celltype = c("Malignant epithelial cell","Basal-like tumor cell","Luminal tumor cell","HER2-enriched tumor cell","Endothelial cell","Fibroblast",
+  "Myofibroblast","Pericyte","Adipocyte","T cell","B cell","Plasma cell","Macrophage","Monocyte","Dendritic cell","NK cell","Mast cell","Red blood cell","Other stromal cell")
+  if (ma$Markers_Annotation_tissue_type == "breast_cancer") {
+  if (!is.null(rc$Run_CellChat_source_celltype)) {
+    if (!(rc$Run_CellChat_source_celltype %in% valid_breast_cancer_celltype)) {
+      stop(paste0("Error: For breast cancer, Run_CellChat_source_celltype must be NULL or one of: ", paste(valid_breast_cancer_celltype, collapse = ", ")))
+    } else {
+      arg_Run_CellChat_source_celltype <- rc$Run_CellChat_source_celltype
+    }
+  } else {
+    arg_Run_CellChat_source_celltype <- NULL
+  }
+}
+  if (ma$Markers_Annotation_tissue_type == "breast_cancer") {
+  if (!is.null(rc$Run_CellChat_target_celltype)) {
+    if (!(rc$Run_CellChat_target_celltype %in% valid_breast_cancer_celltype)) {
+        stop(paste0("Error: For breast cancer, Run_CellChat_target_celltype must be NULL or one of: ", paste(valid_breast_cancer_celltype, collapse = ", ")))
+    } else {
+      arg_Run_CellChat_target_celltype <- rc$Run_CellChat_target_celltype
+    }
+  } else {
+    arg_Run_CellChat_target_celltype <- NULL
+  }
+}
   # Run_CellChat_plot_heatmap
   arg_Run_CellChat_plot_heatmap <- check_boolean_string(rc$Run_CellChat_plot_heatmap, arg_name = "Run_CellChat_plot_heatmap", default = TRUE)
 
   # Run_CellChat_ntop_signaling
   arg_Run_CellChat_ntop_signaling <- check_integer_string(rc$Run_CellChat_ntop_signaling, arg_name = "Run_CellChat_ntop_signaling", default = 5)
-
-  # Run_CellChat_pdf_width
-  arg_Run_CellChat_pdf_width <- check_numeric_string(rc$Run_CellChat_pdf_width, arg_name = "Run_CellChat_pdf_width", default = 8)
-
-  # Run_CellChat_pdf_height
-  arg_Run_CellChat_pdf_height <- check_numeric_string(rc$Run_CellChat_pdf_height, arg_name = "Run_CellChat_pdf_height", default = 6)
 
   # Run_CellChat_MaxGroup
   arg_Run_CellChat_MaxGroup <- check_string(rc$Run_CellChat_MaxGroup, arg_name = "Run_CellChat_MaxGroup")
@@ -1336,9 +1374,6 @@ validate_config <- function(config) {
   if (is.null(vd)) {
     stop("Error: Vina_Docking block is missing in config.yaml")
   }
-
-  # Vina_Docking_input_path
-  arg_Vina_Docking_input_path <- check_string_path(vd$Vina_Docking_input_path, arg_name = "Vina_Docking_input_path")
 
   # Vina_Docking_ligand_ref_file
   arg_Vina_Docking_ligand_ref_file <- check_csv_path(vd$Vina_Docking_ligand_ref_file, arg_name = "Vina_Docking_ligand_ref_file")
@@ -1380,6 +1415,7 @@ validate_config <- function(config) {
   Seurat_output_path = arg_Seurat_output_path,
   Load_QC_input_files = arg_Load_QC_input_files,
   Load_QC_input_type= arg_Load_QC_input_type,
+  Load_QC_species = arg_Load_QC_species,
   Load_QC_min_features= arg_Load_QC_min_features,
   Load_QC_min_cells = arg_Load_QC_min_cells,
   Load_QC_names_delim = arg_Load_QC_names_delim,
@@ -1413,6 +1449,7 @@ validate_config <- function(config) {
   Run_Integration_nfeatures = arg_Run_Integration_nfeatures,
   Run_Integration_normalization_method = arg_Run_Integration_normalization_method,
   Run_Integration_dims = arg_Run_Integration_dims,
+  Run_Integration_resolution = arg_Run_Integration_resolution,
   Run_Integration_verbose = arg_Run_Integration_verbose,
   Markers_Annotation_output_path = arg_Markers_Annotation_output_path,
   Markers_Annotation_use_assay = arg_Markers_Annotation_use_assay,
@@ -1426,7 +1463,6 @@ validate_config <- function(config) {
   Markers_Annotation_tissue_type = arg_Markers_Annotation_tissue_type,
   Markers_Annotation_label_column = arg_Markers_Annotation_label_column,
   DR_Plot_output_path = arg_DR_Plot_output_path,
-  DR_Plot_reduction_method = arg_DR_Plot_reduction_method,
   DR_Plot_group_by = arg_DR_Plot_group_by,
   DR_Plot_pt_size = arg_DR_Plot_pt_size,
   DR_Plot_label = arg_DR_Plot_label,
@@ -1439,16 +1475,12 @@ validate_config <- function(config) {
   DR_Plot_width = arg_DR_Plot_width,
   DR_Plot_height = arg_DR_Plot_height,
   Run_CellChat_output_path = arg_Run_CellChat_output_path,
-  Run_CellChat_species = arg_Run_CellChat_species,
   Run_CellChat_group_by = arg_Run_CellChat_group_by,
   Run_CellChat_source_celltype = arg_Run_CellChat_source_celltype,
   Run_CellChat_target_celltype = arg_Run_CellChat_target_celltype,
   Run_CellChat_plot_heatmap = arg_Run_CellChat_plot_heatmap,
   Run_CellChat_ntop_signaling = arg_Run_CellChat_ntop_signaling,
-  Run_CellChat_pdf_width = arg_Run_CellChat_pdf_width,
-  Run_CellChat_pdf_height = arg_Run_CellChat_pdf_height,
   Run_CellChat_MaxGroup = arg_Run_CellChat_MaxGroup,
-  Vina_Docking_input_path = arg_Vina_Docking_input_path,
   Vina_Docking_output_path = arg_Vina_Docking_output_path,
   Vina_Docking_ligand_ref_file = arg_Vina_Docking_ligand_ref_file,
   Vina_Docking_receptor_ref_file = arg_Vina_Docking_receptor_ref_file,
@@ -1473,7 +1505,7 @@ args <- validate_config(config)
 seurat_output_dir <- args$Seurat_output_path
 message("✅ Config validation passed.")
 
-# 匯入分析函數
+# Load R scripts
 source("functions/Load_QC.R")
 source("functions/Normalization_Scale.R")
 source("functions/DR_Cluster.R")
@@ -1486,10 +1518,11 @@ source("functions/Vina_Docking.R")
 # -------------------------
 # Step 1: Load and QC
 # -------------------------
-message("========== Starting loading data and QC ... ==========")
+message("========== Start loading data and quality control ... ==========")
 seurat_obj <- Load_QC(
   Load_QC_input_files   = args$Load_QC_input_files,
   Load_QC_input_type    = args$Load_QC_input_type,
+  Load_QC_species       = args$Load_QC_species,
   Load_QC_min_features  = args$Load_QC_min_features,
   Load_QC_min_cells     = args$Load_QC_min_cells,
   Load_QC_names_delim   = args$Load_QC_names_delim,
@@ -1499,14 +1532,14 @@ seurat_obj <- Load_QC(
 )
 
 message("Saving the QC-completed file to seurat_qc.rds")
-saveRDS(seurat_obj, file = file.path(seurat_output_dir, "seurat_qc.rds"))
-message("========== QC process complete. ==========")
+# saveRDS(seurat_obj, file = file.path(seurat_output_dir, "seurat_qc.rds"))
+message("========== Loading data and QC process complete. ==========")
 message("")
 
 # -------------------------
-# Step 2: Normalization
+# Step 2: Normalization and scaling
 # -------------------------
-message("========== Starting normalization and scaling ... ==========")
+message("========== Start normalization and scaling ... ==========")
 args$Normalization_Scale_scale_factor <- as.numeric(args$Normalization_Scale_scale_factor)
 args$Normalization_Scale_nVariableFeatures <- as.integer(args$Normalization_Scale_nVariableFeatures)
 
@@ -1526,15 +1559,17 @@ seurat_obj <- Normalization_Scale(
 )
 
 message("Saving the normalized and scaled file to seurat_norm_scale.rds")
-saveRDS(seurat_obj, file = file.path(seurat_output_dir, "seurat_norm_scale.rds"))
+# saveRDS(seurat_obj, file = file.path(seurat_output_dir, "seurat_norm_scale.rds"))
 message("========== Normalization and scaling complete. ==========")
 message("")
 
 # -------------------------
 # Step 3.1: Run DR_Cluster
 # -------------------------
-message("========== Starting dimensional reduction and clustering ... ==========")
-args$DR_Cluster_dims <- seq_len(as.integer(args$DR_Cluster_dims))
+message("========== Start dimensional reduction and clustering ... ==========")
+if (!identical(args$DR_Cluster_dims, "auto")) {
+  args$DR_Cluster_dims <- seq_len(as.integer(args$DR_Cluster_dims))
+}
 
 seurat_obj <- DR_Cluster(
   seurat_obj                        = seurat_obj,
@@ -1551,7 +1586,7 @@ seurat_obj <- DR_Cluster(
 )
 
 message("Saving the clustered file to seurat_dr_cluster.rds")
-saveRDS(seurat_obj, file = file.path(seurat_output_dir, "seurat_dr_cluster.rds"))
+# saveRDS(seurat_obj, file = file.path(seurat_output_dir, "seurat_dr_cluster.rds"))
 message("========== Dimensional reduction and clustering complete. ==========")
 message("")
 
@@ -1559,19 +1594,21 @@ message("")
 # Step 3.2: Run Integration (Optional)
 # -------------------------
 if (!is.null(config$Run_Integration) && args$Run_Integration_run_integration == TRUE) {
-  message("========== Starting Seurat integration ... ==========")
+  message("========== Start Seurat integration ... ==========")
+
   seurat_obj <- Run_Integration(
     seurat_obj                           = seurat_obj,
     Run_Integration_group_by             = args$Run_Integration_group_by,
     Run_Integration_method               = args$Run_Integration_method,
     Run_Integration_nfeatures            = args$Run_Integration_nfeatures,
     Run_Integration_normalization_method = args$Run_Integration_normalization_method,
-    Run_Integration_dims                 = as.integer(args$Run_Integration_dims),
+    Run_Integration_dims                 = args$Run_Integration_dims,
+    Run_Integration_resolution           = args$Run_Integration_resolution,
     Run_Integration_verbose              = args$Run_Integration_verbose
   )
 
   message("Saving the integrated file to seurat_integrated.rds")
-  saveRDS(seurat_obj, file = file.path(seurat_output_dir, "seurat_integrated.rds"))
+  # saveRDS(seurat_obj, file = file.path(seurat_output_dir, "seurat_integrated.rds"))
   message("========== Integration complete. ==========")
   message("")
 }
@@ -1579,7 +1616,7 @@ if (!is.null(config$Run_Integration) && args$Run_Integration_run_integration == 
 # -------------------------
 # Step 4: Find markers and annotate
 # -------------------------
-message("========== Starting cluster markers calculating ... ==========")
+message("========== Start cluster markers calculation and cell annotation... ==========")
 
 seurat_obj <- Markers_Annotation(
   seurat_obj                               = seurat_obj,
@@ -1597,30 +1634,30 @@ seurat_obj <- Markers_Annotation(
 )
 
 message("Saving the annotated file to seurat_markers_annotated.rds")
-saveRDS(seurat_obj, file = file.path(seurat_output_dir, "seurat_markers_annotated.rds"))
+# saveRDS(seurat_obj, file = file.path(seurat_output_dir, "seurat_markers_annotated.rds"))
 message("========== Find marker and annotation complete. ==========")
 message("")
 
 # -------------------------
-# Step 5: Check + Dimensional Reduction Plot
+# Step 5: Check and Dimensional Reduction Plot
 # -------------------------
-message("========== Starting visualization with Dimplot... ==========")
+message("========== Start visualization with Dimplot... ==========")
 
 DR_Plot(
-    seurat_obj               = seurat_obj,
-    DR_Plot_output_path      = args$DR_Plot_output_path,
-    DR_Plot_reduction_method = args$DR_Plot_reduction_method,
-    DR_Plot_group_by         = args$DR_Plot_group_by,
-    DR_Plot_pt_size          = args$DR_Plot_pt_size,
-    DR_Plot_label            = args$DR_Plot_label,
-    DR_Plot_label_size       = args$DR_Plot_label_size,
-    DR_Plot_label_color      = args$DR_Plot_label_color,
-    DR_Plot_label_box        = args$DR_Plot_label_box,
-    DR_Plot_alpha            = args$DR_Plot_alpha,
-    DR_Plot_shuffle          = args$DR_Plot_shuffle,
-    DR_Plot_raster           = args$DR_Plot_raster,
-    DR_Plot_width            = args$DR_Plot_width,
-    DR_Plot_height           = args$DR_Plot_height
+    seurat_obj                  = seurat_obj,
+    DR_Plot_output_path         = args$DR_Plot_output_path,
+    DR_Cluster_reduction_method = args$DR_Cluster_reduction_method,
+    DR_Plot_group_by            = args$DR_Plot_group_by,
+    DR_Plot_pt_size             = args$DR_Plot_pt_size,
+    DR_Plot_label               = args$DR_Plot_label,
+    DR_Plot_label_size          = args$DR_Plot_label_size,
+    DR_Plot_label_color         = args$DR_Plot_label_color,
+    DR_Plot_label_box           = args$DR_Plot_label_box,
+    DR_Plot_alpha               = args$DR_Plot_alpha,
+    DR_Plot_shuffle             = args$DR_Plot_shuffle,
+    DR_Plot_raster              = args$DR_Plot_raster,
+    DR_Plot_width               = args$DR_Plot_width,
+    DR_Plot_height              = args$DR_Plot_height
     )
 
 message("========== Visualization complete. ==========")
@@ -1629,22 +1666,20 @@ message("")
 # -------------------------
 # Step 6: CellChat analysis
 # -------------------------
-message("========== Running CellChat on Seurat object ... ==========")
+message("========== Run CellChat on Seurat object ... ==========")
 
 if (!is.null(config$Run_CellChat)) {
-  seurat_obj <- readRDS(file.path(seurat_output_dir, "seurat_markers_annotated.rds"))
+  # seurat_obj <- readRDS(file.path(seurat_output_dir, "seurat_markers_annotated.rds"))
 
   Run_CellChat(
     seurat_obj                   = seurat_obj,
     Run_CellChat_output_path     = args$Run_CellChat_output_path,
-    Run_CellChat_species         = args$Run_CellChat_species,
+    Load_QC_species              = args$Load_QC_species,
     Run_CellChat_group_by        = args$Run_CellChat_group_by,
     Run_CellChat_source_celltype = args$Run_CellChat_source_celltype,
     Run_CellChat_target_celltype = args$Run_CellChat_target_celltype,
     Run_CellChat_plot_heatmap    = args$Run_CellChat_plot_heatmap,
     Run_CellChat_ntop_signaling  = args$Run_CellChat_ntop_signaling,
-    Run_CellChat_pdf_width       = args$Run_CellChat_pdf_width,
-    Run_CellChat_pdf_height      = args$Run_CellChat_pdf_height,
     Run_CellChat_MaxGroup        = args$Run_CellChat_MaxGroup
   )
 }
@@ -1654,16 +1689,16 @@ message("")
 # -------------------------
 # Step 7: AutoDock Vina docking
 # -------------------------
-message("========== Starting docking ... ==========")
+message("========== Start molecular docking ... ==========")
 
 Vina_Docking(
-    Vina_Docking_input_path             = args$Vina_Docking_input_path,
+    Run_CellChat_output_path            = args$Run_CellChat_output_path,
     Vina_Docking_output_path            = args$Vina_Docking_output_path,
     Vina_Docking_ligand_ref_file        = args$Vina_Docking_ligand_ref_file,
     Vina_Docking_receptor_ref_file      = args$Vina_Docking_receptor_ref_file,
     Vina_Docking_cas_txt_file           = args$Vina_Docking_cas_txt_file,
     Vina_Docking_use_fda                = args$Vina_Docking_use_fda,
-    Vina_Docking_fda_txt           = args$Vina_Docking_fda_txt,
+    Vina_Docking_fda_txt                = args$Vina_Docking_fda_txt,
     Vina_Docking_docking_ligand_dir     = args$Vina_Docking_docking_ligand_dir,
     Vina_Docking_docking_receptor_dir   = args$Vina_Docking_docking_receptor_dir,
     Vina_Docking_vina_exhaustiveness    = args$Vina_Docking_vina_exhaustiveness,
@@ -1671,5 +1706,5 @@ Vina_Docking(
     Vina_Docking_vina_seed              = args$Vina_Docking_vina_seed,
     Vina_Docking_vina_cpu               = args$Vina_Docking_vina_cpu
   )
-message("========== Docking complete. ==========")
+message("========== Molecular docking complete. ==========")
 EOF
