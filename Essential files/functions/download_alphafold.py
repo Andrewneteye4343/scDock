@@ -1,13 +1,11 @@
-#!/usr/bin/env python
+# functions/download_alphafold.py
+#!/usr/bin/env python3
 # coding: utf-8
-
-# In[ ]:
-
 
 import os, sys, requests, time
 
 def download_alphafold_pdb(af_id, output_dir="downloads"):
-    output_dir = os.path.abspath(output_dir)  # 確保是絕對路徑
+    output_dir = os.path.abspath(output_dir)
     os.makedirs(output_dir, exist_ok=True)
     url = f"https://alphafold.ebi.ac.uk/files/{af_id}-model_v4.pdb"
     output_file = os.path.join(output_dir, f"{af_id}.pdb")

@@ -1,22 +1,23 @@
 # functions/Vina_Docking.R
-Vina_Docking <- function(Vina_Docking_input_path,
+Vina_Docking <- function(Run_CellChat_output_path,
                          Vina_Docking_output_path,
-                         Vina_Docking_ligand_ref_file = "/path/to/ligand_reference.csv",
-                         Vina_Docking_receptor_ref_file = "path/to/receptor_reference.csv",
-                         Vina_Docking_cas_txt_file = NULL,
-                         Vina_Docking_use_fda = FALSE,
-                         Vina_Docking_fda_txt = NULL,
-                         Vina_Docking_docking_ligand_dir = NULL,
-                         Vina_Docking_docking_receptor_dir = NULL,
-                         Vina_Docking_vina_exhaustiveness = 8,
-                         Vina_Docking_vina_num_modes = 9,
-                         Vina_Docking_vina_seed = 42,
-                         Vina_Docking_vina_cpu = 1
-) {
-  if (!requireNamespace("dplyr", quietly = TRUE)) stop("Package 'dplyr' is required.")
+                         Vina_Docking_ligand_ref_file,
+                         Vina_Docking_receptor_ref_file,
+                         Vina_Docking_cas_txt_file,
+                         Vina_Docking_use_fda,
+                         Vina_Docking_fda_txt,
+                         Vina_Docking_docking_ligand_dir,
+                         Vina_Docking_docking_receptor_dir,
+                         Vina_Docking_vina_exhaustiveness,
+                         Vina_Docking_vina_num_modes,
+                         Vina_Docking_vina_seed,
+                         Vina_Docking_vina_cpu) {
+  if (!requireNamespace("dplyr", quietly = TRUE)) stop("[Vina_Docking] Package 'dplyr' is required.")
+  suppressPackageStartupMessages({
   library(dplyr)
+})
 
-  # ---- grid.txt read function ----
+  # grid.txt read function
   read_grid_file <- function(grid_file) {
     lines <- readLines(grid_file)
     vals <- sapply(lines, function(x) as.numeric(strsplit(x, "=")[[1]][2]))
@@ -24,7 +25,7 @@ Vina_Docking <- function(Vina_Docking_input_path,
     return(vals)
   }
 
-  # ---- Vina docking running function ----
+  # Vina docking running function
   run_vina_docking <- function(ligand_file, receptor_file, out_dir, params) {
     if (!dir.exists(out_dir)) dir.create(out_dir, recursive = TRUE)
     ligand_name <- tools::file_path_sans_ext(basename(ligand_file))
@@ -60,7 +61,7 @@ Vina_Docking <- function(Vina_Docking_input_path,
     }
   }
 
-  # ---- Set Vina arguments ----
+  # Set Vina arguments
   vina_params <- list(
     exhaustiveness = Vina_Docking_vina_exhaustiveness,
     num_modes = Vina_Docking_vina_num_modes,
@@ -68,18 +69,18 @@ Vina_Docking <- function(Vina_Docking_input_path,
     cpu = Vina_Docking_vina_cpu
   )
 
-  # ---- Read LR CSV ----
-  csv_files <- list.files(Vina_Docking_input_path, pattern = "^top\\d+_LR_.*\\.csv$", full.names = TRUE)
+  # Read LR CSV
+  csv_files <- list.files(Run_CellChat_output_path, pattern = "^top\\d+_LR_.*\\.csv$", full.names = TRUE)
 
   if (length(csv_files) == 0) {
     # fallback: try multi-group file
-    multi_csv <- file.path(Vina_Docking_input_path, "multiGroup_significant_LR_by_prob_diff.csv")
+    multi_csv <- file.path(Run_CellChat_output_path, "multiGroup_significant_LR_by_prob_diff.csv")
     if (file.exists(multi_csv)) {
       message("[INFO] No top*_LR_*.csv found. Using multiGroup_significant_LR_by_prob_diff.csv instead.")
       csv_files <- c(multi_csv)
     } else {
       stop("No LR CSV files found (neither top*_LR_*.csv nor multiGroup_significant_LR_by_prob_diff.csv) in: ",
-           Vina_Docking_input_path)
+           Run_CellChat_output_path)
     }
   }
 
@@ -104,8 +105,32 @@ Vina_Docking <- function(Vina_Docking_input_path,
   }
   ligands <- unique(ligands)
   receptors <- unique(receptors)
+  
+  # Gene name conversion: Mouse -> Human (offline via homologene)
+  if (!requireNamespace("homologene", quietly = TRUE)) {
+    stop("Package 'homologene' is required for gene name conversion.")
+  }
+  suppressPackageStartupMessages({
+  library(homologene)
+})
 
-  # ---- Load reference ----
+  convert_mouse_to_human <- function(gene_vec) {
+    gene_vec <- unique(gene_vec)
+    gene_map <- homologene::homologene(gene_vec, inTax = 10090, outTax = 9606)
+    colnames(gene_map) <- c("MouseGene", "HumanGene")
+    map_dict <- setNames(gene_map$HumanGene, gene_map$MouseGene)
+
+    converted <- ifelse(gene_vec %in% names(map_dict),
+                        map_dict[gene_vec],
+                        gene_vec)
+    converted <- converted[!is.na(converted) & converted != ""]
+    return(unique(converted))
+  }
+
+  ligands <- convert_mouse_to_human(ligands)
+  receptors <- convert_mouse_to_human(receptors)
+  
+  # Load reference
   ligand_ref <- read.csv(Vina_Docking_ligand_ref_file, stringsAsFactors = FALSE)
   receptor_ref <- read.csv(Vina_Docking_receptor_ref_file, stringsAsFactors = FALSE)
   ligand_match <- ligand_ref %>% filter(protein_name %in% ligands)
@@ -115,13 +140,13 @@ Vina_Docking <- function(Vina_Docking_input_path,
   write.csv(ligand_match, file.path(Vina_Docking_output_path, "ligands_with_PDB.csv"), row.names = FALSE)
   write.csv(receptor_match, file.path(Vina_Docking_output_path, "receptors_with_PDB.csv"), row.names = FALSE)
 
-  # ---- Create PDB directory ----
+  # Create PDB directory
   ligand_dir <- file.path(Vina_Docking_output_path, "ligand_from_PDB_LR_pairs")
   receptor_dir <- file.path(Vina_Docking_output_path, "receptor_from_PDB_LR_pairs")
   if (!dir.exists(ligand_dir)) dir.create(ligand_dir, recursive = TRUE)
   if (!dir.exists(receptor_dir)) dir.create(receptor_dir, recursive = TRUE)
 
-  # ---- Download protein structure ----
+  # Download protein structure
   download_structures <- function(df, outdir, label) {
     for (raw_ids in df$PDB_model) {
       if (is.na(raw_ids) || raw_ids=="") next
@@ -156,16 +181,16 @@ Vina_Docking <- function(Vina_Docking_input_path,
 
   download_structures(ligand_match, ligand_dir, "ligand")
 
-  # only download receptors if user did NOT provide Vina_Docking_docking_receptor_dir
+  # Only download receptors if user did NOT provide Vina_Docking_docking_receptor_dir
   if (is.null(Vina_Docking_docking_receptor_dir)) {
     download_structures(receptor_match, receptor_dir, "receptor")
   }
 
-  # ---- Ligand structure source ----
+  # Ligand structure source
   cas_dir <- NULL
 
   if (Vina_Docking_use_fda) {
-    # ---- FDA compounds support ----
+    # FDA compounds support
     if (is.null(Vina_Docking_fda_txt) || !file.exists(Vina_Docking_fda_txt)) {
       stop("[FDA] Vina_Docking_use_fda = TRUE but Vina_Docking_fda_txt is missing or does not exist!")
     }
@@ -186,7 +211,7 @@ Vina_Docking <- function(Vina_Docking_input_path,
     }
 
   } else {
-    # ---- CAS compounds support ----
+    # CAS compounds support
     if (!is.null(Vina_Docking_cas_txt_file) && file.exists(Vina_Docking_cas_txt_file)) {
       cas_dir <- file.path(Vina_Docking_output_path, "ligand_structures_from_CAStxt_for_AutoDockVina")
       if (!dir.exists(cas_dir)) dir.create(cas_dir)
@@ -200,7 +225,7 @@ Vina_Docking <- function(Vina_Docking_input_path,
     }
   }
 
-  # ---- AutoDock Vina docking ----
+  # AutoDock Vina docking
   Vina_Docking_docking_ligand_dir <- if (is.null(Vina_Docking_docking_ligand_dir)) cas_dir else Vina_Docking_docking_ligand_dir
 
   if (is.null(Vina_Docking_docking_receptor_dir)) {
@@ -227,7 +252,7 @@ Vina_Docking <- function(Vina_Docking_input_path,
       )
     }
 
-    # ---- Collect docking results per receptor ----
+    # Collect docking results per receptor
     message("[Vina] Collecting docking results for receptor folder: ", rec_subdir)
     log_files <- list.files(rec_subdir,
                             pattern = "_AutoDockVina_result_score.txt$",

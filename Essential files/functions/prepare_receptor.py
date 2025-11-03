@@ -1,4 +1,7 @@
+# functions/prepare_receptor.py
 #!/usr/bin/env python3
+# coding: utf-8
+
 import sys, os
 from MolKit import Read
 import AutoDockTools.Utilities24.prepare_receptor4 as pr4
@@ -24,7 +27,7 @@ if __name__ == "__main__":
     receptor = Read(in_pdb)[0]
     out_pdbqt = os.path.join(outdir, os.path.basename(in_pdb).replace(".pdb", "_prepared.pdbqt"))
 
-    # 使用 AutoDockTools 的 AD4ReceptorPreparation
+    # Using AD4ReceptorPreparation from AutoDockTools
     prep = pr4.AD4ReceptorPreparation(
     receptor,
     repairs='checkhydrogens',
@@ -36,7 +39,7 @@ if __name__ == "__main__":
 
     print(f"[prepare_receptor] Generated: {out_pdbqt}")
 
-    # 計算最大 grid box
+    # Get the maximum grid box
     coords = receptor.allAtoms.coords
     center, size = compute_grid_box(coords)
     grid_file = out_pdbqt.replace("_prepared.pdbqt", "_prepared_grid.txt")

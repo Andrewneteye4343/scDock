@@ -1,11 +1,6 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[ ]:
-
-
-#!/usr/bin/env python3
 # functions/download_cas_pubchem.py
+#!/usr/bin/env python3
+# coding: utf-8
 
 import sys
 import os
@@ -27,14 +22,24 @@ def download_sdf(cas_number, out_sdf):
         return False
 
 def sdf_to_pdbqt(sdf_file, out_dir):
-    """Convert SDF to PDBQT using OpenBabel"""
+    """Convert SDF to PDBQT using RDKit + OpenBabel"""
     mol_name = os.path.splitext(os.path.basename(sdf_file))[0]
     pdb_file = os.path.join(out_dir, f"{mol_name}.pdb")
     pdbqt_file = os.path.join(out_dir, f"{mol_name}.pdbqt")
-    # SDF -> PDB
-    subprocess.run(["obabel", sdf_file, "-O", pdb_file, "--gen3d"], check=True)
-    # PDB -> PDBQT (AutoDock Vina requires hydrogens)
+
+    # Generate 3D conformer using RDKit
+    mol = Chem.MolFromMolFile(sdf_file, removeHs=False)
+    if mol is None:
+        raise ValueError(f"RDKit failed to read {sdf_file}")
+
+    mol = Chem.AddHs(mol)
+    AllChem.EmbedMolecule(mol, AllChem.ETKDGv3())
+    AllChem.UFFOptimizeMolecule(mol)
+    Chem.MolToPDBFile(mol, pdb_file)
+
+    # Convert into .pdbqt using OpenBabel
     subprocess.run(["obabel", pdb_file, "-O", pdbqt_file, "-xh"], check=True)
+
     return pdbqt_file
 
 def main():

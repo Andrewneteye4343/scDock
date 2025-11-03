@@ -1,47 +1,73 @@
 # functions/Run_CellChat.R
 Run_CellChat <- function(seurat_obj,
-                         Run_CellChat_output_path = "path/to/dir/",
-                         Run_CellChat_species = "human",
-                         Run_CellChat_group_by = "Celltype",
-                         Run_CellChat_source_celltype = NULL,
-                         Run_CellChat_target_celltype = NULL,
-                         Run_CellChat_plot_heatmap = TRUE,
-                         Run_CellChat_ntop_signaling = 5,
-                         Run_CellChat_pdf_width = 6,
-                         Run_CellChat_pdf_height = 6,
-                         Run_CellChat_MaxGroup = NULL) {  # 新增參數
-
-  library(CellChat)
-  library(patchwork)
-  library(scales)
-  library(ComplexHeatmap)
-
-  if (Run_CellChat_species == "human") {
+                         Run_CellChat_output_path,
+                         Load_QC_species,
+                         Run_CellChat_group_by,
+                         Run_CellChat_source_celltype,
+                         Run_CellChat_target_celltype,
+                         Run_CellChat_plot_heatmap,
+                         Run_CellChat_ntop_signaling,
+                         Run_CellChat_MaxGroup) {
+  suppressPackageStartupMessages({
+    library(CellChat)
+    library(patchwork)
+    library(scales)
+    library(ComplexHeatmap)
+  })
+  
+  # Check species
+  if (Load_QC_species == "human") {
     CellChatDB.use <- CellChatDB.human
-  } else if (Run_CellChat_species == "mouse") {
+  } else if (Load_QC_species == "mouse") {
     CellChatDB.use <- CellChatDB.mouse
   } else {
-    stop("❌ Unsupported species: ", Run_CellChat_species)
+    stop("[Run_CellChat] Unsupported species: ", Load_QC_species)
   }
 
   dir.create(Run_CellChat_output_path, showWarnings = FALSE, recursive = TRUE)
 
-  # ================================
-  # 檢查 assay → 若有 SCT 用 SCT，否則用 RNA
-  # ================================
-  if ("SCT" %in% names(seurat_obj@assays)) {
-    DefaultAssay(seurat_obj) <- "SCT"
-    message("📌 Using SCT assay for CellChat input")
-  } else if ("RNA" %in% names(seurat_obj@assays)) {
-    DefaultAssay(seurat_obj) <- "RNA"
-    message("📌 Using RNA assay for CellChat input")
-  } else {
-    stop("❌ Neither SCT nor RNA assay found in Seurat object. Cannot run CellChat.")
+  # 1. Check harmony
+  harmony_detected <- any(grepl("^harmony", names(seurat_obj@reductions))) |
+                      any(grepl("^harmony", colnames(seurat_obj@meta.data)))
+
+  if (harmony_detected) {
+    # Using RNA assay as CellChat input
+    if ("RNA" %in% names(seurat_obj@assays)) {
+      assay_to_use <- "RNA"
+      DefaultAssay(seurat_obj) <- "RNA"
+      message("[Run_CellChat] Harmony detected, using RNA assay for CellChat input")
+    } else {
+      stop("[Run_CellChat] Harmony detected but RNA assay not found in Seurat object")
+    }
+  }
+  
+  # Flatten if Seurat Assay5 structure detected
+  if (inherits(seurat_obj[[assay_to_use]], "Assay5")) {
+    message("[Run_CellChat] Detected multi-layer ", assay_to_use, " assay")
+
+    layer_names <- SeuratObject::Layers(seurat_obj[[assay_to_use]])
+    message("[Run_CellChat] Found layers: ", paste(layer_names, collapse = ", "))
+
+    # Using data layer as default
+    if ("data" %in% layer_names) {
+      mat <- GetAssayData(seurat_obj, assay = assay_to_use, layer = "data")
+      chosen_layer <- "data"
+    } else if ("counts" %in% layer_names) {
+      mat <- GetAssayData(seurat_obj, assay = assay_to_use, layer = "counts")
+      chosen_layer <- "counts"
+    } else {
+      stop("[Run_CellChat] No usable data layer found in assay ", assay_to_use)
+    }
+
+    flat_assay_name <- paste0(assay_to_use, "_flat")
+    message("[Run_CellChat] Using layer '", chosen_layer, "' to create assay: ", flat_assay_name)
+
+    seurat_obj[[flat_assay_name]] <- Seurat::CreateAssayObject(data = mat)
+    DefaultAssay(seurat_obj) <- flat_assay_name
+    assay_to_use <- flat_assay_name
   }
 
-  # ================================
-  # 判斷單組別或多組別
-  # ================================
+  # 2. Check grouping
   is_multi_group <- FALSE
   groups <- NULL
   cellchat <- NULL
@@ -50,29 +76,29 @@ Run_CellChat <- function(seurat_obj,
   if (Run_CellChat_group_by %in% colnames(seurat_obj@meta.data) &&
       length(unique(seurat_obj@meta.data[[Run_CellChat_group_by]])) > 1 &&
       Run_CellChat_group_by == "sample_group") {
-
+    
+    # Multiple groups
     is_multi_group <- TRUE
     groups <- unique(seurat_obj@meta.data[[Run_CellChat_group_by]])
-    message("🔄 Multi-group CellChat analysis based on: ", Run_CellChat_group_by, "; groups: ", paste(groups, collapse = ", "))
+    message("[Run_CellChat] Multi-group CellChat analysis based on: ", Run_CellChat_group_by, "; groups: ", paste(groups, collapse = ", "))
 
-    # 檢查 Run_CellChat_MaxGroup 是否有效
     if (!is.null(Run_CellChat_MaxGroup)) {
       if (!all(Run_CellChat_MaxGroup %in% groups)) {
-        stop("❌ Run_CellChat_MaxGroup contains invalid group names: ", paste(setdiff(Run_CellChat_MaxGroup, groups), collapse = ", "))
+        stop("[Run_CellChat] Run_CellChat_MaxGroup contains invalid group names: ", paste(setdiff(Run_CellChat_MaxGroup, groups), collapse = ", "))
       }
     } else {
-      Run_CellChat_MaxGroup <- groups  # 若未指定，預設使用全部組別
+      Run_CellChat_MaxGroup <- groups
     }
 
-    # ================================
-    # 建立各組 CellChat 對象
-    # ================================
+    # Run CellChat for each group
     cellchat_list <- list()
     for (grp in groups) {
-      message("▶ Running CellChat for group: ", grp)
+      message("[Run_CellChat] Running CellChat for group: ", grp)
       sub_obj <- subset(seurat_obj,
                         cells = rownames(seurat_obj@meta.data[seurat_obj@meta.data[[Run_CellChat_group_by]] == grp, ]))
-      sub_cellchat <- createCellChat(object = GetAssayData(sub_obj, slot = "data"),
+      mat <- GetAssayData(sub_obj, assay = assay_to_use, slot = "data")
+
+      sub_cellchat <- createCellChat(object = mat,
                                      meta = sub_obj@meta.data,
                                      group.by = "Celltype")
       sub_cellchat@DB <- CellChatDB.use
@@ -87,19 +113,27 @@ Run_CellChat <- function(seurat_obj,
       cellchat_list[[grp]] <- sub_cellchat
     }
 
-    # merge multi-group CellChat object
+    # Merge
     cellchat <- mergeCellChat(cellchat_list, add.names = groups)
     cellchat@DB <- CellChatDB.use
     cellchat <- updateCellChat(cellchat)
     saveRDS(cellchat, file = file.path(Run_CellChat_output_path, "cellchat_merged.rds"))
-    message("✅ Merged multi-group cellchat object saved to: ", Run_CellChat_output_path)
+    message("[Run_CellChat] Merged multi-group cellchat object saved to: ", Run_CellChat_output_path)
 
   } else {
-    # ================================
-    # 單組別
-    # ================================
-    message("Single-group CellChat analysis, grouping by: ", Run_CellChat_group_by)
-    cellchat <- createCellChat(object = GetAssayData(seurat_obj, slot = "data"),
+    # Single group
+    message("[Run_CellChat] Single-group CellChat analysis, grouping by: ", Run_CellChat_group_by)
+
+    mat <- GetAssayData(seurat_obj, assay = assay_to_use, slot = "data")
+    if (!is(mat, "AnyMatrix") || nrow(mat) == 0) {
+      warning("[Run_CellChat] Data slot invalid, switching to counts.")
+      mat <- GetAssayData(seurat_obj, assay = assay_to_use, slot = "counts")
+    }
+    if (!is(mat, "AnyMatrix") || nrow(mat) == 0) {
+      stop("[Run_CellChat] Expression matrix invalid — cannot run CellChat.")
+    }
+
+    cellchat <- createCellChat(object = mat,
                                meta = seurat_obj@meta.data,
                                group.by = Run_CellChat_group_by)
     cellchat@DB <- CellChatDB.use
@@ -112,25 +146,34 @@ Run_CellChat <- function(seurat_obj,
     cellchat <- aggregateNet(cellchat)
     cellchat <- netAnalysis_computeCentrality(cellchat, slot.name = "netP")
     saveRDS(cellchat, file = file.path(Run_CellChat_output_path, "cellchat.rds"))
-    message("✅ Single-group cellchat object saved to: ", Run_CellChat_output_path)
+    message("[Run_CellChat] Single-group cellchat object saved to: ", Run_CellChat_output_path)
   }
 
-  # ================================
-  # signaling role heatmap
-  # ================================
+  # Plot signaling role heatmap
   if (Run_CellChat_plot_heatmap) {
-    message("Drawing netAnalysis_signalingRole_heatmap ...")
+    message("[Run_CellChat] Drawing netAnalysis_signalingRole_heatmap ...")
 
-    if (Run_CellChat_plot_heatmap) {
-    message("Drawing netAnalysis_signalingRole_heatmap ...")
-
+    # Multiple groups
     if (is_multi_group) {
-      message("Multi-group mode: drawing heatmaps for each group with unified pathway set")
+      message("[Run_CellChat] Multi-group mode: drawing heatmaps for each group with unified pathway set")
 
-      # 取得所有 pathways 的 union
+      # Get the union of all pathways
       pathway.union <- unique(unlist(lapply(cellchat_list, function(x) x@netP$pathways)))
+      n_rows <- length(pathway.union)
+      n_cols <- length(unique(cellchat@idents))
+      
+      # Plot unit: increase 0.5/0.25 cm per pathway
+      heatmap_pdf_height <- max(20, n_rows * 0.25)
+      bubble_pdf_height <- max(20, n_rows * 0.5)
+      # Plot unit: increase 2 / 2 * group number cm per cell type
+      heatmap_pdf_width <- max(20, n_cols * 2)
+      bubble_pdf_width <- max(20, n_cols * 2) * length(cellchat_list)
 
-      # --- outgoing ---
+      # Modify font size based on pathway and Celltype number
+      row_font_size <- ifelse(n_rows > 60, 8.5, ifelse(n_rows > 30, 9, 10))
+      col_font_size <- ifelse(n_cols > 20, 9, 8)
+
+      # Outgoing signaling heatmap
       ht_list_out <- list()
       for (i in seq_along(cellchat_list)) {
         grp_name <- names(cellchat_list)[i]
@@ -139,17 +182,19 @@ Run_CellChat <- function(seurat_obj,
           pattern = "outgoing",
           signaling = pathway.union,
           title = grp_name,
-          width = 6, height = 6
+          width = heatmap_pdf_width, height = heatmap_pdf_height
         )
+        ht_list_out[[i]]@row_names_param$gp <- grid::gpar(fontsize = row_font_size)
+        ht_list_out[[i]]@column_names_param$gp <- grid::gpar(fontsize = col_font_size)
       }
 
       pdf(file = file.path(Run_CellChat_output_path, "signalingRole_heatmap_outgoing.pdf"),
-          width = Run_CellChat_pdf_width * length(cellchat_list), 
-          height = Run_CellChat_pdf_height * 1.5)
+          width = heatmap_pdf_width, 
+          height = heatmap_pdf_height)
       draw(Reduce(`+`, ht_list_out), ht_gap = unit(0.5, "cm"))
       dev.off()
 
-      # --- incoming ---
+      # Incoming signaling heatmap
       ht_list_in <- list()
       for (i in seq_along(cellchat_list)) {
         grp_name <- names(cellchat_list)[i]
@@ -158,36 +203,56 @@ Run_CellChat <- function(seurat_obj,
           pattern = "incoming",
           signaling = pathway.union,
           title = grp_name,
-          width = 6, height = 6,
+          width = heatmap_pdf_width, height = heatmap_pdf_height,
           color.heatmap = "GnBu"
         )
+        ht_list_in[[i]]@row_names_param$gp <- grid::gpar(fontsize = row_font_size)
+        ht_list_in[[i]]@column_names_param$gp <- grid::gpar(fontsize = col_font_size)
       }
 
       pdf(file = file.path(Run_CellChat_output_path, "signalingRole_heatmap_incoming.pdf"),
-          width = Run_CellChat_pdf_width * length(cellchat_list), 
-          height = Run_CellChat_pdf_height * 1.5)
+          width = heatmap_pdf_width, 
+          height = heatmap_pdf_height)
       draw(Reduce(`+`, ht_list_in), ht_gap = unit(0.5, "cm"))
       dev.off()
 
-      message("✅ signalingRole_heatmap (multi-group, union pathways) saved: incoming & outgoing")
+      message("[Run_CellChat] signalingRole_heatmap (multi-group, union pathways) saved: incoming & outgoing")
 
     } else {
-      # --- 單組別 ---
-      ht1 <- netAnalysis_signalingRole_heatmap(cellchat, pattern = "outgoing")
-      ht2 <- netAnalysis_signalingRole_heatmap(cellchat, pattern = "incoming", color.heatmap = "GnBu")
+      # Single group
+      # Get the union of all pathways
+      n_rows <- length(cellchat@netP$pathways)
+      n_cols <- length(unique(cellchat@idents))
+      
+      # Plot unit: increase 0.25/0.5 cm per pathway
+      heatmap_pdf_height <- max(20, n_rows * 0.25)
+      bubble_pdf_height <- max(20, n_rows * 0.5)
+      # Plot unit: increase 0.5 cm per cell type
+      heatmap_pdf_width <- max(20, n_cols * 0.5)
+      bubble_pdf_width <- max(20, n_cols * 0.5)
+
+      # Modify font size based on pathway and Celltype number
+      row_font_size <- ifelse(n_rows > 60, 8.5, ifelse(n_rows > 30, 9, 10))
+      col_font_size <- ifelse(n_cols > 20, 9, 8)
+
+      # Outgoing signaling heatmap
+      ht1 <- netAnalysis_signalingRole_heatmap(cellchat, pattern = "outgoing", width = heatmap_pdf_width, height = heatmap_pdf_height)
+      ht1@row_names_param$gp <- grid::gpar(fontsize = row_font_size)
+      ht1@column_names_param$gp <- grid::gpar(fontsize = col_font_size)
+      # Incoming signaling heatmap
+      ht2 <- netAnalysis_signalingRole_heatmap(cellchat, pattern = "incoming", width = heatmap_pdf_width, height = heatmap_pdf_height)
+      ht2@row_names_param$gp <- grid::gpar(fontsize = row_font_size)
+      ht2@column_names_param$gp <- grid::gpar(fontsize = col_font_size)
       pdf(file = file.path(Run_CellChat_output_path, "signalingRole_heatmap.pdf"),
-          width = Run_CellChat_pdf_width * 1.5, height = Run_CellChat_pdf_height * 1.5)
+          width = heatmap_pdf_width, height = heatmap_pdf_height)
       print(ht1 + ht2)
       dev.off()
-      message("✅ signalingRole_heatmap (single-group) saved")
-      }
+      message("[Run_CellChat] signalingRole_heatmap (single-group) saved")
     }
   }
-  # ================================
-  # L-R pair selection
-  # ================================
+  # Bubble plot
   if (!is_multi_group) {
-    # -------- 單組別 --------
+    # Single group
     comm <- subsetCommunication(cellchat, slot.name = "net")
     pcol <- if ("pval" %in% colnames(comm)) "pval" else if ("p.value" %in% colnames(comm)) "p.value" else NULL
     if (!is.null(pcol)) comm <- comm[comm[[pcol]] < 0.05, ]
@@ -196,22 +261,22 @@ Run_CellChat <- function(seurat_obj,
       top_comm <- head(comm, Run_CellChat_ntop_signaling)
       csv_file <- file.path(Run_CellChat_output_path, paste0("top", Run_CellChat_ntop_signaling, "_LR_singleGroup.csv"))
       write.csv(top_comm, file = csv_file, row.names = FALSE)
-      message("✅ Saved top L-R pairs to: ", csv_file)
+      message("[Run_CellChat] Saved top L-R pairs to: ", csv_file)
 
       pdf(file = file.path(Run_CellChat_output_path, "netVisual_bubble_singleGroup.pdf"),
-          width = Run_CellChat_pdf_width,
-          height = Run_CellChat_pdf_height)
+          width = bubble_pdf_width,
+          height = bubble_pdf_height)
       print(netVisual_bubble(cellchat,
                              signaling = unique(as.character(top_comm$pathway_name)),
                              sources.use = Run_CellChat_source_celltype,
                              targets.use = Run_CellChat_target_celltype,
                              remove.isolate = TRUE))
       dev.off()
-      message("✅ Single-group bubble plot saved")
+      message("[Run_CellChat] Single-group bubble plot saved")
     }
   } else {
-    # -------- 多組別 --------
-    message("Performing multi-group bubble plots based on Run_CellChat_MaxGroup ...")
+    # Multiple groups
+    message("[Run_CellChat] Performing multi-group bubble plots based on Run_CellChat_MaxGroup ...")
     for (max_grp in Run_CellChat_MaxGroup) {
       max_idx <- which(groups == max_grp)
       comparison_vec <- c(1:length(groups))
@@ -222,7 +287,7 @@ Run_CellChat <- function(seurat_obj,
       }
       
       pdf(file = file.path(Run_CellChat_output_path, paste0("netVisual_bubble_maxGroup_", max_grp, ".pdf")),
-          width = Run_CellChat_pdf_width * 1.5, height = Run_CellChat_pdf_height * 1.5)
+          width = bubble_pdf_width, height = bubble_pdf_height)
       print(netVisual_bubble(cellchat,
                              comparison = comparison_vec,
                              max.dataset = max_idx,
@@ -232,10 +297,10 @@ Run_CellChat <- function(seurat_obj,
                              title.name = paste("Max signaling in", max_grp),
                              color.text = color_text))
       dev.off()
-      message("✅ Bubble plot saved for max group: ", max_grp)
+      message("[Run_CellChat] Bubble plot saved for max group: ", max_grp)
     }
 
-    # -------- 計算多組別 L-R 差異 --------
+    # Calculate the difference of ligand-receptor pairs between multiple groups
     comm_list <- lapply(cellchat_list, function(cc) {
       df <- subsetCommunication(cc, slot.name = "net")
       if ("p.value" %in% colnames(df) && !"pval" %in% colnames(df)) df$pval <- df[["p.value"]]
@@ -287,10 +352,10 @@ Run_CellChat <- function(seurat_obj,
     if (length(sig_details) > 0) {
       diff_df <- do.call(rbind, sig_details)
   
-      # 只保留 higher_group 在 Run_CellChat_MaxGroup
+      # Only remain the results of higher_group (Run_CellChat_MaxGroup)
       diff_df <- diff_df[diff_df$higher_group %in% Run_CellChat_MaxGroup, , drop = FALSE]
   
-      # 如果指定 source_celltype / target_celltype，過濾
+      # If arguments "Run_CellChat_source_celltype" and "Run_CellChat_target_celltype" are set, filter the results.
       if (!is.null(Run_CellChat_source_celltype)) {
         diff_df <- diff_df[diff_df$source %in% Run_CellChat_source_celltype, , drop = FALSE]
       }
@@ -298,27 +363,27 @@ Run_CellChat <- function(seurat_obj,
         diff_df <- diff_df[diff_df$target %in% Run_CellChat_target_celltype, , drop = FALSE]
       }
   
-      # 按 prob_diff 絕對值排序
+      # Rank the absolute probability difference 
       diff_df <- diff_df[order(-abs(diff_df$prob_diff)), ]
   
-      # 取前 Run_CellChat_ntop_signaling
+      # Get the top signalings
       if (nrow(diff_df) > Run_CellChat_ntop_signaling) {
         diff_df <- diff_df[1:Run_CellChat_ntop_signaling, ]
       }
 
-      # === 新增：從 interaction 拆出 ligand / receptor ===
+      # Get the ligand and receptor information from interaction column
       if ("interaction" %in% colnames(diff_df)) {
         parts <- strsplit(diff_df$interaction, "_")
         diff_df$ligand <- sapply(parts, `[`, 1)
         diff_df$receptor <- sapply(parts, `[`, 2)
       }
   
-      # 輸出 CSV
+      # Output CSV file
       out_csv <- file.path(Run_CellChat_output_path, "multiGroup_significant_LR_by_prob_diff.csv")
       write.csv(diff_df, file = out_csv, row.names = FALSE)
-      message("✅ Multi-group significant L-R pairs saved to: ", out_csv)
+      message("[Run_CellChat] Multi-group significant L-R pairs saved to: ", out_csv)
     } else {
-      message("⚠️ No significant L-R pairs found across group comparisons.")
+      message("[Run_CellChat] No significant L-R pairs found across group comparisons.")
     }
 }
   return(cellchat)

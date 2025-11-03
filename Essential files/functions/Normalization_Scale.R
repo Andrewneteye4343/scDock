@@ -11,12 +11,11 @@ Normalization_Scale <- function(seurat_obj,
                                 Normalization_Scale_scale_max = 10,
                                 Normalization_Scale_scale_features = "variable",
                                 Normalization_Scale_verbose = TRUE) {
+  suppressPackageStartupMessages({
   library(Seurat)
-  
-  # -------------------------
-  # NormalizeData
-  # -------------------------
-  if (Normalization_Scale_verbose) message("Step 1: Normalizing data using method: ", Normalization_Scale_normalization_method)
+})
+  # Normalization
+  if (Normalization_Scale_verbose) message("[Normalization_Scale] Normalizing data using method: ", Normalization_Scale_normalization_method)
   seurat_obj <- NormalizeData(
     seurat_obj,
     normalization.method = Normalization_Scale_normalization_method,
@@ -26,10 +25,8 @@ Normalization_Scale <- function(seurat_obj,
     assay = Normalization_Scale_use_assay
   )
   
-  # -------------------------
   # FindVariableFeatures
-  # -------------------------
-  if (Normalization_Scale_verbose) message("Step 2: Finding top ", Normalization_Scale_nVariableFeatures, " variable features using method: ", Normalization_Scale_hvg_method)
+  if (Normalization_Scale_verbose) message("[Normalization_Scale] Finding top ", Normalization_Scale_nVariableFeatures, " variable features using method: ", Normalization_Scale_hvg_method)
   seurat_obj <- FindVariableFeatures(
     seurat_obj,
     selection.method = Normalization_Scale_hvg_method,
@@ -38,12 +35,10 @@ Normalization_Scale <- function(seurat_obj,
     assay = Normalization_Scale_use_assay
   )
   
-  # -------------------------
   # ScaleData
-  # -------------------------
-  if (Normalization_Scale_verbose) message("Step 3: Scaling data...")
+  if (Normalization_Scale_verbose) message("[Normalization_Scale] Scaling data...")
   
-  # 決定要 scale 的基因
+  # Determine genes to scale
   if (is.character(Normalization_Scale_scale_features) && Normalization_Scale_scale_features == "variable") {
     features_to_scale <- VariableFeatures(seurat_obj)
     
@@ -53,14 +48,14 @@ Normalization_Scale <- function(seurat_obj,
   } else if (is.vector(Normalization_Scale_scale_features)) {
     missing_genes <- setdiff(Normalization_Scale_scale_features, rownames(seurat_obj))
     if (length(missing_genes) > 0) {
-      warning("⚠️ Some genes in Normalization_Scale_scale_features were not found and will be ignored: ",
+      warning("[Normalization_Scale] Some genes in Normalization_Scale_scale_features were not found and will be ignored: ",
               paste(head(missing_genes), collapse = ", "),
               if (length(missing_genes) > 5) " ..." else "")
     }
     features_to_scale <- intersect(Normalization_Scale_scale_features, rownames(seurat_obj))
   }
   
-  # 執行 scale
+  tryCatch(
   seurat_obj <- ScaleData(
     seurat_obj,
     split.by = Normalization_Scale_split_by,
@@ -68,6 +63,6 @@ Normalization_Scale <- function(seurat_obj,
     scale.max = Normalization_Scale_scale_max,
     features = features_to_scale,
     verbose = Normalization_Scale_verbose
-  )
+  ))
   return(seurat_obj)
 }

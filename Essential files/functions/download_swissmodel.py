@@ -1,8 +1,6 @@
-#!/usr/bin/env python
+# functions/download_swissmodel.py
+#!/usr/bin/env python3
 # coding: utf-8
-
-# In[ ]:
-
 
 import os, sys, requests, time
 
