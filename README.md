@@ -11,7 +11,7 @@ scDock streamlines the complex workflow from single-cell/nucleus RNA sequencing 
 Available scRNA/snRNA format:  
 ● 10X Cell Ranger output (barcodes.tsv.gz, features.tsv.gz, matrix.mtx.gz)  
 ● .h5  
-● .txt  
+● .txt (Column: Cell; Row: Feature)  
 
 ### Output:  
 ● Seurat_object.rds files from Seurat analysis    
