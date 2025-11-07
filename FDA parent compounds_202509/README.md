@@ -1,5 +1,5 @@
 We provide a list of compounds (FDA_202509_compounds.xlsx) obtained from the FDA Drugs Database
- (version: September 2, 2025; accessed: September 4, 2025).
+ (version: September 2, 2025; accessed: September 4, 2025. URL: https://www.fda.gov/drugs/drug-approvals-and-databases/drugsfda-data-files).
 
 The .xlsx file was generated using the script "Get CAS from compound name.py", which retrieves the PubChem CID and CAS number for each compound name in the FDA list, along with the corresponding parent compound’s name, PubChem CID, and CAS number.
 
