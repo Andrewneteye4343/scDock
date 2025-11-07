@@ -14,8 +14,8 @@ Available scRNA/snRNA format:
 ● .txt (Column: Cell; Row: Feature)  
 
 ### Output:  
-● Core scRNA-seq analysis outputs include dimensional reduction plots with cell-type annotations, marker gene information, detailed annotation results, and Seurat_object.rds files from intermediate Seurat analysis steps.
-● Intercellular communication inference outputs include incoming and outgoing signaling, global and group-specific communication networks, and the CellChat.rds file.
+● Core scRNA-seq analysis outputs include dimensional reduction plots with cell-type annotations, marker gene information, detailed annotation results, and Seurat_object.rds files from intermediate Seurat analysis steps.  
+● Intercellular communication inference outputs include incoming and outgoing signaling, global and group-specific communication networks, and the CellChat.rds file.  
 ● Molecular docking results include the binding affinities and binding poses between compounds and proteins involved in the top intercellular signaling pathways across cell types, as well as in the most differentially activated pathways between groups. Users can also specify the cell types and groups of interest. The output includes the corresponding protein structure(s) and compound structure(s) used for docking.
 
 ### How to use:  
