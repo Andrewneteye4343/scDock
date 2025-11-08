@@ -25,7 +25,7 @@ Run_CellChat <- function(seurat_obj,
   }
 
   dir.create(Run_CellChat_output_path, showWarnings = FALSE, recursive = TRUE)
-
+  assay_to_use <- DefaultAssay(seurat_obj)
   # 1. Check harmony
   harmony_detected <- any(grepl("^harmony", names(seurat_obj@reductions))) |
                       any(grepl("^harmony", colnames(seurat_obj@meta.data)))
