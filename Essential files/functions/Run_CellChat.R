@@ -26,7 +26,7 @@ Run_CellChat <- function(seurat_obj,
 
   dir.create(Run_CellChat_output_path, showWarnings = FALSE, recursive = TRUE)
   assay_to_use <- DefaultAssay(seurat_obj)
-  # 1. Check harmony
+  # Check harmony
   harmony_detected <- any(grepl("^harmony", names(seurat_obj@reductions))) |
                       any(grepl("^harmony", colnames(seurat_obj@meta.data)))
 
@@ -67,7 +67,7 @@ Run_CellChat <- function(seurat_obj,
     assay_to_use <- flat_assay_name
   }
 
-  # 2. Check grouping
+  # Check grouping
   is_multi_group <- FALSE
   groups <- NULL
   cellchat <- NULL
@@ -188,7 +188,7 @@ Run_CellChat <- function(seurat_obj,
         ht_list_out[[i]]@column_names_param$gp <- grid::gpar(fontsize = col_font_size)
       }
 
-      pdf(file = file.path(Run_CellChat_output_path, "signalingRole_heatmap_outgoing.pdf"),
+      pdf(file = file.path(Run_CellChat_output_path, "Outgoing_signaling.pdf"),
           width = heatmap_pdf_width, 
           height = heatmap_pdf_height)
       draw(Reduce(`+`, ht_list_out), ht_gap = unit(0.5, "cm"))
@@ -210,7 +210,7 @@ Run_CellChat <- function(seurat_obj,
         ht_list_in[[i]]@column_names_param$gp <- grid::gpar(fontsize = col_font_size)
       }
 
-      pdf(file = file.path(Run_CellChat_output_path, "signalingRole_heatmap_incoming.pdf"),
+      pdf(file = file.path(Run_CellChat_output_path, "Incoming_signaling.pdf"),
           width = heatmap_pdf_width, 
           height = heatmap_pdf_height)
       draw(Reduce(`+`, ht_list_in), ht_gap = unit(0.5, "cm"))
@@ -263,7 +263,7 @@ Run_CellChat <- function(seurat_obj,
       write.csv(top_comm, file = csv_file, row.names = FALSE)
       message("[Run_CellChat] Saved top L-R pairs to: ", csv_file)
 
-      pdf(file = file.path(Run_CellChat_output_path, "netVisual_bubble_singleGroup.pdf"),
+      pdf(file = file.path(Run_CellChat_output_path, "Bubble_plot_singleGroup.pdf"),
           width = bubble_pdf_width,
           height = bubble_pdf_height)
       print(netVisual_bubble(cellchat,
@@ -286,7 +286,7 @@ Run_CellChat <- function(seurat_obj,
         color_text <- colorRampPalette(RColorBrewer::brewer.pal(8, "Set2"))(n_groups)
       }
       
-      pdf(file = file.path(Run_CellChat_output_path, paste0("netVisual_bubble_maxGroup_", max_grp, ".pdf")),
+      pdf(file = file.path(Run_CellChat_output_path, paste0("Bubble_plot_maxGroup_", max_grp, ".pdf")),
           width = bubble_pdf_width, height = bubble_pdf_height)
       print(netVisual_bubble(cellchat,
                              comparison = comparison_vec,
@@ -379,7 +379,7 @@ Run_CellChat <- function(seurat_obj,
       }
   
       # Output CSV file
-      out_csv <- file.path(Run_CellChat_output_path, "multiGroup_significant_LR_by_prob_diff.csv")
+      out_csv <- file.path(Run_CellChat_output_path, "multiGroup_significant_LR.csv")
       write.csv(diff_df, file = out_csv, row.names = FALSE)
       message("[Run_CellChat] Multi-group significant L-R pairs saved to: ", out_csv)
     } else {

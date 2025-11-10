@@ -96,7 +96,7 @@ Run_Integration <- function(seurat_obj,
   # Branch 2: Anchor-based integration (CCA / RPCA)
   message("[Run_Integration] Using Seurat anchor-based integration (", toupper(Run_Integration_method), ") ...")
 
-  # Split
+  # Split data
   seurat_list <- SplitObject(seurat_obj, split.by = Run_Integration_group_by)
   if (Run_Integration_verbose) message("[Run_Integration] Split into ", length(seurat_list), " objects by ", Run_Integration_group_by)
 

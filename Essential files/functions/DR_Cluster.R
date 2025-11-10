@@ -48,7 +48,7 @@ DR_Cluster <- function(seurat_obj,
                  sqrt((p2[2] - p1[2])^2 + (p2[1] - p1[1])^2)
     elbow_point <- which.max(distances)
 
-    # Prevent mistake
+    # Prevent mistake (linear Elbow plot or too small elbow_point)
     if (is.na(elbow_point) || elbow_point < 2) {
       elbow_point <- min(30, total_pcs)
     }
@@ -72,7 +72,7 @@ DR_Cluster <- function(seurat_obj,
     }
   }
 
-  # Neighbors + Clustering
+  # Neighbors
   if (DR_Cluster_verbose) message("[DR_Cluster] Using ", 
                                   ifelse(is.numeric(DR_Cluster_dims), length(DR_Cluster_dims), DR_Cluster_dims),
                                   " dimensions for FindNeighbors()...")
@@ -82,14 +82,15 @@ DR_Cluster <- function(seurat_obj,
                               k.param = DR_Cluster_k_param,
                               n.trees = DR_Cluster_n_trees,
                               verbose = DR_Cluster_verbose)
-
+  
+  # Clustering
   if (DR_Cluster_verbose) message("[DR_Cluster] Using resolution ", DR_Cluster_resolution, " for FindClusters()...")
   seurat_obj <- FindClusters(seurat_obj,
                              resolution = DR_Cluster_resolution,
                              algorithm = DR_Cluster_clustering_algorithm,
                              verbose = DR_Cluster_verbose)
 
-  # Dimension Reduction
+  # Dimension reduction
   if (tolower(DR_Cluster_reduction_method) == "umap") {
     if (DR_Cluster_verbose) message("[DR_Cluster] Using umap for RunUMAP()...")
     seurat_obj <- RunUMAP(seurat_obj,

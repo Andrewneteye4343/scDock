@@ -1,6 +1,6 @@
-# functions/download_swissmodel.py
 #!/usr/bin/env python3
 # coding: utf-8
+# functions/download_swissmodel.py
 
 import os, sys, requests, time
 

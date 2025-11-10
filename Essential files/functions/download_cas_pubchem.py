@@ -1,6 +1,6 @@
-# functions/download_cas_pubchem.py
 #!/usr/bin/env python3
 # coding: utf-8
+# functions/download_cas_pubchem.py
 
 import sys
 import os
@@ -9,8 +9,8 @@ from rdkit import Chem
 from rdkit.Chem import AllChem
 import subprocess
 
+# Download 3D SDF from PubChem for given CAS number
 def download_sdf(cas_number, out_sdf):
-    """Download 3D SDF from PubChem for given CAS number"""
     url = f"https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/{cas_number}/SDF?record_type=3d"
     r = requests.get(url)
     if r.status_code == 200 and len(r.content) > 0:
@@ -21,13 +21,13 @@ def download_sdf(cas_number, out_sdf):
         print(f"[WARN] CAS {cas_number} not found in PubChem.")
         return False
 
+# Convert SDF to PDBQT using RDKit and OpenBabel
 def sdf_to_pdbqt(sdf_file, out_dir):
-    """Convert SDF to PDBQT using RDKit + OpenBabel"""
     mol_name = os.path.splitext(os.path.basename(sdf_file))[0]
     pdb_file = os.path.join(out_dir, f"{mol_name}.pdb")
     pdbqt_file = os.path.join(out_dir, f"{mol_name}.pdbqt")
 
-    # Generate 3D conformer using RDKit
+    # Generate 3D conformer by RDKit
     mol = Chem.MolFromMolFile(sdf_file, removeHs=False)
     if mol is None:
         raise ValueError(f"RDKit failed to read {sdf_file}")
@@ -37,7 +37,7 @@ def sdf_to_pdbqt(sdf_file, out_dir):
     AllChem.UFFOptimizeMolecule(mol)
     Chem.MolToPDBFile(mol, pdb_file)
 
-    # Convert into .pdbqt using OpenBabel
+    # Convert structure into PDBQT format by OpenBabel
     subprocess.run(["obabel", pdb_file, "-O", pdbqt_file, "-xh"], check=True)
 
     return pdbqt_file

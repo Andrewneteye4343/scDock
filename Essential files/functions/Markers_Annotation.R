@@ -62,9 +62,9 @@ Markers_Annotation <- function(seurat_obj,
   if (Markers_Annotation_verbose) message("[Markers_Annotation] Marker finding complete. Total markers: ", nrow(markers))
 
   if (!is.null(Markers_Annotation_output_path)) {
-    Marker_output <- file.path(Markers_Annotation_output_path, "Markers.csv")
+    Marker_output <- file.path(Markers_Annotation_output_path, "Cluster_markers.csv")
     write.csv(markers, Marker_output, row.names = FALSE)
-    message("[Markers_Annotation] Markers.csv saved to: ", Markers_Annotation_output_path)
+    message("[Markers_Annotation] Cluster_markers.csv saved to: ", Markers_Annotation_output_path)
   }
 
   # Step 4: Select top markers per cluster
@@ -108,11 +108,11 @@ Markers_Annotation <- function(seurat_obj,
     message("[Markers_Annotation] Detected human symbols.")
   }
 
+# Extra step: Extend annotation database of scMayoMap
 # === Neuroblastoma start ===
-# Extend scMayoMap with neuroblastoma
 original_db <- scMayoMapDatabase
 
-# Set Neuroblastoma cell types + marker
+# Set Neuroblastoma cell types and marker
 cell_types_new <- c(
   "neuroblastoma:B cell",
   "neuroblastoma:Endothelial cell",
@@ -229,7 +229,7 @@ rownames(combined_db) <- NULL
 # === Neuroblastoma end ===
 
 # === Breast cancer start ===
-# Set Breast cancer cell types + marker
+# Set Breast cancer cell types and marker
 cell_types_new <- c(
   "breast_cancer:Malignant epithelial cell",
   "breast_cancer:Basal-like tumor cell",
@@ -349,139 +349,14 @@ combined_db <- rbind(combined_db, new_db_exp)
 rownames(combined_db) <- NULL
 # === Breast cancer end ===
 
-# === Lung cancer start ===
-# Set Lung cancer cell types + marker
-cell_types_new <- c(
-  "lung_cancer:Malignant epithelial cell",
-  "lung_cancer:Adenocarcinoma cell",
-  "lung_cancer:Squamous carcinoma cell",
-  "lung_cancer:Small cell carcinoma cell",
-  "lung_cancer:Endothelial cell",
-  "lung_cancer:Fibroblast",
-  "lung_cancer:Myofibroblast",
-  "lung_cancer:Pericyte",
-  "lung_cancer:Club cell",
-  "lung_cancer:Alveolar type I cell",
-  "lung_cancer:Alveolar type II cell",
-  "lung_cancer:T cell",
-  "lung_cancer:B cell",
-  "lung_cancer:Plasma cell",
-  "lung_cancer:Macrophage",
-  "lung_cancer:Monocyte",
-  "lung_cancer:Dendritic cell",
-  "lung_cancer:NK cell",
-  "lung_cancer:Mast cell",
-  "lung_cancer:Red blood cell",
-  "lung_cancer:Other stromal cell"
-)
-
-marker_list <- list(
-  "lung_cancer:Malignant epithelial cell" = c(
-    "EPCAM","KRT8","KRT18","KRT19","CDH1","MUC1","CEACAM5","S100A6",
-    "SOX9","MKI67","PCNA","TP63","VIM","SPP1"
-  ),
-  "lung_cancer:Adenocarcinoma cell" = c(
-    "NKX2-1","NAPS2","SFTPB","SFTPC","MUC1","KRT7","KRT8","EPCAM",
-    "CLDN4","TFF3","CEACAM6","AGR2","TSPAN8","HNF4A"
-  ),
-  "lung_cancer:Squamous carcinoma cell" = c(
-    "TP63","KRT5","KRT6A","KRT14","KRT17","SFN","DSG3","KRTDAP",
-    "IVL","LCE3D","SPRR1B","CLDN1","FABP5"
-  ),
-  "lung_cancer:Small cell carcinoma cell" = c(
-    "CHGA","SYP","ENO2","INSM1","NCAM1","ASCL1","DLL3","NEUROD1",
-    "TUBB2B","GRP","SCG3"
-  ),
-  "lung_cancer:Endothelial cell" = c(
-    "PECAM1","VWF","ENG","KDR","CD34","TEK","CLDN5","CDH5","ESM1","FLT1"
-  ),
-  "lung_cancer:Fibroblast" = c(
-    "COL1A1","COL1A2","FAP","PDGFRA","DCN","THY1","PDGFRB","S100A4",
-    "MMP2","ELN","COL3A1","POSTN"
-  ),
-  "lung_cancer:Myofibroblast" = c(
-    "ACTA2","TAGLN","MYH11","CNN1","TPM2","PDGFRB","DES","CALD1","RGS5","VIM"
-  ),
-  "lung_cancer:Pericyte" = c(
-    "RGS5","PDGFRB","MCAM","CSPG4","CD146","ACTA2","NOTCH3","TAGLN"
-  ),
-  "lung_cancer:Club cell" = c(
-    "SCGB1A1","SCGB3A1","SCGB3A2","KRT7","MUC1","MUC5B","BPIFA1","UGT1A6"
-  ),
-  "lung_cancer:Alveolar type I cell" = c(
-    "AGER","PDPN","CAV1","AQP5","RTKN2","EMP2","HOPX"
-  ),
-  "lung_cancer:Alveolar type II cell" = c(
-    "SFTPA1","SFTPB","SFTPC","SFTPD","NAPSA","LAMP3","ABCA3","PGC","NKX2-1"
-  ),
-  "lung_cancer:T cell" = c(
-    "CD3D","CD3E","CD2","CD4","IL7R","CD8A","CD8B","GZMB","PRF1",
-    "TRAC","TRBC1","CCR7","SELL","FOXP3"
-  ),
-  "lung_cancer:B cell" = c(
-    "MS4A1","CD19","CD79A","CD79B","PAX5","CD37","BANK1","TCL1A",
-    "IGHM","IGHD","CD24","FCER2"
-  ),
-  "lung_cancer:Plasma cell" = c(
-    "MZB1","XBP1","PRDM1","SDC1","IGHG1","IGKC","JCHAIN","TXNDC5"
-  ),
-  "lung_cancer:Macrophage" = c(
-    "CD68","CD163","MRC1","CSF1R","CD14","CD86","CD80","MSR1","MARCO","LYVE1"
-  ),
-  "lung_cancer:Monocyte" = c(
-    "CD14","LYZ","S100A8","S100A9","VCAN","FCN1","FCGR3A","CST3","SELL"
-  ),
-  "lung_cancer:Dendritic cell" = c(
-    "ITGAX","CD1C","CLEC9A","FCER1A","ZBTB46","BATF3","FLT3","CCR7","IRF8"
-  ),
-  "lung_cancer:NK cell" = c(
-    "NCAM1","KLRD1","NKG7","GNLY","PRF1","KLRF1","KLRC1","KLRC2","FCGR3A",
-    "NCR1","GZMA","GZMB"
-  ),
-  "lung_cancer:Mast cell" = c(
-    "TPSAB1","TPSB2","CPA3","KIT","MS4A2","FCER1A","HDC","HPGDS","CD63"
-  ),
-  "lung_cancer:Red blood cell" = c(
-    "HBB","HBA1","HBA2","GYPA","ALAS2","EPB41","SLC4A1"
-  ),
-  "lung_cancer:Other stromal cell" = c(
-    "COL6A1","PDPN","SPARC","FN1","MMP2","CSPG4","RGS5","VIM","CD146"
-  )
-)
-# Establish breast cancer binary matrix
-all_genes_new <- unique(unlist(marker_list))
-
-new_db <- matrix(0, nrow = length(all_genes_new), ncol = length(cell_types_new),
-                 dimnames = list(all_genes_new, cell_types_new))
-
-for(ct in cell_types_new){
-  genes <- marker_list[[ct]]
-  new_db[genes, ct] <- 1
-}
-
-new_db_df <- as.data.frame(new_db)
-new_db_df$gene <- rownames(new_db_df)
-new_db_df$tissue <- "lung_cancer"
-new_db_df <- new_db_df[, c("tissue","gene", cell_types_new)]
-
-# Align all cell type column
-all_cell_types <- union(colnames(combined_db)[3:ncol(combined_db)], cell_types_new)
-combined_db <- expand_cols(combined_db, all_cell_types)
-new_db_exp <- expand_cols(new_db_df, all_cell_types)
-
-# Combination
-combined_db <- rbind(combined_db, new_db_exp)
-rownames(combined_db) <- NULL
-# === Lung cancer end ===
-
 if (Markers_Annotation_verbose) message("[Markers_Annotation] Running scMayoMap for cell annotation...")
 annotation <- scMayoMap::scMayoMap(data = top_markers, tissue = Markers_Annotation_tissue_type, database = combined_db)
 
 # Step 5: Save annotation result
 if (!is.null(Markers_Annotation_output_path) && "res" %in% names(annotation)) {
-  Annotation_output <- file.path(Markers_Annotation_output_path, "Annotations.csv")
+  Annotation_output <- file.path(Markers_Annotation_output_path, "Annotation_results.csv")
   write.csv(annotation$res, Annotation_output, row.names = FALSE)
-  message("[Markers_Annotation] Annotation.csv saved to: ", Markers_Annotation_output_path)
+  message("[Markers_Annotation] Annotation_results.csv saved to: ", Markers_Annotation_output_path)
 }
 
 # Step 6: Add annotation to Seurat object

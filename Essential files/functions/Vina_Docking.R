@@ -29,8 +29,8 @@ Vina_Docking <- function(Run_CellChat_output_path,
   run_vina_docking <- function(ligand_file, receptor_file, out_dir, params) {
     if (!dir.exists(out_dir)) dir.create(out_dir, recursive = TRUE)
     ligand_name <- tools::file_path_sans_ext(basename(ligand_file))
-    output_pdbqt <- file.path(out_dir, paste0(ligand_name, "_AutoDockVina_result_structure.pdbqt"))
-    log_file <- file.path(out_dir, paste0(ligand_name, "_AutoDockVina_result_score.txt"))
+    output_pdbqt <- file.path(out_dir, paste0(ligand_name, "_result_structure.pdbqt"))
+    log_file <- file.path(out_dir, paste0(ligand_name, "_result_score.txt"))
 
     grid_file <- sub("\\.pdbqt$", "_grid.txt", receptor_file)
     if (!file.exists(grid_file)) {
@@ -141,8 +141,8 @@ Vina_Docking <- function(Run_CellChat_output_path,
   write.csv(receptor_match, file.path(Vina_Docking_output_path, "receptors_with_PDB.csv"), row.names = FALSE)
 
   # Create PDB directory
-  ligand_dir <- file.path(Vina_Docking_output_path, "ligand_from_PDB_LR_pairs")
-  receptor_dir <- file.path(Vina_Docking_output_path, "receptor_from_PDB_LR_pairs")
+  ligand_dir <- file.path(Vina_Docking_output_path, "CellChat_ligand")
+  receptor_dir <- file.path(Vina_Docking_output_path, "CellChat_receptor")
   if (!dir.exists(ligand_dir)) dir.create(ligand_dir, recursive = TRUE)
   if (!dir.exists(receptor_dir)) dir.create(receptor_dir, recursive = TRUE)
 

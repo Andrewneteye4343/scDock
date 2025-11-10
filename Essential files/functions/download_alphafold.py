@@ -1,9 +1,10 @@
-# functions/download_alphafold.py
 #!/usr/bin/env python3
 # coding: utf-8
+# functions/download_alphafold.py
 
 import os, sys, requests, time
 
+# Download protein structure(s) from AlphaFold
 def download_alphafold_pdb(af_id, output_dir="downloads"):
     output_dir = os.path.abspath(output_dir)
     os.makedirs(output_dir, exist_ok=True)
