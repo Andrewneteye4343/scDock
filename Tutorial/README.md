@@ -1,4 +1,4 @@
-In this tutorial, we will demonstrate how to utilize scDock with GSE218563 dataset from NCBI GEO website (https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE218563). This scRNA dataset contains 16 kidney tissue samples from control and diabetic nephropathy (DN) mice.  
+[Cluster_markers.csv](https://github.com/user-attachments/files/23565984/Cluster_markers.csv)In this tutorial, we will demonstrate how to utilize scDock with GSE218563 dataset from NCBI GEO website (https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE218563). This scRNA dataset contains 16 kidney tissue samples from control and diabetic nephropathy (DN) mice.  
 
 ● Data preparation:  
 Please manually download those data to your computer. We recommend users rename their files as shown in the example below for 10X Cell Ranger data. For example, each sample directory should contain the following files:  
@@ -51,16 +51,17 @@ netVisual_bubble_maxGroup_Control.pdf, netVisual_bubble_maxGroup_DN.pdf, signali
 
 ● Result explanation:  
 1. ElbowPlot_SeuratProject.pdf – Visualizes the ranking of principal components based on the percentage of variance explained in the Elbow plot.
-The optimal number of PCs should be chosen at the point where an “elbow” is observed.
-2. ElbowPlot_Integration_SeuratProject.pdf – Visualizes the ranking of principal components based on the percentage of variance explained in the Elbow plot during data integration. The optimal number of PCs should be chosen at the point where an “elbow” is observed.
+The optimal number of PCs should be chosen at the point where an “elbow” is observed.[ElbowPlot_SeuratProject.pdf](https://github.com/user-attachments/files/23565972/ElbowPlot_SeuratProject.pdf)
+
+2. ElbowPlot_Integration_SeuratProject.pdf – Visualizes the ranking of principal components based on the percentage of variance explained in the Elbow plot during data integration. The optimal number of PCs should be chosen at the point where an “elbow” is observed.[ElbowPlot_Integration_SeuratProject.pdf](https://github.com/user-attachments/files/23565973/ElbowPlot_Integration_SeuratProject.pdf)
+
 3. DimPlot.png – Visualizes the distribution of cells with annotated labels.  <img width="3000" height="2400" alt="DimPlot" src="https://github.com/user-attachments/assets/475cffb8-b98e-4c35-95a8-04a38f1331d3" />
-4. Markers.csv – Records the detailed information of differentially expressed genes (DEGs), including p-value, adjusted p-value and average log2 fold change, and additional related details in each cluster. 
-5. Annotation.csv – Records detailed annotation results calculated by scMayoMap (https://github.com/chloelulu/scMayoMap).  
-6. signalingRole_heatmap_incoming.pdf & signalingRole_heatmap_outgoing.pdf – Visualize incoming and outgoing signaling activities among groups.
-7. netVisual_bubble_maxGroup_DN.pdf – Visualizes signaling pathways that are more active in a specific group (e.g., DN) compared to others.
-8. multiGroup_significant_LR_by_prob_diff.csv – Records detailed information on top signaling pathways across all groups or within a specific group, including: interaction name, source (signaling-providing cell type), target (signaling-receiving cell type), group name, prob1 (probability in group 1), prob2 (probability in group 2), prob_diff (probability difference), higher_group (group with higher probability), and additional related details.  
+4. Cluster_markers.csv – Records the detailed information of differentially expressed genes (DEGs), including p-value, adjusted p-value and average log2 fold change, and additional related details in each cluster.
+5. Annotation_results.csv – Records detailed annotation results calculated by scMayoMap (https://github.com/chloelulu/scMayoMap).  
+6. Incoming_signaling.pdf & Outgoing_signaling.pdf – Visualize incoming and outgoing signaling activities among groups.[Incoming_signaling.pdf](https://github.com/user-attachments/files/23565987/Incoming_signaling.pdf)[Outgoing_signaling.pdf](https://github.com/user-attachments/files/23565988/Outgoing_signaling.pdf)
+7. Bubble_plot_maxGroup_DN.pdf – Visualizes signaling pathways that are more active in a specific group (e.g., DN) compared to others.[Bubble_plot_maxGroup_DN.pdf](https://github.com/user-attachments/files/23565989/Bubble_plot_maxGroup_DN.pdf)
+8. multiGroup_significant_LR.csv – Records detailed information on top signaling pathways across all groups or within a specific group, including: interaction name, source (signaling-providing cell type), target (signaling-receiving cell type), group name, prob1 (probability in group 1), prob2 (probability in group 2), prob_diff (probability difference), higher_group (group with higher probability), and additional related details.  
 9. ligands_with_PDB.csv & receptors_with_PDB.csv – Record ligand and receptor proteins involved in top signaling pathways across or within specific groups. Information includes protein name and their PDB model matched from Uniprot-PDB-mapper (https://github.com/iriziotis/Uniprot-PDB-mapper) (accessed August 8, 2025).
 10. ligand_from_PDB_LR_pairs/ – Contains the protein structures and detailed docking results (LigandName_AutoDockVina_result_structure.pdbqt & AutoDockVina_score.csv) of ligand proteins listed in ligands_with_PDB.csv. In AutoDockVina_score.csv, scDock ranks the compounds by their binding affinity from lowest to highest.
 11. receptor_from_PDB_LR_pairs/ – Contains the protein structures and detailed docking results (LigandName_AutoDockVina_result_structure.pdbqt & AutoDockVina_score.csv) of receptor proteins listed in receptors_with_PDB.csv.
-12. ligand_structures_from_CAStxt_for_AutoDockVina/ – Stores the prepared compound structures for molecular docking provided in cas.txt.
-[netVisual_bubble_maxGroup_DN.pdf](https://github.com/user-attachments/files/23565965/netVisual_bubble_maxGroup_DN.pdf)
+12. ligand_structures_from_CAStxt_for_AutoDockVina/ – Stores the prepared compound structures for molecular docking provided in cas.txt.  
