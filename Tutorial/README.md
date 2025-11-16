@@ -63,3 +63,4 @@ The optimal number of PCs should be chosen at the point where an “elbow” is 
 10. ligand_from_PDB_LR_pairs/ – Contains the protein structures and detailed docking results (LigandName_AutoDockVina_result_structure.pdbqt & AutoDockVina_score.csv) of ligand proteins listed in ligands_with_PDB.csv. In AutoDockVina_score.csv, scDock ranks the compounds by their binding affinity from lowest to highest.
 11. receptor_from_PDB_LR_pairs/ – Contains the protein structures and detailed docking results (LigandName_AutoDockVina_result_structure.pdbqt & AutoDockVina_score.csv) of receptor proteins listed in receptors_with_PDB.csv.
 12. ligand_structures_from_CAStxt_for_AutoDockVina/ – Stores the prepared compound structures for molecular docking provided in cas.txt.
+[netVisual_bubble_maxGroup_DN.pdf](https://github.com/user-attachments/files/23565965/netVisual_bubble_maxGroup_DN.pdf)
