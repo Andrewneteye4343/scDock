@@ -45,8 +45,7 @@ Bubble_plot_maxGroup_Control.pdf, Bubble_plot_maxGroup_DN.pdf, Incoming_signalin
 10. During molecular docking, scDock will display the current docking participators. When the docking is finished, scDock will automatically rank the binding affinity of compounds in the single receptor results and save it (AutoDockVina_score.csv).  <img width="1169" height="862" alt="Figure 12" src="https://github.com/user-attachments/assets/30d4c2d6-4bf9-4c1d-be15-7c9a9ae6a4f6" />  
 
 11. In the end, you should obtain results similar to those shown in the figure.
-<img width="374" height="393" alt="Figure 13" src="https://github.com/user-attachments/assets/3d43956f-f1da-4d8a-b2e6-ef6d5e454f89" />
-
+<img width="389" height="381" alt="Figure 13" src="https://github.com/user-attachments/assets/45dd3844-d352-4bed-9488-b7c44e61be9b" />  
 ● Result explanation:  
 1. ElbowPlot_SeuratProject.pdf – Visualizes the ranking of principal components based on the percentage of variance explained in the Elbow plot.
 The optimal number of PCs should be chosen at the point where an “elbow” is observed. [ElbowPlot_SeuratProject.pdf](https://github.com/user-attachments/files/23565972/ElbowPlot_SeuratProject.pdf)
