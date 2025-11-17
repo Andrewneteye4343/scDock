@@ -21,7 +21,7 @@ Load_QC:
 Normalization_Scale:
   Normalization_Scale_use_assay: RNA                       # [strings] This argument defines the assay in Seurat::NormalizeData(). Default is "RNA".
   Normalization_Scale_normalization_method: LogNormalize   # [strings] This argument defines the method in Seurat::NormalizeData(). The valid values are "LogNormalize", "CLR", and "RC". Default is "LogNormalize".
-  Normalization_Scale_CLR_margin: 2                        # [integer] CLR Normalization margin. Choose 1 (features) or 2 (cells), only you use normalization_method as CLR. Default is 2.
+  Normalization_Scale_CLR_margin: 1                        # [integer] CLR Normalization margin. Choose 1 (features) or 2 (cells), only you use normalization_method as CLR. Default is 1.
   Normalization_Scale_scale_factor: 10000                  # [integer] This argument defines the scale.factor in Seurat::NormalizeData(). Default is 10000.
   Normalization_Scale_hvg_method: vst                      # [strings] This argument defines the selection.method in Seurat::FindVariableFeatures(). The valid values are "vst", "mean.var.plot", and "dispersion". Default is vst.
   Normalization_Scale_nVariableFeatures: 2000              # [integer] This argument defines the nfeatures in Seurat::FindVariableFeatures(). Default is 2000.
