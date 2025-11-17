@@ -9,7 +9,7 @@ Please manually download those data to your computer. We recommend users rename 
 ● Meta data preparation (Optional):  
 If you are interested in the difference of cellular interaction between control and DN mice, you can provide metadata.txt as we have prepared.  
 
-● Modify config.yaml (read in the above GSE218563_config.yaml file):  
+● Modify config.yaml:  
 In the tutorial, the scDock workpath is set as `/home/andrew/scDock`. 
 Users can modify the paths according to your requirement.  Except the path arguments, users can stay default settings if you are not sure how to modify them.  
 
