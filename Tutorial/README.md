@@ -15,7 +15,7 @@ Users can modify the paths according to your requirement.  Except the path argum
 
 Here, we mention some important arguments that users might want to modify:  
 1. `Load_QC_input_files` This path defines where to find your scRNA file(s). Options can be a single file or a directory which contains several files. For each pair of CellRanger file (barcodes.tsv.gz, features.tsv.gz, matrix.mtx.gz), they should be placed in distinct directories under Load_QC_input_files. For other format (.h5 and .txt), they can be placed under Load_QC_input_files without creating any directory. For example: /home/andrew/validation_datasets/GSE218563  
-2. `Load_QC_input_type` This argument defines the type of scRNA that you place in Load_QC_input_files. Options are 10x, multi10x (use only when you have more than 1 pair of Cell Ranger file), h5 and txt.  
+2. `Load_QC_input_type` This argument defines the type of scRNA that you place in Load_QC_input_files. Options are 10x, multi10x (use only when you have more than 1 pair of Cell Ranger file), h5 and txt. For example: multi10x  
 3. `Load_QC_max_mito` This argument defines the persent of mitochondrial counts cut off in subset(). The valid range locates from 0 to 1. Default is 0.1. Lower cut off will remove more cells in the further analysis.
 4. `Load_QC_metadata_file` This path defines where to find metadata for grouping your samples (Optional).  
 5. `Run_Integration_method` This argument defines the method in Seurat::IntegrateLayers(). The valid values are "cca", "harmony" and "rpca". Default is "cca". Should be modified only if you intend to run integration (Optional).  
