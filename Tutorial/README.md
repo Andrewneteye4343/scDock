@@ -37,7 +37,7 @@ Here, we mention some important arguments that users might want to modify:
 
 4. During the QC process, the numbers of cells and genes before and after quality control will be displayed.  <img width="463" height="303" alt="Figure 3" src="https://github.com/user-attachments/assets/5d2a64e7-aa93-4dc7-a7dd-00e76e319f7f" />
 
-5. During dimensional reduction, if the user sets "auto" to automatically determine the optimal number of PCs, scDock will display the following information and generate an Elbow plot <img width="891" height="81" alt="Figure 4" src="https://github.com/user-attachments/assets/f881a352-f7ea-4e94-aa34-1249a129cfe3" />  
+5. During dimensional reduction, if the user sets "auto" to automatically determine the optimal number of PCs, scDock will display the following information and generate an Elbow plot. <img width="891" height="81" alt="Figure 4" src="https://github.com/user-attachments/assets/f881a352-f7ea-4e94-aa34-1249a129cfe3" />  
 
 6. If users set Run_Integration_run_integration = true in config.yaml, the following information may be displayed.  <img width="532" height="65" alt="Figure 5" src="https://github.com/user-attachments/assets/a7718b3a-5158-423e-843b-39d148cab5ec" />  <img width="931" height="416" alt="Figure 6" src="https://github.com/user-attachments/assets/8f37f278-d12c-416c-8e9c-2be97190e48f" />  
 
