@@ -24,7 +24,8 @@ Here, we mention some important arguments that users might want to modify:
 8. `Run_CellChat_ntop_signaling` Choose how many top signalings (detailed L-R pairs in each pathway) you want to explore. More signalings will increase the time cost for further molecular docking. Defualt is 5.
 9. `Vina_Docking_vina_exhaustiveness` This argument defines the exhaustiveness in AudoDock Vina. The higher value will increase the exhaustiveness of the global search, but also increase the time cost. Default is 8.
 10. `Vina_Docking_vina_cpu` This argument defines the how many cpu(s) will be used in AutoDock Vina. Default is 1.
-11. `Vina_Docking_ligand_ref_file` and `Vina_Docking_receptor_ref_file` These arguments defines where to find the ligand_reference.csv and receptor_reference.csv that we provided in Github - Essential File.  
+11. `Vina_Docking_ligand_ref_file` and `Vina_Docking_receptor_ref_file` These arguments defines where to find the ligand_reference.csv and receptor_reference.csv that we provided in Github - Essential Files - functions.  
+12. `Vina_Docking_cas_txt_file` You can provide a .txt file with CAS number for each compound that you are interested. Seperate them with row. If you provide this, the program won't consider use_fda and fda_txt_path.
 
 ● Start tutorial:  
 1. If you haven’t installed scDock, run `bash install.sh`. The installation should complete within a few minutes.  
