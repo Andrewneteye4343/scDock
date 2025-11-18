@@ -23,7 +23,7 @@ Here, we mention some important arguments that users might want to modify:
 7. `Run_CellChat_group_by` This argument defines the group.by in CellChat::createCellChat(). Default is "Celltype". If you are interested in groups from metadata.txt, you can set this argument with "sample_group".  
 8. `Run_CellChat_ntop_signaling` Choose how many top signalings (detailed L-R pairs in each pathway) you want to explore. More signalings will increase the time cost for further molecular docking. Defualt is 5.
 9. `Vina_Docking_ligand_ref_file` and `Vina_Docking_receptor_ref_file` These arguments defines where to find the ligand_reference.csv and receptor_reference.csv that we provided in Github - Essential Files - functions.
-10. `Vina_Docking_cas_txt_file` You can provide a .txt file with CAS number for each compound that you are interested. Seperate them with row. If you provide this, the program won't consider use_fda and fda_txt_path.  
+10. `Vina_Docking_cas_txt_file` This argument defines where to find the cas.txt. You can provide a .txt file with CAS number for each compound that you are interested. Seperate them with row. If you provide this, the program won't consider use_fda and fda_txt_path.  
 11. `Vina_Docking_vina_exhaustiveness` This argument defines the exhaustiveness in AudoDock Vina. The higher value will increase the exhaustiveness of the global search, but also increase the time cost. Default is 8.
 12. `Vina_Docking_vina_cpu` This argument defines the how many cpu(s) will be used in AutoDock Vina. Default is 1.  
 
