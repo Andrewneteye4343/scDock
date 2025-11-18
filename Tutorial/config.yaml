@@ -14,7 +14,7 @@ Seurat_output_dir: seurat_output   # [string] This argument defines the name of 
 Load_QC:
   Load_QC_input_files: /home/andrew/validation_datasets/GSE218563   # [string] This path defines where to find your scRNA file(s). Options can be a single file or a directory which contains several files.
   # For each pair of CellRanger file (barcodes.tsv.gz, features.tsv.gz, matrix.mtx.gz), they should be placed in distinct directories under Load_QC_input_files. For other format (.h5 and .txt), they can be placed under Load_QC_input_files without creating any directory.
-  Load_QC_input_type: multi10x                          # [string] This argument defines the type of scRNA that you place in Load_QC_input_files. Options are 10x, multi10x (use only when you have more than 1 pair of Cell Ranger file), rds, h5 and txt.
+  Load_QC_input_type: multi10x                          # [string] This argument defines the type of scRNA that you place in Load_QC_input_files. Options are 10x, multi10x (use only when you have more than 1 pair of Cell Ranger file), h5 and txt.
   Load_QC_species: mouse                                # [string] This argument defines the species of your data. The valid values are human and mouse.
   Load_QC_min_features: 200                             # [integer] This argument defines the min.features in Seurat::CreateSeuratObject(). Default is 200.
   Load_QC_min_cells: 3                                  # [integer] This argument defines the min.cells in Seurat::CreateSeuratObject(). Default is 3.
