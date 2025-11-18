@@ -29,5 +29,8 @@ Enter scDock virtual environment and conduct the following command
 3. [Optional] If you want to use FDA compounds as compound library in molecular docking, you can follow the README.md in our FDA parent compounds_202509.
 4. [Optional] If you want to group your input samples, you can follow the README.md in our Metadata.
 
+### Tutorial:
+We provide a tutorial to demonstrate how to utilize scDock ([前往 src 資料夾](./Tutorial)).  
+
 ### Note:  
 We recommend clearing the files in argument "Vina_Docking_output_path" (in config.yaml) before each run, as scDock does not automatically remove the ligand and receptor directories. Otherwise, unnecessary structural files may accumulate.
