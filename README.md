@@ -30,7 +30,7 @@ Enter scDock virtual environment and conduct the following command
 4. [Optional] If you want to group your input samples, you can follow the README.md in our Metadata.
 
 ### Tutorial:
-We provide a tutorial to demonstrate how to utilize scDock ([Tutorial](./Tutorial)). You can follow the instrction to finish a comparative analyses with control and DN mice.    
+We provide a tutorial that demonstrates how to use scDock ([Tutorial](./Tutorial)). By following the instructions, you can perform a comparative analysis using kidney samples from control and diabetic nephropathy (DN) mice.  
 
 ### Note:  
 We recommend clearing the files in argument "Vina_Docking_output_path" (in config.yaml) before each run, as scDock does not automatically remove the ligand and receptor directories. Otherwise, unnecessary structural files may accumulate.
