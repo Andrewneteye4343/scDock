@@ -74,12 +74,12 @@ Vina_Docking <- function(Run_CellChat_output_path,
 
   if (length(csv_files) == 0) {
     # fallback: try multi-group file
-    multi_csv <- file.path(Run_CellChat_output_path, "multiGroup_significant_LR_by_prob_diff.csv")
+    multi_csv <- file.path(Run_CellChat_output_path, "multiGroup_significant_LR.csv")
     if (file.exists(multi_csv)) {
-      message("[INFO] No top*_LR_*.csv found. Using multiGroup_significant_LR_by_prob_diff.csv instead.")
+      message("[INFO] No top*_LR_*.csv found. Using multiGroup_significant_LR.csv instead.")
       csv_files <- c(multi_csv)
     } else {
-      stop("No LR CSV files found (neither top*_LR_*.csv nor multiGroup_significant_LR_by_prob_diff.csv) in: ",
+      stop("No LR CSV files found (neither top*_LR_*.csv nor multiGroup_significant_LR.csv) in: ",
            Run_CellChat_output_path)
     }
   }
