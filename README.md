@@ -25,7 +25,7 @@ Enter scDock virtual environment and conduct the following command
 
 ### Preparation:
 1. [Recommended] Please follow the README.md in our [Installation](./Installation).
-2. [Recommended] Please follow the README.md in our [Essential files](./Essential%20files).
+2. [Recommended] Please follow the README.md in our [Essential_files](./Essential_files).
 3. [Optional] If you want to use FDA compounds as compound library in molecular docking, you can follow the README.md in our [FDA parent compounds_202509](./FDA%20parent%20compounds_202509).
 4. [Optional] If you want to group your input samples, you can follow the README.md in our [Metadata](./Metadata).
 
