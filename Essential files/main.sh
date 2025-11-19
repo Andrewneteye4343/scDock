@@ -333,8 +333,8 @@ validate_config <- function(config) {
   valid_CLR_margin <- c(1,2)
   if ((ns$Normalization_Scale_normalization_method == "CLR") && (!(ns$Normalization_Scale_CLR_margin %in% valid_CLR_margin))) {
     warning(paste0("Warning: Normalization_Scale_CLR_margin must be numeric"))
-    message(paste0("Using default value: 1 [for features] for Normalization_Scale_CLR_margin"))
-    arg_Normalization_Scale_CLR_margin <- 1
+    message(paste0("Using default value: 2 [for cells] for Normalization_Scale_CLR_margin"))
+    arg_Normalization_Scale_CLR_margin <- 2
   } else {
     arg_Normalization_Scale_CLR_margin <- ns$Normalization_Scale_CLR_margin
   }
