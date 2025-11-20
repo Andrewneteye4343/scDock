@@ -13,7 +13,7 @@ Load_QC:
   Load_QC_min_features: 200                             # [integer] This argument defines the min.features in Seurat::CreateSeuratObject(). Default is 200.
   Load_QC_min_cells: 3                                  # [integer] This argument defines the min.cells in Seurat::CreateSeuratObject(). Default is 3.
   Load_QC_names_delim: _                                # [strings] This argument defines the names.delim in Seurat::CreateSeuratObject(). Default is "_".
-  Load_QC_max_mito: 0.1                                 # [float] This argument defines the persent of mitochondrial counts cut off in subset(). The valid range locates from 0 to 1. Default is 0.1.
+  Load_QC_max_mito: 0.1                                 # [float] This argument defines the percent of mitochondrial counts cut off in subset(). The valid range locates from 0 to 1. Default is 0.1.
   Load_QC_metadata_file: null                           # [strings] This pah defines where to find metadata for grouping your samples. Should not be the same path with Load_QC_input_files when you input txt as Load_QC_input_type.
   Load_QC_verbose: true                                 # [boolean] Whether to display the progress detail. Default is true.
 
