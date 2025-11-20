@@ -29,6 +29,7 @@ Here, we mention some important arguments that users might want to modify:
 13. `Vina_Docking_vina_exhaustiveness` This argument defines the exhaustiveness in AudoDock Vina. The higher value will increase the exhaustiveness of the global search, but also increase the time cost. Default is 8.
 14. `Vina_Docking_vina_cpu` This argument defines the how many cpu(s) will be used in AutoDock Vina. Default is 1.  
 
+
 ● Start tutorial:  
 ##### Time cost: approximately 50 minutes. This tutorial processes ~27,000 cells and 20,695 genes after QC. During the docking step, two proteins and 43 compounds were docked with vina_exhaustiveness set to eight, using a single CPU.  
 ##### CPU and Memory Usage: The CPU usage reached 274%, and the maximum resident set size was approximately 14.59 GB.  
