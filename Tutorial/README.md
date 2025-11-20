@@ -30,6 +30,7 @@ Here, we mention some important arguments that users might want to modify:
 14. `Vina_Docking_vina_cpu` This argument defines the how many cpu(s) will be used in AutoDock Vina. Default is 1.  
 
 ● Start tutorial:  
+0. Time cost: approximately 50 minutes. This tutorial processes ~27,000 cells and 20,695 genes. During the docking step, two proteins and 43 compounds were docked with vina_exhaustiveness set to eight, using a single CPU.
 1. If you haven’t installed scDock, run `bash install.sh`. The installation should complete within a few minutes.  
 2. Before starting the analysis, make sure to place main.sh, config.yaml, and the functions directory in your working directory.  <img width="119" height="91" alt="Figure 1" src="https://github.com/user-attachments/assets/6596c326-d52b-4651-aed3-173fef6a198f" />  
 
