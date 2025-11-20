@@ -9,7 +9,7 @@ Load_QC:
   Load_QC_input_files: /path/to/your_data               # [strings] This path defines where to find your scRNA file(s). Options can be a single file or a directory which contains several files. (ex: /home/andrew/scDock/GSE176078)
   # For each pair of CellRanger file (barcodes.tsv.gz, features.tsv.gz, matrix.mtx.gz), they should be placed in distinct directories under Load_QC_input_files. For other format (.h5 and .txt), they can be placed under Load_QC_input_files without creating any directory.
   Load_QC_input_type: multi10x                          # [strings] This argument defines the type of scRNA that you place in Load_QC_input_files. The valid values are "10x", "multi10x" (use only when you have more than 1 pair of Cell Ranger file), "h5" and "txt".
-  Load_QC_species: human                                # [strings] This argument defines the species of your scRNA data. The valid values are "human" and "mouse".
+  Load_QC_species: mouse                                # [strings] This argument defines the species of your scRNA data. The valid values are "human" and "mouse".
   Load_QC_min_features: 200                             # [integer] This argument defines the min.features in Seurat::CreateSeuratObject(). Default is 200.
   Load_QC_min_cells: 3                                  # [integer] This argument defines the min.cells in Seurat::CreateSeuratObject(). Default is 3.
   Load_QC_names_delim: _                                # [strings] This argument defines the names.delim in Seurat::CreateSeuratObject(). Default is "_".
@@ -67,7 +67,7 @@ Markers_Annotation:
   Markers_Annotation_only_pos: true                       # [boolean] Whether to only calculate the positive differential expression genes in each cluster. Default is true.
   Markers_Annotation_verbose: true                        # [boolean] Whether to display the progress detail. Default is true.
   Markers_Annotation_top_n: 150                           # [integer] The number of top positive differential expresseion genes (ranked by avg_log2) in each cluster that will be utilized in the annotation. Default is 150. 
-  Markers_Annotation_tissue_type: blood                   # [strings] Please choose the one of the following tissue type of your sample: adipose tissue; bladder; blood; bone; bone marrow; brain; breast; embryo; eye; 
+  Markers_Annotation_tissue_type: kidney                  # [strings] Please choose the one of the following tissue type of your sample: adipose tissue; bladder; blood; bone; bone marrow; brain; breast; embryo; eye; 
   # gastrointestinal tract; heart; kidney; liver; lung ; mammary gland; muscle; other; ovary; pancreas; placenta; prostate; skin; spleen; stomach; testis; thymus; tooth; uterus; neuroblastoma, breast_cancer.
   Markers_Annotation_label_column: Celltype               # [strings] This argument defines the metadata name in seurat_obj that records the annotation results. Default is Celltype.
 
