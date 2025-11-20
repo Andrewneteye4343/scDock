@@ -255,7 +255,7 @@ Vina_Docking <- function(Run_CellChat_output_path,
     # Collect docking results per receptor
     message("[Vina] Collecting docking results for receptor folder: ", rec_subdir)
     log_files <- list.files(rec_subdir,
-                            pattern = "_AutoDockVina_result_score.txt$",
+                            pattern = "_result_score.txt$",
                             full.names = TRUE,
                             recursive = FALSE)
 
@@ -267,7 +267,7 @@ Vina_Docking <- function(Run_CellChat_output_path,
       if (length(line1) > 0) {
         affinity <- as.numeric(strsplit(trimws(line1), "\\s+")[[1]][2])
       }
-      ligand <- sub("_AutoDockVina_result_score.txt$", "", basename(logf))
+      ligand <- sub("_result_score.txt$", "", basename(logf))
       data.frame(ligand = ligand,
                  affinity = affinity,
                  stringsAsFactors = FALSE)
