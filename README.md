@@ -24,8 +24,8 @@ Enter scDock virtual environment and conduct the following command
 `bash main.sh config.yaml` 
 
 ### Preparation:
-1. [Recommended] Please follow the README.md in our [Installation](./Installation).
-2. [Recommended] Please follow the README.md in our [Essential_files](./Essential_files).
+1. Please follow the README.md in our [Installation](./Installation).
+2. Please follow the README.md in our [Essential_files](./Essential_files).
 3. [Optional] If you want to use FDA compounds as compound library in molecular docking, you can follow the README.md in our [FDA_parent_compounds_202509](./FDA_parent_compounds_202509).
 4. [Optional] If you want to group your input samples, you can follow the README.md in our [Metadata](./Metadata).
 
