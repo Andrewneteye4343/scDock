@@ -1,6 +1,6 @@
 If you want to group samples during input, please provide a metadata.txt file following the demonstrated format.  
 When metadata.txt is provided, the Seurat object will include a metadata column named "sample_group", defined according to the file.  
-The "sample_group" label can be used as the value for the argument `Run_CellChat_group_by argument` in config.yaml for downstream CellChat analysis.  
+The "sample_group" label can be used as the value for the argument `Run_CellChat_group_by` in config.yaml for downstream CellChat analysis.  
 The metadata.txt file should contain two tab-separated columns:  
 ● file_name  
 ● group  
