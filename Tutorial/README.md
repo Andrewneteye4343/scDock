@@ -1,7 +1,7 @@
 In this tutorial, we will demonstrate how to utilize scDock with GSE218563 dataset from NCBI GEO website (https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE218563). This scRNA dataset contains 16 kidney tissue samples from control and diabetic nephropathy (DN) mice.  
 
 ● Data preparation:  
-Please manually download those data to your computer. Please rename the files as illustrated in the example below for 10x Cell Ranger data. For example, each sample directory should contain the following files:  
+Please manually download those data to your computer. Please rename the files as illustrated in the example below for 10x Cell Ranger data. Each sample directory should contain the following files:  
 `barcodes.tsv.gz`  
 `features.tsv.gz`  
 `matrix.mtx.gz`  
