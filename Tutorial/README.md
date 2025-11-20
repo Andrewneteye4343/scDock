@@ -69,4 +69,5 @@ The optimal number of PCs should be chosen at the point where an “elbow” is 
 9. ligands_with_PDB.csv & receptors_with_PDB.csv – Record ligand and receptor proteins involved in top signaling pathways across or within specific groups. Information includes protein name and their PDB model matched from Uniprot-PDB-mapper (https://github.com/iriziotis/Uniprot-PDB-mapper) (accessed August 8, 2025).
 10. CellChat_ligand/ – Contains the protein structures (ReceptorName_prepared.pdbqt) and detailed docking results (LigandName_result_structure.pdbqt & AutoDockVina_score.csv) of ligand proteins listed in ligands_with_PDB.csv. In AutoDockVina_score.csv, scDock ranks the compounds by their binding affinity from lowest to highest.
 11. CellChat_receptor/ – Contains the protein structures (ReceptorName_prepared.pdbqt) and detailed docking results (LigandName_result_structure.pdbqt & AutoDockVina_score.csv) of receptor proteins listed in receptors_with_PDB.csv.
-12. ligand_structures_from_CAStxt_for_AutoDockVina/ – Stores the prepared compound structures for molecular docking provided in cas.txt.  
+12. ligand_structures_from_CAStxt_for_AutoDockVina/ – Stores the prepared compound structures for molecular docking provided in cas.txt.
+13. seurat_output/ – Records the suerat object files (.rds) from the intermediate steps in scRNA analysis.
