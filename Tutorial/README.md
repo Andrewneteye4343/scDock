@@ -33,7 +33,7 @@ Here, we mention some important arguments that users might want to modify:
 ● Start tutorial:  
 Time cost: approximately 50 minutes. This tutorial processes ~27,000 cells and 20,695 genes after QC and perfomrs Harmony integration. During the docking step, two proteins and 43 compounds were docked with argument `Vina_Docking_vina_exhaustiveness` set to eight, using a single CPU.  
 CPU and Memory Usage: The CPU usage reached 274%, and the maximum resident set size was approximately 14.59 GB.  
-1. If you haven’t installed scDock, run `bash install.sh`. The installation should complete within a few minutes.  
+1. If you haven’t installed scDock, run `bash install.sh`. The [installation](https://github.com/Andrewneteye4343/scDock/tree/main/Installation) should complete within a few minutes.  
 2. Before starting the analysis, make sure to place main.sh, config.yaml, and the functions directory in your working directory.  <img width="119" height="91" alt="Figure 1" src="https://github.com/user-attachments/assets/6596c326-d52b-4651-aed3-173fef6a198f" />  
 
 3. Please make sure you are working in the scDock virtual environment. If not, activate it by running `conda activate scDock` first. Then, execute `bash main.sh config.yaml` to start the scDock analysis.  <img width="885" height="203" alt="Figure 2" src="https://github.com/user-attachments/assets/168130be-c6c7-49c7-84f6-64a4b86e322e" />
