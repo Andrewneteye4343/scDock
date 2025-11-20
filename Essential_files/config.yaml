@@ -58,7 +58,7 @@ Run_Integration:
 
 # Step 4: Markers_Annotation()
 Markers_Annotation:
-  Markers_Annotation_output_path: /home/andrew/scDock     # [strings] This path defines where to save your annotation results.
+  Markers_Annotation_output_path: /path/to/your_path      # [strings] This path defines where to save your annotation results.
   Markers_Annotation_use_assay: RNA                       # [strings] The argument defines the assay in Seurat::FindAllMarkers(). Default is "RNA".
   Markers_Annotation_group_by: seurat_clusters            # [strings] The argument defines the group.by in Seurat::FindAllMarkers(). Default is "seurat_clusters".
   Markers_Annotation_logfc_threshold: 0.2                 # [float] The argument defines the min.pct in Seurat::FindAllMarkers(). Default is 0.1.
