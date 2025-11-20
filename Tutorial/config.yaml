@@ -46,7 +46,7 @@ DR_Cluster:
 
 # Step 3.2: Run_Integration() (Optional)
 Run_Integration:
-  Run_Integration_run_integration: true
+  Run_Integration_run_integration: false
   Run_Integration_group_by: orig.ident                 # [strings] This argument determines which seurat metadata will be used for data integration. Default is "orig.ident" (each sample).
   Run_Integration_method: cca                          # [strings] This argument defines the method in Seurat::IntegrateLayers(). The valid values are "cca", "harmony" and "rpca". Default is "cca".
   Run_Integration_nfeatures: 2000                      # [integer] This argument defines the nfeatures in Seurat::SelectIntegrationFeatures. Default is 2000.
