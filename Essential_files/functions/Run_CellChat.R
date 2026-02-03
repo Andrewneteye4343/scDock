@@ -26,6 +26,13 @@ Run_CellChat <- function(seurat_obj,
 
   dir.create(Run_CellChat_output_path, showWarnings = FALSE, recursive = TRUE)
   assay_to_use <- DefaultAssay(seurat_obj)
+  
+  # Check integrated or SCT
+  if (assay_to_use %in% c("integrated", "SCT")) {
+  message("[Run_CellChat] Detected integrated/SCT assay. Switching to RNA for CellChat input")
+  assay_to_use <- "RNA"
+  DefaultAssay(seurat_obj) <- "RNA"
+  }
   # Check harmony
   harmony_detected <- any(grepl("^harmony", names(seurat_obj@reductions))) |
                       any(grepl("^harmony", colnames(seurat_obj@meta.data)))
