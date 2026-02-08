@@ -19,6 +19,8 @@ Please follow the instructions to install scDock:
 The installation process might take some time to finish.
 After the installation, your computer will be ready for scDock.
 
+In addition, we provide a validated Conda environment for running scDock, along with a complete package list in confirmed_package_version.txt.  
+
 We have confirm the success of scDock installation and operation in the following linux systems:  
 1. Ubuntu 18.04.6
 2. Ubuntu 20.04.6  
