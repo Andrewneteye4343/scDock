@@ -50,7 +50,8 @@ Bubble_plot_maxGroup_Control.pdf, Bubble_plot_maxGroup_DN.pdf, Incoming_signalin
 9. Before molecular docking, scDock retrieves the PDB IDs of ligands and receptors involved in the top cellular signaling interactions between groups. It then downloads the corresponding protein structures from the SWISS-MODEL template library and performs preprocessing for docking preparation. Afterward, scDock downloads and preprocesses the compounds specified by the user. The final prepared structures are saved as .pdbqt files.  <img width="1083" height="517" alt="Tutorial_figure_GitHub" src="https://github.com/user-attachments/assets/fb88d31c-ca4b-47b6-ba9b-573fc5eefa90" />
 
 
-10. During molecular docking, scDock will display the current docking participators. When the docking is finished, scDock will automatically rank the binding affinity of compounds in the single receptor results and save it (AutoDockVina_score.csv).  <img width="1169" height="862" alt="Figure 12" src="https://github.com/user-attachments/assets/30d4c2d6-4bf9-4c1d-be15-7c9a9ae6a4f6" />  
+10. During molecular docking, scDock will display the current docking participators. When the docking is finished, scDock will automatically rank the binding affinity of compounds in the single receptor results and save it (AutoDockVina_score.csv).  <img width="1080" height="860" alt="Tutorial_figure_GitHub_2" src="https://github.com/user-attachments/assets/ffef79f9-1233-4af7-9f2f-c6670be9e314" />
+
 
 11. In the end, you should obtain results similar to those shown in the figure.
 <img width="399" height="441" alt="fig" src="https://github.com/user-attachments/assets/27a4bb5b-fa72-4e01-8af6-1efd485f01c6" />
