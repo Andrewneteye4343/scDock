@@ -22,8 +22,8 @@
 ● download_pdb_chains_from_csv  
 ● prepare_receptor.py 
 
-4. Place ligand_reference.csv and receptor_reference.csv in your computer (set argument Vina_Docking_ligand_ref_file and Vina_Docking_receptor_ref_file). In this example, we use: /home/path/to/scDock/functions/ligand_reference.csv and /home/path/to/scDock/functions/receptor_reference.csv.
-#### Note: These files are updated for changing download soruce from SWISS-MODEL to Protein Data Bank (PDB) on 2026/02/08.  
+4. Place ligand_reference.csv and receptor_reference.csv in your computer (set argument Vina_Docking_ligand_ref_file and Vina_Docking_receptor_ref_file). In this example, we use: /home/path/to/scDock/functions/ligand_reference.csv and /home/path/to/scDock/functions/receptor_reference.
+Note: These reference files are updated for changing download soruce from SWISS-MODEL to Protein Data Bank (PDB) on 2026/02/08.  
 
 #### config.yaml:
 Basically, users only need to adjust the arguments in config.yaml according to their requirements.
@@ -41,7 +41,8 @@ We provide three options for ligand usage: FDA compounds, CAS number and your ow
 ● For your own structures, you need to set argument Vina_Docking_docking_ligand_dir = path/to/YourStucture. You can provide your compound structure.pdbqt file by using this argument. Please make sure your structure fulfills the requirement for AutoDock Vina.
 
 #### Decide the protein structure for molecular docking  
-By default, protein structures, which have been recorded in CellChat v2 (https://github.com/jinworks/CellChat), will be automatically downloaded from Protein Data Bank (PDB) and pre-processed for molecular docking based on the information in ligand_reference.csv and receptor_reference.csv. These files record the most suitable protein model for each protein, as identified by the Uniprot-PDB-mapper (https://github.com/iriziotis/Uniprot-PDB-mapper) (accessed August 8, 2025). If you believe a better model exists for a given protein, you can directly update those files.
+By default, protein structures, which have been recorded in CellChat v2 (https://github.com/jinworks/CellChat), will be automatically downloaded from Protein Data Bank (PDB) and pre-processed for molecular docking based on the information in ligand_reference.csv and receptor_reference.csv. These files record the PDB identifiers of most suitable protein model for each protein, as identified by the Uniprot-PDB-mapper (https://github.com/iriziotis/Uniprot-PDB-mapper) (accessed August 8, 2025). If you believe a better model exists for a given protein, you can directly update those files.
+The protein preprocessing is handled by AutoDockTools, including the removal of water, hetero atoms and non-amino acid entities, addition of essential hydrogens, assignment of Gasteiger charges.  
 
 In addition, we provide an option for users to supply their own protein_structure.pdbqt file. To enable this, set argument Vina_Docking_docking_receptor_dir = path/to/YourDirectory.
 Please ensure that your structure meets the input requirements for AutoDock Vina.
