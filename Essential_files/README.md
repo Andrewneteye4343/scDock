@@ -48,7 +48,7 @@ In addition, we provide an option for users to supply their own protein_structur
 Please ensure that your structure meets the input requirements for AutoDock Vina.
 
 #### Curated drug annotaion file from BindingDB (Ligand-Target-Affinity Dataset; updated 2026-02-05) (Optional)
-This curated file can be downloaded from Figshare ((https://figshare.com/s/2de23cd82eeec10e7ede)). By setting the Drug_Information parameter to this file, users can perform drug annotation using the current BindingDB dataset.
+This curated file can be downloaded from Figshare (https://figshare.com/s/2de23cd82eeec10e7ede). By setting the Drug_Information parameter to this file, users can perform drug annotation using the current BindingDB dataset.
 
 #### Provide the tissue type of your scRNA/snRNA data.  
 In addtion to regular organs, we also expand the annotation database with neuroblastoma and breast cancer for research.  
