@@ -54,7 +54,8 @@ Bubble_plot_maxGroup_Control.pdf, Bubble_plot_maxGroup_DN.pdf, Incoming_signalin
 
 
 11. In the end, you should obtain results similar to those shown in the figure.
-<img width="399" height="441" alt="fig" src="https://github.com/user-attachments/assets/27a4bb5b-fa72-4e01-8af6-1efd485f01c6" />
+<img width="381" height="481" alt="Tutorial_figure_GitHub_3" src="https://github.com/user-attachments/assets/49f6a518-f58a-432c-a903-da4767d77223" />
+
 
 ● Result explanation:  
 1. ElbowPlot_SeuratProject.pdf – Visualizes the ranking of principal components based on the percentage of variance explained in the Elbow plot.
