@@ -3,7 +3,7 @@
 This repository provides an integrated analysis pipeline covering:  
 ● scRNA/snRNA-seq analysis  
 ● Cell–cell communication inference  
-● Small-molecule molecular docking  
+● Small-molecule molecular docking and lightweight drug annotation  
 
 scDock streamlines the complex workflow from single-cell/nucleus RNA sequencing analysis to drug discovery, reducing manual preparation and making the process more efficient. With a user-friendly design, researchers only need to modify a single configuration file to run the entire workflow—without switching programming languages or platforms—greatly simplifying operation and enhancing reproducibility.  
 
@@ -16,7 +16,7 @@ Available scRNA/snRNA format:
 ### Output:  
 ● Core scRNA-seq analysis outputs include dimensional reduction plots with cell-type annotations, marker gene information, detailed annotation results, and Seurat_object.rds files from intermediate Seurat analysis steps.  
 ● Intercellular communication inference outputs include incoming and outgoing signaling, global and group-specific communication networks, and the CellChat.rds file.  
-● Molecular docking results include the binding affinities and binding poses between compounds and proteins involved in the top intercellular signaling pathways across cell types, as well as in the most differentially activated pathways between groups. Users can also specify the cell types and groups of interest. The output includes the corresponding protein structure(s) and compound structure(s) used for docking.
+● Molecular docking results include the binding affinities and binding poses between compounds and proteins involved in the top intercellular signaling pathways across cell types, as well as in the most differentially activated pathways between groups. Users can also specify the cell types and groups of interest. The output includes the corresponding protein structure(s) and compound structure(s) used for docking. Users can also optionally decide whether to retreive drug annotation from BindingDB (Ligand-Target-Affinity Dataset from BindingDB; version 2026/02/05).  
 
 ### How to use:  
 Enter scDock virtual environment and conduct the following command  
