@@ -1707,4 +1707,38 @@ Vina_Docking(
     Vina_Docking_vina_cpu               = args$Vina_Docking_vina_cpu
   )
 message("========== Molecular docking complete. ==========")
+
+# -------------------------
+# Step 8: Drug information annotation
+# -------------------------
+if (!is.null(config$Drug_Information)) {
+
+  message("========== Annotating drug information ... ==========")
+
+  cas_csv <- "Output_drug_information.csv"
+
+  drug_tsv <- config$Drug_Information
+
+  if (!file.exists(cas_csv)) {
+    stop("Output_drug_information.csv not found in working directory: ", getwd())
+  }
+
+  if (!file.exists(drug_tsv)) {
+    stop("Drug_Information file not found: ", drug_tsv)
+  }
+
+  cmd <- sprintf(
+    'python functions/annotate_drug_info.py "%s" "%s"',
+    cas_csv,
+    drug_tsv
+  )
+
+  message("Running: ", cmd)
+  system(cmd)
+
+  message("========== Drug information annotation complete. ==========")
+}
+
+
+
 EOF
