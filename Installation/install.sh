@@ -69,7 +69,11 @@ conda install -y -c conda-forge -c bioconda --strict-channel-priority \
   presto \
   openbabel \
   autodock-vina \
-  jq
+  jq \
+  pubchempy \
+  biopython \
+  
+  
 
 echo "=== Step 2: install Python pip modules ==="
 python -m pip install --upgrade pip
