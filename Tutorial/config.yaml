@@ -111,3 +111,6 @@ Vina_Docking:
   Vina_Docking_vina_num_modes: 9                                    # [integer] This argument defines the num_modes in AutoDock Vina. Default is 9.
   Vina_Docking_vina_seed: 42                                        # [integer] This argument defines the seed in AutoDock Vina. Default is 42.
   Vina_Docking_vina_cpu: 1                                          # [integer] This argument defines the cpu in AutoDock Vina. Default is 1.
+
+# Step 8: Drug_Information() (Optional)
+Drug_Information: null                                              # [strings] This path will read our curated drug information from BindingDB and output a summary reference. Default is null.
