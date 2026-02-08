@@ -103,7 +103,7 @@ Run_CellChat <- function(seurat_obj,
       message("[Run_CellChat] Running CellChat for group: ", grp)
       sub_obj <- subset(seurat_obj,
                         cells = rownames(seurat_obj@meta.data[seurat_obj@meta.data[[Run_CellChat_group_by]] == grp, ]))
-      mat <- GetAssayData(sub_obj, assay = assay_to_use, slot = "data")
+      mat <- SeuratObject::LayerData(sub_obj[[assay_to_use]], layer = "data")
 
       sub_cellchat <- createCellChat(object = mat,
                                      meta = sub_obj@meta.data,
@@ -131,10 +131,10 @@ Run_CellChat <- function(seurat_obj,
     # Single group
     message("[Run_CellChat] Single-group CellChat analysis, grouping by: ", Run_CellChat_group_by)
 
-    mat <- GetAssayData(seurat_obj, assay = assay_to_use, slot = "data")
+    mat <- SeuratObject::LayerData(seurat_obj[[assay_to_use]], layer = "data")
     if (!is(mat, "AnyMatrix") || nrow(mat) == 0) {
       warning("[Run_CellChat] Data slot invalid, switching to counts.")
-      mat <- GetAssayData(seurat_obj, assay = assay_to_use, slot = "counts")
+      mat <- SeuratObject::LayerData(seurat_obj[[assay_to_use]], layer = "counts")
     }
     if (!is(mat, "AnyMatrix") || nrow(mat) == 0) {
       stop("[Run_CellChat] Expression matrix invalid — cannot run CellChat.")
@@ -380,9 +380,8 @@ Run_CellChat <- function(seurat_obj,
 
       # Get the ligand and receptor information from interaction column
       if ("interaction" %in% colnames(diff_df)) {
-        parts <- strsplit(diff_df$interaction, "_")
-        diff_df$ligand <- sapply(parts, `[`, 1)
-        diff_df$receptor <- sapply(parts, `[`, 2)
+        diff_df$ligand <- sub("_.*$", "", diff_df$interaction)
+        diff_df$receptor <- sub("^[^_]+_", "", diff_df$interaction)
       }
   
       # Output CSV file

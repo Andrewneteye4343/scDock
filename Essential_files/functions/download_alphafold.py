@@ -8,7 +8,9 @@ import os, sys, requests, time
 def download_alphafold_pdb(af_id, output_dir="downloads"):
     output_dir = os.path.abspath(output_dir)
     os.makedirs(output_dir, exist_ok=True)
-    url = f"https://alphafold.ebi.ac.uk/files/{af_id}-model_v4.pdb"
+    # In the URL, the string “v6” can be replaced with the current AlphaFold Database version to retrieve the corresponding structure files.
+    # At present (2026-02-05), the latest release is v6. The most recent version can be verified by consulting the AlphaFold Database release notes available on the official website.
+    url = f"https://alphafold.ebi.ac.uk/files/{af_id}-model_v6.pdb"
     output_file = os.path.join(output_dir, f"{af_id}.pdb")
     
     r = requests.get(url)

@@ -8,6 +8,8 @@ import requests
 from rdkit import Chem
 from rdkit.Chem import AllChem
 import subprocess
+import csv
+import pubchempy as pcp
 
 # Download 3D SDF from PubChem for given CAS number
 def download_sdf(cas_number, out_sdf):
@@ -51,8 +53,19 @@ def main():
     output_dir = sys.argv[2]
     os.makedirs(output_dir, exist_ok=True)
 
+    work_dir = os.getcwd()
+    csv_file = os.path.join(work_dir, "Output_drug_information.csv")
+
     with open(cas_txt_file) as f:
         cas_numbers = [line.strip() for line in f if line.strip()]
+
+    with open(csv_file, "w", newline="") as cf:
+        writer = csv.writer(cf)
+        writer.writerow(["CAS number"])
+        for cas in cas_numbers:
+            writer.writerow([cas])
+
+    print(f"[INFO] Output_drug_information.csv created at {csv_file}")
 
     for cas in cas_numbers:
         sdf_file = os.path.join(output_dir, f"{cas}.sdf")
@@ -65,6 +78,29 @@ def main():
             print(f"[INFO] Generated PDBQT: {pdbqt_file}")
         except subprocess.CalledProcessError:
             print(f"[ERROR] Failed to convert {cas} to PDBQT.")
+
+    print("[INFO] Fetching PubChem CID for each CAS number...")
+
+    updated_rows = []
+
+    for cas in cas_numbers:
+        cid = ""
+        try:
+            compounds = pcp.get_compounds(cas, 'name')
+            if compounds:
+                cid = compounds[0].cid
+        except Exception as e:
+            print(f"[WARN] Failed to fetch CID for {cas}: {e}")
+
+        updated_rows.append([cas, cid])
+
+    with open(csv_file, "w", newline="") as cf:
+        writer = csv.writer(cf)
+        writer.writerow(["CAS number", "PubChem CID"])
+        writer.writerows(updated_rows)
+
+    print(f"[INFO] CAS and CID table written to {csv_file}")
+
 
 if __name__ == "__main__":
     main()

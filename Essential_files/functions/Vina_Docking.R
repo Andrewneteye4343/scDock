@@ -146,38 +146,87 @@ Vina_Docking <- function(Run_CellChat_output_path,
   if (!dir.exists(ligand_dir)) dir.create(ligand_dir, recursive = TRUE)
   if (!dir.exists(receptor_dir)) dir.create(receptor_dir, recursive = TRUE)
 
+  message("[INFO] Downloading ligand structures from RCSB...")
+  system2("python3", args = c(
+    normalizePath("functions/download_pdb_chains_from_csv.py"),
+    file.path(Vina_Docking_output_path, "ligands_with_PDB.csv"),
+    ligand_dir
+    ))
+
+  if (is.null(Vina_Docking_docking_receptor_dir)) {
+  message("[INFO] Downloading receptor structures from RCSB...")
+  system2("python3", args = c(
+    normalizePath("functions/download_pdb_chains_from_csv.py"),
+    file.path(Vina_Docking_output_path, "receptors_with_PDB.csv"),
+    receptor_dir
+    ))
+  }
+
   # Download protein structure
   download_structures <- function(df, outdir, label) {
-    for (raw_ids in df$PDB_model) {
-      if (is.na(raw_ids) || raw_ids=="") next
-      ids <- trimws(unlist(strsplit(raw_ids, ";")))
-      for (id in ids) {
-        if (id=="") next
-        subdir <- file.path(outdir, id)
-        if (!dir.exists(subdir)) dir.create(subdir, recursive = TRUE)
-        outfile <- file.path(subdir, paste0(id, ".pdb"))
+  for (raw_ids in df$PDB_model) {
+    if (is.na(raw_ids) || raw_ids == "") next
+    ids <- trimws(unlist(strsplit(raw_ids, ";")))
+    for (id in ids) {
+      if (id == "") next
+      subdir <- file.path(outdir, id)
+      if (!dir.exists(subdir)) dir.create(subdir, recursive = TRUE)
 
-        if (grepl("^AF-", id)) {
+      outfile <- NULL
+
+      if (grepl("^AF-", id)) {
+        # AlphaFold structure
+        outfile <- file.path(subdir, paste0(id, ".pdb"))
+        if (!file.exists(outfile)) {
+          message("[", label, "] Downloading AlphaFold model: ", id)
+          system2("python3", args = c(
+            normalizePath("functions/download_alphafold.py"),
+            id, subdir
+          ))
+        }
+      } else if (grepl("^[0-9][A-Za-z0-9]{3}\\.[A-Z]$", id)) {
+        parts <- strsplit(id, "\\.")[[1]]
+        pdb_id <- toupper(parts[1])
+        chain <- toupper(parts[2])
+        outfile <- file.path(subdir, paste0(pdb_id, "_", chain, ".pdb"))
+
+        if (!file.exists(outfile)) {
+          message("[", label, "] Downloading PDB chain from RCSB: ", pdb_id, " chain ", chain)
+          status <- system2("python3", args = c(
+            normalizePath("functions/download_pdb_chains_from_csv.py"),
+            tempfile_csv <- tempfile(fileext = ".csv"),
+            subdir
+          ))
+
+          write.csv(data.frame(PDB_model = id), tempfile_csv, row.names = FALSE)
+
+          system2("python3", args = c(normalizePath("functions/download_pdb_chains_from_csv.py"),
+                                      tempfile_csv, subdir))
+
           if (!file.exists(outfile)) {
-            message("[",label,"] Downloading AlphaFold model: ", id)
-            system2("python3", args = c(normalizePath("functions/download_alphafold.py"), id, subdir))
+            af_id <- paste0("AF-", pdb_id, "-", chain)
+            message("[", label, "] RCSB not found, fallback to AlphaFold: ", af_id)
+            outfile <- file.path(subdir, paste0(af_id, ".pdb"))
+            system2("python3", args = c(
+              normalizePath("functions/download_alphafold.py"),
+              af_id, subdir
+            ))
           }
-          message("[",label,"] Preprocessing with AutoDockTools: ", outfile)
-          system2("python3", args = c(normalizePath("functions/prepare_receptor.py"), outfile, subdir))
-        } else if (grepl("^[0-9][A-Za-z0-9]{3}\\.[A-Z]$", id)) {
-          parts <- strsplit(id, "\\.")[[1]]
-          pdb_id <- tolower(parts[1]); chain <- toupper(parts[2])
-          outfile <- file.path(subdir, paste0(pdb_id,".1.",chain,".pdb"))
-          if (!file.exists(outfile)) {
-            message("[",label,"] Downloading SWISS-MODEL: ", pdb_id, " chain ", chain)
-            system2("python3", args = c(normalizePath("functions/download_swissmodel.py"), pdb_id, chain, subdir))
-          }
-          message("[",label,"] Preprocessing with AutoDockTools: ", outfile)
-          system2("python3", args = c(normalizePath("functions/prepare_receptor.py"), outfile, subdir))
-        } else warning("[",label,"] Unrecognized ID format: ", id)
+        }
+      } else warning("[", label, "] Unrecognized ID format: ", id)
+
+      # preprocessing with AutoDockTools
+      if (!is.null(outfile) && file.exists(outfile)) {
+        message("[", label, "] Preprocessing with AutoDockTools: ", outfile)
+        system2("python3", args = c(
+          normalizePath("functions/prepare_receptor.py"),
+          outfile, subdir
+        ))
       }
     }
   }
+}
+
 
   download_structures(ligand_match, ligand_dir, "ligand")
 
