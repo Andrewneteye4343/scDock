@@ -47,6 +47,9 @@ The protein preprocessing is handled by AutoDockTools, including the removal of 
 In addition, we provide an option for users to supply their own protein_structure.pdbqt file. To enable this, set argument Vina_Docking_docking_receptor_dir = path/to/YourDirectory.
 Please ensure that your structure meets the input requirements for AutoDock Vina.
 
+#### Curated drug annotaion file from BindingDB (Ligand-Target-Affinity Dataset; updated 2026-02-05) (Optional)
+This curated file can be downloaded from Figshare ((https://figshare.com/s/2de23cd82eeec10e7ede)). By setting the Drug_Information parameter to this file, users can perform drug annotation using the current BindingDB dataset.
+
 #### Provide the tissue type of your scRNA/snRNA data.  
 In addtion to regular organs, we also expand the annotation database with neuroblastoma and breast cancer for research.  
 You must input one of the below tissue names into argument Markers_Annotation_tissue_type for proper cell annotation:  
