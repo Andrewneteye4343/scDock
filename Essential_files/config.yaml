@@ -61,7 +61,7 @@ Markers_Annotation:
   Markers_Annotation_output_path: /path/to/your_path      # [strings] This path defines where to save your annotation results.
   Markers_Annotation_use_assay: RNA                       # [strings] The argument defines the assay in Seurat::FindAllMarkers(). Default is "RNA".
   Markers_Annotation_group_by: seurat_clusters            # [strings] The argument defines the group.by in Seurat::FindAllMarkers(). Default is "seurat_clusters".
-  Markers_Annotation_logfc_threshold: 0.2                 # [float] The argument defines the min.pct in Seurat::FindAllMarkers(). Default is 0.1.
+  Markers_Annotation_logfc_threshold: 0.2                 # [float] The argument defines the logfc.threshold in Seurat::FindAllMarkers(). Default is 0.1.
   Markers_Annotation_min_pct: 0.01                        # [float] The argument defines the min.pct in Seurat::FindAllMarkers(). Default is 0.01.
   Markers_Annotation_test_use: wilcox                     # [strings] The argument defines the test.use in Seurat::FindAllMarkers(). Default is "wilcox".
   Markers_Annotation_only_pos: true                       # [boolean] Whether to only calculate the positive differential expression genes in each cluster. Default is true.
