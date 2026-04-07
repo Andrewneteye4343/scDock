@@ -19,8 +19,9 @@ Please follow the instructions to install scDock:
 
 Option 2:  
 Now, we provide a .yml file (scDock_environment.yml) to create scDock environment.
-1. Downloading the file. Conduct `conda env create -f scDock_environment.yml` to install the environment.  
-2. Enter the Conda virtual environment with `conda activate scDock`.
+1. Download and place the "scDock_environment.yml" to your computer.
+2. Conduct `conda env create -f scDock_environment.yml` to install the environment.  
+3. Enter the Conda virtual environment with `conda activate scDock`.
   
 The installation process might take some time to finish.
 After the installation, your computer will be ready for scDock.
