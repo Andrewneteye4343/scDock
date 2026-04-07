@@ -10,12 +10,18 @@ Please make sure there are `conda-forge` and `bioconda` channels in your conda. 
 `conda config –set channel_priority strict`  
 
 ● Installation:  
+Option 1:  
 To establish scDock, we provide "install.sh" which can automatically create a virtual environment named "scDock" with the essential requirment, including Python (3.10.0), R (4.4.3), and their modules/packages by a single line command.
 
 Please follow the instructions to install scDock:  
 1. Download and place the "install.sh" to your computer.
 2. Conduct `bash install.sh`
 
+Option 2:  
+Now, we provide a .yml file (scDock_environment.yml) to create scDock environment.
+1. Downloading the file. Conduct `conda env create -f scDock_environment.yml` to install the environment.  
+2. Enter the Conda virtual environment with `conda activate scDock`.
+  
 The installation process might take some time to finish.
 After the installation, your computer will be ready for scDock.
 
