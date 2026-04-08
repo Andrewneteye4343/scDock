@@ -20,6 +20,7 @@ The installation process might take some time to finish.
 After the installation, your computer will be ready for scDock.
 
 In addition, we provide a validated Conda environment for running scDock, along with a complete package list in confirmed_package_version.txt.  
+Furthermore, we provide the environment in .yml file, named "scDock_environment.yml" for reference.  
 
 We have confirm the success of scDock installation and operation in the following linux systems:  
 1. Ubuntu 18.04.6
